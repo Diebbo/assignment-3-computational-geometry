@@ -1,5 +1,5 @@
-// sidedness
 #include "common.hpp"
+#include <string>
 
 namespace util {
     /* Determine if point p is above line l
@@ -34,6 +34,20 @@ namespace util {
      *  false otherwise
      */
     bool is_inside(const Triangle& t, const Point& p);
+
+    /* Read points from a file
+     *
+     * The file should contain points in the following format:
+     * x1 y1
+     * x2 y2
+     * ...
+     *
+     * Parameters:
+     *  - filename: The name of the file to read from
+     *  - container: The container to store the points in (e.g., std::vector<Point>)
+     */
+    template<typename T>
+    void read_points_from_file(const std::string& filename, T& container);
     
 }
 

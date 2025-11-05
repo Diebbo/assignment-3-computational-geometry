@@ -1,3 +1,5 @@
+#include <vector>
+
 /* Point Class */
 class Point {
 public:
