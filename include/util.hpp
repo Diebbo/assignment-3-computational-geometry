@@ -1,3 +1,5 @@
+#ifndef UTIL_HPP
+#define UTIL_HPP
 #include "common.hpp"
 #include <string>
 #include <fstream>
@@ -69,3 +71,4 @@ void read_points_from_file(const std::string &filename, Container &container) {
 }
 }
 
+#endif // UTIL_HPP
