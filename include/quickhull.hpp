@@ -3,10 +3,12 @@
 /* QuickHull Implementation */
 
 namespace QuickHullNS {
-class QuickHull : public ConvexHull<std::vector<Point>> {
+class QuickHull : public ConvexHull<Points> {
 protected:
-    void QuickHullRecursive(const Point& p1, const Point& p2, const std::vector<Point>& points, std::vector<Point>& hull);
+  void QuickHullRecursive(const Point &p1, const Point &p2,
+                          const Points &points, Points &hull);
+
 public:
-    std::vector<Point> compute(const std::vector<Point>& points) override;
+  Points compute(const Points &points) override;
 };
-}
+} // namespace QuickHullNS

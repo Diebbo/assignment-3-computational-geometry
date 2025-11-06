@@ -9,6 +9,8 @@ float sidedness(const Line &l, const Point &p) {
   return sidedness(l.p1, l.p2, p);
 }
 
+bool isAbove(const Line &l, const Point &p) { return sidedness(l, p) > 0; }
+
 bool is_inside(const Triangle &t, const Point &p) {
   /* The point must be on the same side of all the triangle's edges */
   float d1 = sidedness(t.p1, t.p2, p);
@@ -20,6 +22,88 @@ bool is_inside(const Triangle &t, const Point &p) {
   bool all_positive = (d1 > 0) && (d2 > 0) && (d3 > 0);
   bool all_negative = (d1 < 0) && (d2 < 0) && (d3 < 0);
   return all_positive || all_negative;
+}
+
+bool is_inside(const Points &polygon, const Point &p) {
+  size_t n = polygon.size();
+  if (n < 3) {
+    return false; // A polygon must have at least 3 vertices
+  }
+
+  float initial_side = sidedness(polygon[0], polygon[1], p);
+  for (size_t i = 1; i < n; ++i) {
+    float current_side = sidedness(polygon[i], polygon[(i + 1) % n], p);
+    if (initial_side * current_side < 0) {
+      return false; // Point is on the opposite side of an edge
+    }
+  }
+  return true; // Point is inside the polygon
+}
+
+bool is_partial_inside(const Points &polygon, const Point &p) {
+  size_t n = polygon.size();
+  if (n < 3) {
+    return false; // A polygon must have at least 3 vertices
+  }
+
+  float initial_side = sidedness(polygon[0], polygon[1], p);
+  for (size_t i = 1; i < n - 1; ++i) {
+    float current_side = sidedness(polygon[i], polygon[(i + 1) % n], p);
+    if (initial_side * current_side < 0) {
+      return false; // Point is on the opposite side of an edge
+    }
+  }
+  return true; // Point is inside the polygon
+}
+
+bool is_hull(const Points &hull, const Points &points) {
+  for (const auto &p : points) {
+    bool on_hull = false;
+
+    // Check if point is on hull
+    for (const auto &hp : hull) {
+      if (p.x == hp.x && p.y == hp.y) {
+        on_hull = true;
+        break;
+      }
+    }
+
+    if (!on_hull) {
+      // Check if point is inside hull
+      // A point is inside if it's on the same side of ALL edges
+      int inside = sidedness(hull[0], hull[1], p);
+
+      if (!is_inside(hull, p)) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+bool is_partial_hull(const Points &hull, const Points &points) {
+  for (const auto &p : points) {
+    bool on_hull = false;
+
+    // Check if point is on hull
+    for (const auto &hp : hull) {
+      if (p.x == hp.x && p.y == hp.y) {
+        on_hull = true;
+        break;
+      }
+    }
+
+    if (!on_hull) {
+      // Check if point is inside hull
+      // A point is inside if it's on the same side of ALL edges
+      int inside = sidedness(hull[0], hull[1], p);
+
+      if (!is_partial_inside(hull, p)) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
 } // namespace util
