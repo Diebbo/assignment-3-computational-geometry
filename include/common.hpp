@@ -1,4 +1,5 @@
 #include <vector>
+#include <iostream>
 
 /* Point Class */
 class Point {
@@ -37,11 +38,4 @@ public:
     virtual T compute(const T& points) = 0;
 };
 
-
-//example in Gram.hpp
-/* Gramham Scan Implementation */
-class GrahamScan : public ConvexHull<std::vector<Point>> {
-public:
-    std::vector<Point> compute(const std::vector<Point>& points) override;
-};
 
