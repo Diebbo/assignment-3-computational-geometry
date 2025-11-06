@@ -45,6 +45,7 @@ bool is_partial_inside(const Points &polygon, const Point &p);
 bool is_hull(const Points &hull, const Points &points);
 bool is_partial_hull(const Points &hull, const Points &points);
 
+float partial_distance(const Line &l, const Point &p);
 /* Read points from a file
  *
  * The file should contain points in the following format:
