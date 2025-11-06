@@ -3,7 +3,7 @@
 /* Convex Hull Factory */
 using namespace QuickHullNS;
 
-std::pair<Point, Point> findExtremePoints(const std::vector<Point> &points) {
+std::pair<Point, Point> findExtremePoints(const Points &points) {
   Point minPoint = points[0];
   Point maxPoint = points[0];
 
@@ -18,15 +18,14 @@ std::pair<Point, Point> findExtremePoints(const std::vector<Point> &points) {
   return {minPoint, maxPoint};
 }
 
-std::vector<Point>
-QuickHull::compute(const std::vector<Point> &points) {
+Points QuickHull::compute(const Points &points) {
   /* ·
    * To initialize, find the point q1 with the smallest x-coordinate and the
 point q2 with the largest x- coordinate, and form the line segment s by
 connecting them. Then prune all the points below s. · QuickHull(q1 q2 , P )
       */
-  std::vector<Point> prunedPoints = std::vector<Point>();
-  std::vector<Point> hull = std::vector<Point>();
+  Points prunedPoints = Points();
+  Points hull = Points();
 
   Point q1, q2;
   std::tie(q1, q2) = findExtremePoints(points);
@@ -38,7 +37,7 @@ connecting them. Then prune all the points below s. · QuickHull(q1 q2 , P )
     }
   }
 
-		QuickHull::QuickHullRecursive(q1, q2, prunedPoints, hull);
+  QuickHull::QuickHullRecursive(q1, q2, prunedPoints, hull);
 
   hull.push_back(q2);
 
@@ -46,8 +45,7 @@ connecting them. Then prune all the points below s. · QuickHull(q1 q2 , P )
 }
 
 void QuickHull::QuickHullRecursive(const Point &p1, const Point &p2,
-                        const std::vector<Point> &points,
-                        std::vector<Point> &hull) {
+                                   const Points &points, Points &hull) {
   /* No more points left */
   if (points.empty()) {
     return;
@@ -75,8 +73,8 @@ void QuickHull::QuickHullRecursive(const Point &p1, const Point &p2,
    * Partition the remaining points into two subsets Pℓ and Pr consisting
    * of points that lie to the left of q and points that lie to the right of q
    */
-  std::vector<Point> leftSet = std::vector<Point>();
-  std::vector<Point> rightSet = std::vector<Point>();
+  Points leftSet = Points();
+  Points rightSet = Points();
   for (const auto &p : points) {
     if (util::sidedness(p1, q, p) > 0) {
       leftSet.push_back(p);

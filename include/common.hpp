@@ -20,6 +20,7 @@ public:
     Point p1;
     Point p2;
     Line(const Point& p1, const Point& p2) : p1(p1), p2(p2) {}
+    Line() : p1(Point()), p2(Point()) {}
 };
 
 class Triangle {
@@ -41,5 +42,6 @@ public:
     virtual T compute(const T& points) = 0;
 };
 
+using Points = std::vector<Point>;
 
 #endif // COMMON_HPP

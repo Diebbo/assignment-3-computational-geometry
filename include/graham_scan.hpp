@@ -3,9 +3,8 @@
 #include "common.hpp"
 
 /* Gramham Scan Implementation */
-class GrahamScan : public ConvexHull<std::vector<Point>> {
+class GrahamScan : public ConvexHull<Points> {
 public:
-    std::vector<Point> compute(const std::vector<Point>& points) override;
-
+  Points compute(const Points &points) override;
 };
 #endif // GRAM_SCAN_CONVEX_HULL_HPP
