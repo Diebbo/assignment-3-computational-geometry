@@ -40,6 +40,19 @@ namespace util {
      */
     bool is_inside(const Triangle& t, const Point& p);
 
+    /* Calculate the partial distance from point p to line l
+     *
+     * The partial distance is the perpendicular distance from the point to the line.
+     *
+     * Parameters:
+     *  - l: The line to measure from
+     *  - p: The point to measure to
+     *
+     * Returns:
+     *  The perpendicular distance from point p to line l
+     */
+    float partial_distance(const Line& l, const Point& p);
+
     /* Read points from a file
      *
      * The file should contain points in the following format:
