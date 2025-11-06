@@ -1,3 +1,6 @@
+#ifndef COMMON_HPP
+#define COMMON_HPP
+
 #include <vector>
 #include <iostream>
 
@@ -39,3 +42,4 @@ public:
 };
 
 
+#endif // COMMON_HPP
