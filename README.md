@@ -4,8 +4,13 @@ Convex Hull Computation
 ## Compile
 
 ```bash
-mkdir build
-cd build
-cmake ..
-cmake --build .
+just build
 ```
+
+
+## Run
+
+```bash
+just run # also build
+```
+

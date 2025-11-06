@@ -1,5 +1,8 @@
 #include "common.hpp"
 #include <string>
+#include <fstream>
+#include <iostream>
+#include <string>
 
 namespace util {
     /* Determine if point p is above line l
@@ -16,7 +19,7 @@ namespace util {
      *  < 0 if point is below the line
      *  = 0 if point is on the line
      */
-    float sidedness(const Line& l, const Point& p) ; // sidedness(Line(p1,p2), p3);
+    float sidedness(const Line& l, const Point& p);
     float sidedness(const Point& p1, const Point& p2, const Point& p3);
 
 
@@ -46,8 +49,23 @@ namespace util {
      *  - filename: The name of the file to read from
      *  - container: The container to store the points in (e.g., std::vector<Point>)
      */
-    template<typename T>
-    void read_points_from_file(const std::string& filename, T& container);
+template <typename Container>
+void read_points_from_file(const std::string &filename, Container &container) {
+    static_assert(std::is_same_v<typename Container::value_type, Point>,
+                  "Container must hold Point objects");
+    std::ifstream file(filename);
+
+    if (!file.is_open()) {
+        throw std::runtime_error("Cannot open file: " + filename);
+    }
+    int n;
+    file >> n;
     
+    float x, y;
+    for (int i = 0; i < n; ++i) {
+        file >> x >> y;
+        container.emplace_back(x, y);
+    }
+}
 }
 
