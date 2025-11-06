@@ -25,25 +25,20 @@ float sidedness(const Point &p1, const Point &p2, const Point &p3);
 
 bool isAbove(const Line &l, const Point &p);
 
-/* Determine if point p is inside triangle t
- *
- * A point is considered "inside" a triangle if it lies within the area
- * bounded by the triangle's three edges.
- *
- * Parameters:
- *  - t: The triangle to check against
- *  - p: The point to check
- *
- * Returns:
- *  true if point is inside the triangle
- *  false otherwise
- */
-bool is_inside(const Triangle &t, const Point &p);
-bool is_inside(const Points &polygon, const Point &p);
-bool is_partial_inside(const Points &polygon, const Point &p);
-
-bool is_hull(const Points &hull, const Points &points);
-bool is_partial_hull(const Points &hull, const Points &points);
+    /* Determine if point p is inside triangle t
+     *
+     * A point is considered "inside" a triangle if it lies within the area
+     * bounded by the triangle's three edges.
+     *
+     * Parameters:
+     *  - t: The triangle to check against
+     *  - p: The point to check
+     *
+     * Returns:
+     *  true if point is inside the triangle
+     *  false otherwise
+     */
+    bool is_inside(const Triangle& t, const Point& p);
 
 /* Read points from a file
  *
