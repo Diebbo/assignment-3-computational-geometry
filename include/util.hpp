@@ -1,6 +1,7 @@
 #ifndef UTIL_HPP
 #define UTIL_HPP
-#include "common.hpp"
+
+#include <common.hpp>
 #include <fstream>
 #include <iostream>
 #include <string>

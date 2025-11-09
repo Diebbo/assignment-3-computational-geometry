@@ -1,4 +1,4 @@
-#include "../include/util.hpp"
+#include <util.hpp>
 
 namespace util {
 float sidedness(const Point &p1, const Point &p2, const Point &p3) {
@@ -77,8 +77,6 @@ bool is_hull(const Points &hull, const Points &points) {
     if (!on_hull) {
       // Check if point is inside hull
       // A point is inside if it's on the same side of ALL edges
-      int inside = sidedness(hull[0], hull[1], p);
-
       if (!is_inside(hull, p)) {
         return false;
       }
@@ -102,8 +100,6 @@ bool is_partial_hull(const Points &hull, const Points &points) {
     if (!on_hull) {
       // Check if point is inside hull
       // A point is inside if it's on the same side of ALL edges
-      int inside = sidedness(hull[0], hull[1], p);
-
       if (!is_partial_inside(hull, p)) {
         return false;
       }

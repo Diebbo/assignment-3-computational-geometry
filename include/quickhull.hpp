@@ -1,7 +1,6 @@
-#include "util.hpp"
+#include <common.hpp>
 
 /* QuickHull Implementation */
-
 namespace QuickHullNS {
 class QuickHull : public ConvexHull<Points> {
 protected:

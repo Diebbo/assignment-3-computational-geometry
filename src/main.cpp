@@ -1,14 +1,13 @@
-#include "../include/graham_scan.hpp"
-#include "../include/quickhull.hpp"
-#include "../include/marriage_before_conquest.hpp"
-#include "../include/util.hpp"
+#include <graham_scan.hpp>
+#include <quickhull.hpp>
+#include <marriage_before_conquest.hpp>
+#include <util.hpp>
 #include <cassert>
 #include <iostream>
 #include <ostream>
 
 void verify_points_in_hull(const Points &points, const Points &hull);
 
-// test purpose
 int main() {
   /* Quick test of the sidedness function */
   Point p1(0, 0);

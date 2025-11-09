@@ -1,4 +1,5 @@
-#include "../include/quickhull.hpp"
+#include <quickhull.hpp>
+#include <util.hpp>
 
 /* Convex Hull Factory */
 using namespace QuickHullNS;

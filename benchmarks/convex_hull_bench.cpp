@@ -1,5 +1,5 @@
 #include <benchmark/benchmark.h>
-#include "graham_scan.hpp"
+#include <iostream>
 
 static void BM_ConvexHull(benchmark::State& state) {
     for (auto _ : state) {

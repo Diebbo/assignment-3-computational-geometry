@@ -1,10 +1,10 @@
-#include "../include/graham_scan.hpp"
+#include <graham_scan.hpp>
+
+bool point_cmp_x(const Point &a, const Point &b) { return a.x < b.x; }
 
 Points GrahamScan::compute(const Points &points) {
-  // Placeholder implementation for Graham Scan algorithm
-  Points hull;
-  // Actual implementation would go here
-  std::cout << "Computing convex hull using Graham Scan algorithm..."
-            << std::endl;
+  Points hull(points);
+  std::sort(hull.begin(), hull.end(),
+            [](const Point &a, const Point &b) { return a.x < b.x; });
   return hull;
 }

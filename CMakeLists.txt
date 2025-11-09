@@ -3,27 +3,28 @@ project(ConvexHullProject LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 include_directories(include)
 
-# ---- Library with your algorithm ----
-file(GLOB LIB_SOURCES src/*.cpp)
-add_library(convex_hull_lib ${LIB_SOURCES})
-
 if (MSVC)
-    target_compile_options(convex_hull_lib PRIVATE /W4)
+    add_compile_options(/W4)
 else()
-    target_compile_options(convex_hull_lib PRIVATE -Wall -Wextra -Wpedantic)
+    add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 endif()
+
+# ---- Library ----
+file(GLOB LIB_SOURCES src/*.cpp)
+add_library(hullib ${LIB_SOURCES})
 
 # ---- Main executable ----
 add_executable(convex_hull src/main.cpp)
-target_link_libraries(convex_hull PRIVATE convex_hull_lib)
+target_link_libraries(convex_hull PRIVATE hullib)
 
-# ---- Google Benchmark ----
+# ---- Benchmarks ----
 find_package(benchmark REQUIRED)
 
-# ---- Benchmark target ----
-file(GLOB BENCHMARK_SOURCES benchmarks/*.cpp)
-add_executable(convex_hull_bench ${BENCHMARK_SOURCES})
-target_link_libraries(convex_hull_bench PRIVATE convex_hull_lib benchmark::benchmark)
+add_executable(quickhull_bench benchmarks/quickhull_bench.cpp)
+target_link_libraries(quickhull_bench PRIVATE hullib benchmark::benchmark)
+add_executable(graham_scan_bench benchmarks/graham_scan_bench.cpp)
+target_link_libraries(graham_scan_bench PRIVATE hullib benchmark::benchmark)
+add_executable(mbc_bench benchmarks/mbc_bench.cpp)
+target_link_libraries(mbc_bench PRIVATE hullib benchmark::benchmark)

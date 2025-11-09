@@ -1,4 +1,5 @@
-#include "../include/marriage_before_conquest.hpp"
+#include <marriage_before_conquest.hpp>
+#include <util.hpp>
 #include <algorithm>
 #include <random>
 
@@ -19,7 +20,7 @@ Line MarriageBeforeConquest::findBridge(const Points &points, float midX) {
   std::default_random_engine rng(rd());
   std::shuffle(shuffledPoints.begin(), shuffledPoints.end(), rng);
 
-  for (int i = 0; i < shuffledPoints.size(); ++i) {
+  for (size_t i = 0; i < shuffledPoints.size(); ++i) {
     const auto &p = shuffledPoints[i];
     if (util::isAbove(bridge, p)) {
       /* Point is above the bridge, update the bridge */
@@ -31,7 +32,7 @@ Line MarriageBeforeConquest::findBridge(const Points &points, float midX) {
       */
       if (p.x < midX) {
         bridge.p1 = p;
-        for (int j = 0; j < i; ++j) {
+        for (size_t j = 0; j < i; ++j) {
           const auto &q = shuffledPoints[j];
           if (q.x >= midX) {
             if (util::isAbove(bridge, q)) {
@@ -42,7 +43,7 @@ Line MarriageBeforeConquest::findBridge(const Points &points, float midX) {
       }
     } else {
       bridge.p2 = p;
-      for (int j = 0; j < i; ++j) {
+      for (size_t j = 0; j < i; ++j) {
         const auto &q = shuffledPoints[j];
         if (q.x <= midX) {
           if (util::isAbove(bridge, q)) {
