@@ -34,8 +34,6 @@ int main() {
   Points points = {Point(0, 0),  Point(1, 1), Point(0.5, 1.5),
                    Point(1, -1), Point(2, 0), Point(1.5, 1.5)};
 
-  /* Create an instance of GrahamScan and compute the convex hull using
-   * dependency injection for the compute method */
   ConvexHull<Points> *convexHullAlgorithm = new GrahamScan();
   Points hull = convexHullAlgorithm->compute(points);
 
