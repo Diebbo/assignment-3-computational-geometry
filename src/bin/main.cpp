@@ -1,12 +1,26 @@
-#include <graham_scan.hpp>
-#include <quickhull.hpp>
-#include <marriage_before_conquest.hpp>
-#include <util.hpp>
+#include "common.hpp"
 #include <cassert>
+#include <graham_scan.hpp>
 #include <iostream>
+#include <marriage_before_conquest.hpp>
 #include <ostream>
+#include <quickhull.hpp>
+#include <rapidcheck.h>
+#include <util.hpp>
 
-void verify_points_in_hull(const Points &points, const Points &hull);
+bool verify_points_in_hull(const Points &points, const Points &hull);
+
+namespace rc {
+template <> struct Arbitrary<Point> {
+  static Gen<Point> arbitrary() {
+    return gen::build<Point>(
+      gen::construct<Point>(),
+      gen::set(&Point::x, rc::gen::inRange(-100, 100)),
+      gen::set(&Point::y, rc::gen::inRange(-100, 100))
+    );
+  }
+};
+} // namespace rc
 
 int main() {
   /* Quick test of the sidedness function */
@@ -51,25 +65,36 @@ int main() {
 
   verify_points_in_hull(points, qhull);
 
-    /* Quick Hull */
-  ConvexHull<Points> *marriageBeforeConquest = new MarriageNS::MarriageBeforeConquest();
-  Points mbc_hull = marriageBeforeConquest->compute(points);
-
-  std::cout << "QuickHull Convex Hull Points:" << std::endl;
-  for (const auto &p : qhull) {
-    std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
-  }
-
+  Points mbc_hull = MarriageNS::MarriageBeforeConquest().compute(points);
   if (util::is_partial_hull(mbc_hull, points)) {
-    std::cout << "Test Pass: Marriage Before Conquest hull is valid" << std::endl;
+    std::cout << "Test Pass: Marriage Before Conquest hull is valid"
+              << std::endl;
   } else {
-    std::cout << "Test Fail: Marriage Before Conquest hull is NOT valid" << std::endl;
+    std::cout << "Test Fail: Marriage Before Conquest hull is NOT valid"
+              << std::endl;
   }
+
+  rc::check("automatic test", []() {
+    int num = *rc::gen::inRange(5, 50);
+    std::vector<float> xs = *rc::gen::container<std::vector<float>>(num, rc::gen::nonZero<float>());
+    std::vector<float> ys = *rc::gen::container<std::vector<float>>(num, rc::gen::nonZero<float>());
+    std::vector<Point> pts;
+    for (int i = 0; i < num; i++) {
+      pts.push_back(Point(xs[i], ys[i]));
+    }
+
+    auto hull = GrahamScan().compute(pts);
+    // auto hull2 = QuickHullNS::QuickHull().compute(pts);
+    // auto hull3 = MarriageNS::MarriageBeforeConquest().compute(pts);
+    // RC_ASSERT(hull == hull3);
+    // RC_ASSERT(hull2 == hull3);
+    RC_ASSERT(util::is_hull(pts, hull));
+  });
 
   return 0;
 }
 
-void verify_points_in_hull(const Points &points, const Points &hull) {
+bool verify_points_in_hull(const Points &points, const Points &hull) {
   for (const auto &p : points) {
     bool on_hull = false;
 
@@ -85,7 +110,6 @@ void verify_points_in_hull(const Points &points, const Points &hull) {
       // Check if point is inside hull
       // A point is inside if it's on the same side of ALL edges
       int inside = util::sidedness(hull[0], hull[1], p);
-      bool miao = true;
 
       for (size_t i = 1; i < hull.size() - 1; i++) {
         Point p1 = hull[i];
@@ -96,17 +120,10 @@ void verify_points_in_hull(const Points &points, const Points &hull) {
         float side = util::sidedness(p1, p2, p);
 
         if (inside * side < 0) {
-          miao = false;
-          std::cout << "Point (" << p.x << ", " << p.y
-                    << ") is outside the hull edge from (" << p1.x << ", "
-                    << p1.y << ") to (" << p2.x << ", " << p2.y << ")"
-                    << std::endl;
-          break;
+          return false;
         }
       }
-
-      assert(miao);
     }
   }
-  std::cout << "Test Pass: points inside" << std::endl;
+  return true;
 }

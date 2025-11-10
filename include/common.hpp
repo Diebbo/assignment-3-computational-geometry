@@ -9,8 +9,10 @@ public:
     float y;
     Point();
     Point(float x, float y);
-    bool operator==(const Point&);
+    bool operator==(const Point&) const;
+    std::string to_string() const;
 };
+void showValue(const Point &person, std::ostream &os);
 
 class Line {
 public:

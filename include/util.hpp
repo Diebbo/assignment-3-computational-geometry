@@ -17,9 +17,9 @@ namespace util {
  *  - l: The line to compare against
  *
  * Returns:
- *  > 0 if point is above the line
- *  < 0 if point is below the line
- *  = 0 if point is on the line
+ *  - > 0 if point is above the line
+ *  - < 0 if point is below the line
+ *  - = 0 if point is on the line
  */
 float sidedness(const Line &l, const Point &p);
 float sidedness(const Point &p1, const Point &p2, const Point &p3);

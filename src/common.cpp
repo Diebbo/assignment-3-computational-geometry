@@ -1,9 +1,21 @@
 #include <common.hpp>
+#include <iostream>
+#include <sstream>
 
 Point::Point(float x, float y) : x(x), y(y) {}
 Point::Point() : x(0), y(0) {}
-bool Point::operator==(Point const& other) {
+bool Point::operator==(Point const& other) const {
     return this->x == other.x && this->y == other.y;
+}
+
+std::string Point::to_string() const {
+  std::ostringstream o;
+  o << "Point(" << this->x << ", " << this->y << ")";
+  return o.str();
+}
+
+void showValue(const Point &pt, std::ostream &o) {
+  o << "Point(" << pt.x << "," << pt.y << ")";
 }
 
 Line::Line() : p1(), p2() {}
