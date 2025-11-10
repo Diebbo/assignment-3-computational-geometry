@@ -10,12 +10,12 @@ bool Point::operator==(Point const& other) const {
 
 std::string Point::to_string() const {
   std::ostringstream o;
-  o << "Point(" << this->x << ", " << this->y << ")";
+  o << "(" << this->x << ", " << this->y << ")";
   return o.str();
 }
 
 void showValue(const Point &pt, std::ostream &o) {
-  o << "Point(" << pt.x << "," << pt.y << ")";
+  o << "(" << pt.x << "," << pt.y << ")";
 }
 
 Line::Line() : p1(), p2() {}

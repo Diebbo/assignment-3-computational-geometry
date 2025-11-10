@@ -6,7 +6,8 @@
 bool point_cmp_x(const Point &a, const Point &b) { return a.x < b.x; }
 
 bool doesLeftTurn(float side, const Point& a, const Point& b, const Point& c) {
-  return util::sidedness(Line(a, c), b) * side < 0;
+  auto sidedness = util::sidedness(Line(a, c), b);
+  return sidedness * side <= 0;
 }
 
 void compute_inner(const Points& points, Points& half, float side) {
