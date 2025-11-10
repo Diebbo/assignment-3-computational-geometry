@@ -51,14 +51,19 @@ void QuickHull::QuickHullRecursive(const Point &p1, const Point &p2,
   if (points.empty()) {
     return;
   }
+  if (points.size() == 1) {
+    hull.push_back(points[0]);
+    return;
+  }
   /* 1. Find the point q above s that has the largest distance to s. */
   float maxDistance = -1.0f;
   Point q;
   for (const auto &p : points) {
     float distance = util::partial_distance(Line(p1, p2), p);
-    // it would be the same to use sidedness because algebraically they are the same:
-    // it's basically the area of the triangle formed by p1, p2 and p multiplied by 2 and divided by the length of the base (p2 - p1)
-    // aka half the determinant of the matrix formed by the vectors
+    // it would be the same to use sidedness because algebraically they are the
+    // same: it's basically the area of the triangle formed by p1, p2 and p
+    // multiplied by 2 and divided by the length of the base (p2 - p1) aka half
+    // the determinant of the matrix formed by the vectors
     if (distance > maxDistance) {
       maxDistance = distance;
       q = p;

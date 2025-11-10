@@ -83,12 +83,12 @@ int main() {
       pts.push_back(Point(xs[i], ys[i]));
     }
 
-    auto hull = GrahamScan().compute(pts);
-    // auto hull2 = QuickHullNS::QuickHull().compute(pts);
+    // auto hull = GrahamScan().compute(pts);
+    auto hull2 = QuickHullNS::QuickHull().compute(pts);
     // auto hull3 = MarriageNS::MarriageBeforeConquest().compute(pts);
     // RC_ASSERT(hull == hull3);
     // RC_ASSERT(hull2 == hull3);
-    RC_ASSERT(util::is_hull(pts, hull));
+    RC_ASSERT(util::is_hull(pts, hull2));
   });
 
   return 0;
