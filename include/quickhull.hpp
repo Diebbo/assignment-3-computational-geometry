@@ -4,6 +4,8 @@
 namespace QuickHullNS {
 class QuickHull : public ConvexHull<Points> {
 protected:
+  void QuickBottomHullRecursive(const Point &p1, const Point &p2,
+                          const Points &points, Points &hull);
   void QuickHullRecursive(const Point &p1, const Point &p2,
                           const Points &points, Points &hull);
 
