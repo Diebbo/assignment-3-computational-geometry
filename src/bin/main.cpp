@@ -51,9 +51,6 @@ int main() {
   ConvexHull<Points> *convexHullAlgorithm = new GrahamScan();
   Points hull = convexHullAlgorithm->compute(points);
 
-  // TODO
-  std::cout << "TODO" << std::endl;
-
   /* Quick Hull */
   ConvexHull<Points> *quickHullAlgorithm = new QuickHullNS::QuickHull();
   Points qhull = quickHullAlgorithm->compute(points);
@@ -63,7 +60,12 @@ int main() {
     std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
   }
 
-  verify_points_in_hull(points, qhull);
+  bool is_correct = verify_points_in_hull(points, qhull);
+  if (is_correct) {
+    std::cout << "Test Pass: QuickHull hull is valid" << std::endl;
+  } else {
+    std::cout << "Test Fail: QuickHull hull is NOT valid" << std::endl;
+  }
 
   Points mbc_hull = MarriageNS::MarriageBeforeConquest().compute(points);
   if (util::is_partial_hull(mbc_hull, points)) {

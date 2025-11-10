@@ -3,12 +3,15 @@
 /* QuickHull Implementation */
 namespace QuickHullNS {
 class QuickHull : public ConvexHull<Points> {
+private:
+  void findHullRecursive(const Point &p1, const Point &p2, const Points &points,
+                         Points &hull, int side_multiplier);
 protected:
-  void QuickBottomHullRecursive(const Point &p1, const Point &p2,
-                          const Points &points, Points &hull);
-  void QuickHullRecursive(const Point &p1, const Point &p2,
-                          const Points &points, Points &hull);
+  void findTopHullRecursive(const Point &p1, const Point &p2, const Points &points,
+                         Points &hull);
 
+  void findBottomHullRecursive(const Point &p1, const Point &p2, const Points &points,
+                         Points &hull);
 public:
   Points compute(const Points &points) override;
 };
