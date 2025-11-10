@@ -1,6 +1,7 @@
 #include <util.hpp>
 #include <common.hpp>
 #include <graham_scan.hpp>
+#include <algorithm>
 
 bool point_cmp_x(const Point &a, const Point &b) { return a.x < b.x; }
 

@@ -2,6 +2,7 @@
 #define COMMON_HPP
 
 #include <vector>
+#include <ostream>
 
 class Point {
 public:
