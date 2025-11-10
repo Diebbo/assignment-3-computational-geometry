@@ -10,6 +10,8 @@ float sidedness(const Line &l, const Point &p) {
 }
 
 bool isAbove(const Line &l, const Point &p) { return sidedness(l, p) > 0; }
+bool isLeft(const Line &l, const Point &p) { return sidedness(l, p) > 0; }
+bool isUnder(const Line &l, const Point &p) { return sidedness(l, p) < 0; }
 
 bool is_inside(const Triangle &t, const Point &p) {
   /* The point must be on the same side of all the triangle's edges */
@@ -26,8 +28,10 @@ bool is_inside(const Triangle &t, const Point &p) {
 
 float partial_distance(const Line &l, const Point &p) {
   // https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#Line_defined_by_an_equation
-  // but we are not considering the denominator as it would be the same for all points
-  return std::abs((l.p2.y - l.p1.y) * p.x - (l.p2.x - l.p1.x) * p.y + l.p2.x * l.p1.y - l.p2.y * l.p1.x);
+  // but we are not considering the denominator as it would be the same for all
+  // points
+  return std::abs((l.p2.y - l.p1.y) * p.x - (l.p2.x - l.p1.x) * p.y +
+                  l.p2.x * l.p1.y - l.p2.y * l.p1.x);
 }
 
 bool is_inside(const Points &polygon, const Point &p) {

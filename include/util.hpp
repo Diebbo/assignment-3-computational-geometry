@@ -25,6 +25,8 @@ float sidedness(const Line &l, const Point &p);
 float sidedness(const Point &p1, const Point &p2, const Point &p3);
 
 bool isAbove(const Line &l, const Point &p);
+bool isUnder(const Line &l, const Point &p);
+bool isLeft(const Line &l, const Point &p);
 
 /* Determine if point p is inside triangle t
  *

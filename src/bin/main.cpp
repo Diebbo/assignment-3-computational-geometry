@@ -13,11 +13,9 @@ bool verify_points_in_hull(const Points &points, const Points &hull);
 namespace rc {
 template <> struct Arbitrary<Point> {
   static Gen<Point> arbitrary() {
-    return gen::build<Point>(
-      gen::construct<Point>(),
-      gen::set(&Point::x, rc::gen::inRange(-100, 100)),
-      gen::set(&Point::y, rc::gen::inRange(-100, 100))
-    );
+    return gen::build<Point>(gen::construct<Point>(),
+                             gen::set(&Point::x, rc::gen::inRange(-100, 100)),
+                             gen::set(&Point::y, rc::gen::inRange(-100, 100)));
   }
 };
 } // namespace rc
@@ -68,7 +66,7 @@ int main() {
   }
 
   Points mbc_hull = MarriageNS::MarriageBeforeConquest().compute(points);
-  if (util::is_partial_hull(mbc_hull, points)) {
+  if (util::is_hull(mbc_hull, points)) {
     std::cout << "Test Pass: Marriage Before Conquest hull is valid"
               << std::endl;
   } else {
@@ -82,8 +80,10 @@ int main() {
 
   rc::check("automatic test", []() {
     int num = *rc::gen::inRange(5, 50);
-    std::vector<float> xs = *rc::gen::container<std::vector<float>>(num, rc::gen::nonZero<float>());
-    std::vector<float> ys = *rc::gen::container<std::vector<float>>(num, rc::gen::nonZero<float>());
+    std::vector<float> xs =
+        *rc::gen::container<std::vector<float>>(num, rc::gen::nonZero<float>());
+    std::vector<float> ys =
+        *rc::gen::container<std::vector<float>>(num, rc::gen::nonZero<float>());
     std::vector<Point> pts;
     for (int i = 0; i < num; i++) {
       pts.push_back(Point(xs[i], ys[i]));
@@ -91,10 +91,12 @@ int main() {
 
     auto hull = GrahamScan().compute(pts);
     auto hull2 = QuickHullNS::QuickHull().compute(pts);
-    // auto hull3 = MarriageNS::MarriageBeforeConquest().compute(pts);
-    //RC_ASSERT(hull == hull3);
-    // RC_ASSERT(hull2 == hull3);
+    auto hull3 = MarriageNS::MarriageBeforeConquest().compute(pts);
+    RC_ASSERT(util::is_hull(pts, hull));
     RC_ASSERT(util::is_hull(pts, hull2));
+    RC_ASSERT(util::is_hull(pts, hull3));
+    // RC_ASSERT(hull == hull3);
+    // RC_ASSERT(hull2 == hull3);
     RC_ASSERT(hull == hull2);
   });
 
