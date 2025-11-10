@@ -108,4 +108,11 @@ bool is_partial_hull(const Points &hull, const Points &points) {
   return true;
 }
 
+void print_points(const Points &points) {
+  for (const auto &p : points) {
+    std::cout << "(" << p.x << ", " << p.y << ")  ";
+  }
+  std::cout << std::endl;
+}
+
 } // namespace util

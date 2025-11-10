@@ -75,6 +75,10 @@ int main() {
     std::cout << "Test Fail: Marriage Before Conquest hull is NOT valid"
               << std::endl;
   }
+  std::cout << "MBC Convex Hull Points:" << std::endl;
+  for (const auto &p : mbc_hull) {
+    std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
+  }
 
   rc::check("automatic test", []() {
     int num = *rc::gen::inRange(5, 50);

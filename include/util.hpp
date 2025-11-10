@@ -47,6 +47,8 @@ bool is_hull(const Points &hull, const Points &points);
 bool is_partial_hull(const Points &hull, const Points &points);
 
 float partial_distance(const Line &l, const Point &p);
+void print_points(const Points &points);
+
 /* Read points from a file
  *
  * The file should contain points in the following format:
@@ -76,6 +78,7 @@ void read_points_from_file(const std::string &filename, Container &container) {
     container.emplace_back(x, y);
   }
 }
+
 } // namespace util
 
 #endif // UTIL_HPP
