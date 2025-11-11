@@ -13,7 +13,7 @@ Points testAglorithm(ConvexHull<Points> *algorithm, const Points &points,
                    const std::string &name) {
   std::cout << "------ Testing " << name << " algorithm..." << std::endl;
   Points hull = algorithm->compute(points);
-  bool is_correct = util::is_hull(hull, points);
+  bool is_correct = util::is_valid_hull(hull, points);
   if (is_correct) {
     std::cout << "Test Pass: Hull is valid" << std::endl;
   } else {

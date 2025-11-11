@@ -1,42 +1,39 @@
-import numpy as np # type: ignore
-import os # type: ignore
+import numpy as np
+import random
+import os
 
-# move to the directory parent to print the script file
-if not os.path.exists("build/tests/"):
-    os.mkdir("build/tests/")
-
-LOWER_X = -10.0
-UPPER_X = 10.0
-R = 10.0
-
+# create output folder
+os.makedirs("build/tests/", exist_ok=True)
 types = {
-    # generate the points according to the function
-    "parabola": lambda x:  x**2,
-    # uniformly distributed points in a square
+    "parabola": lambda x: x**2,
     "square": lambda x: np.random.uniform(LOWER_X, UPPER_X),
-    # points on a circle
     "circle": lambda x: np.random.choice([(R**2 - x**2)**0.5, -(R**2 - x**2)**0.5])
 }
 
 for shape in types.keys():
     path = os.path.join("build/tests/", f"{shape}_tests")
-    if not os.path.exists(path):
-        os.mkdir(path)
+    os.makedirs(path, exist_ok=True)
 
-    for size in [2 **i for i in range(8, 20)]:
-        file_name = f"parabola_points_{size}.txt"
+    for size in [2**i for i in range(8, 20)]:
+        print(f"Generating {shape} test with size {size}")
+        LOWER_X = -10.0 * (size / 256)
+        UPPER_X = 10.0 * (size / 256)
+        R = 10.0 * (size / 256)
 
+        # generate unique x values
+        x_vals = set()
+        limit_low, limit_high = (LOWER_X, UPPER_X) if shape != "circle" else (-R, R)
 
-# number of points
-        n = size
-# x values
-        x_vals = np.random.uniform(LOWER_X, UPPER_X, n)
-# compute y values
+        # keep generating until enough unique x values
+        while len(x_vals) < size:
+            x = round(random.uniform(limit_low, limit_high), 3)
+            x_vals.add(x)
+
+        x_vals = sorted(x_vals)
         y_vals = [types[shape](x) for x in x_vals]
 
-# write to file
+        file_name = f"{shape}_points_{size}.txt"
         with open(os.path.join(path, file_name), "w") as f:
-            f.write(f"{n}\n")
+            f.write(f"{size}\n")
             for x, y in zip(x_vals, y_vals):
-                f.write(f"{x:.1f} {y:.1f}\n")
-
+                f.write(f"{x:.3f} {y:.3f}\n")

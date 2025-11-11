@@ -7,6 +7,48 @@ using namespace QuickHullNS;
 const int TOP_HULL = 1;
 const int BOTTOM_HULL = -1;
 
+// Tuple of two points
+using TPoint = std::pair<Point, Point>;
+
+/* Compute the extremes for the points: leftmost and rightmost.
+ * It cover the edge case where multiple points have the same x-coordinate but different y-coordinates.
+ *
+ * returns a pair of points <(leftmost_ymin, leftmost_ymax), (rightmost_ymin, rightmost_ymax)>
+ */
+std::pair<TPoint, TPoint> findExtremePointsCases(const Points &points){
+  Point minPointYMin = points[0];
+  Point minPointYMax = points[0];
+  Point maxPointYMin = points[0];
+  Point maxPointYMax = points[0];
+
+  for (const auto &p : points) {
+    if (p.x < minPointYMin.x) {
+      minPointYMin = p;
+      minPointYMax = p;
+    } else if (p.x == minPointYMin.x) {
+      if (p.y < minPointYMin.y) {
+        minPointYMin = p;
+      }
+      if (p.y > minPointYMax.y) {
+        minPointYMax = p;
+      }
+    }
+
+    if (p.x > maxPointYMax.x) {
+      maxPointYMin = p;
+      maxPointYMax = p;
+    } else if (p.x == maxPointYMax.x) {
+      if (p.y < maxPointYMin.y) {
+        maxPointYMin = p;
+      }
+      if (p.y > maxPointYMax.y) {
+        maxPointYMax = p;
+      }
+    }
+  }
+  return {{minPointYMin, minPointYMax}, {maxPointYMin, maxPointYMax}};
+}
+
 std::pair<Point, Point> findExtremePoints(const Points &points) {
   Point minPoint = points[0];
   Point maxPoint = points[0];
@@ -32,23 +74,57 @@ Points QuickHull::compute(const Points &points) {
   Points lower_points = Points();
   Points hull = Points();
 
-  Point q1, q2;
-  std::tie(q1, q2) = findExtremePoints(points);
-  hull.push_back(q1);
+  Point q1upper, q2upper;
+  Point q1lower, q2lower;
+
+  auto extremes = findExtremePointsCases(points);
+  TPoint q1 = extremes.first;
+  TPoint q2 = extremes.second;
+  // check if the leftmost points are the same, otherwise we compute differenyly and merge afterwards
+  if (q1.first.y == q1.second.y) {
+    q1upper = q1lower = q1.first;
+  } else {
+    q1upper = q1.first;
+    q1lower = q1.second;
+  }
+
+  if (q2.first.x == q2.second.x) {
+    q2upper = q2lower = q2.first;
+  } else {
+    q2upper = q2.first;
+    q2lower = q2.second;
+  }
+
+  hull.push_back(q1upper);
 
   for (const auto &p : points) {
-    auto s = util::sidedness(q1, q2, p);
+    auto s = util::sidedness(q1upper, q2upper, p);
+    auto s2 = util::sidedness(q1lower, q2lower, p);
     if (s > 0) {
       upper_points.push_back(p);
-    } else if (s < 0) {
+    } 
+    if (s2 < 0) {
       lower_points.push_back(p);
     }
   }
 
   /* Recursively find the upper and lower hulls */
-  QuickHull::findTopHullRecursive(q1, q2, upper_points, hull);
-  hull.push_back(q2);
-  QuickHull::findBottomHullRecursive(q1, q2, lower_points, hull);
+  QuickHull::findTopHullRecursive(q1upper, q2upper, upper_points, hull);
+
+  // conclude the cycle of the upper hull with the last point of the upper hull if needed
+  // another check to avoid duplicates
+  if (hull.empty() || !(hull.back() == q2upper))
+    hull.push_back(q2upper);
+
+  // Only add q2lower if it's different from the last point in hull
+  if (hull.empty() || !(hull.back() == q2lower))
+    hull.push_back(q2lower);
+
+  QuickHull::findBottomHullRecursive(q1lower, q2lower, lower_points, hull);
+
+  // conclude the cycle of the bottom hull with the last point of the bottom hull if needed
+  if (hull.empty() || !(hull.back() == q1lower))
+    hull.push_back(q1lower);
 
   return hull;
 }
@@ -106,7 +182,7 @@ void QuickHull::findHullRecursive(const Point &p1, const Point &p2,
     findHullRecursive(q, p2, rightSet, hull, side_multiplier);
     hull.push_back(q);
     findHullRecursive(p1, q, leftSet, hull, side_multiplier);
-  } else {
+  } else { // UPPER HULL
     findHullRecursive(p1, q, leftSet, hull, side_multiplier);
     hull.push_back(q);
     findHullRecursive(q, p2, rightSet, hull, side_multiplier);
