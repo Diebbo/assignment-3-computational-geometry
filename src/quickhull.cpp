@@ -4,6 +4,9 @@
 /* Convex Hull Factory */
 using namespace QuickHullNS;
 
+const int TOP_HULL = 1;
+const int BOTTOM_HULL = -1;
+
 std::pair<Point, Point> findExtremePoints(const Points &points) {
   Point minPoint = points[0];
   Point maxPoint = points[0];
@@ -52,12 +55,12 @@ Points QuickHull::compute(const Points &points) {
 
 void QuickHull::findTopHullRecursive(const Point &p1, const Point &p2,
                                    const Points &points, Points &hull) {
-  QuickHull::findHullRecursive(p1, p2, points, hull, 1);
+  QuickHull::findHullRecursive(p1, p2, points, hull, TOP_HULL);
 }
 
 void QuickHull::findBottomHullRecursive(const Point &p1, const Point &p2,
                                    const Points &points, Points &hull) {
-  QuickHull::findHullRecursive(p1, p2, points, hull, -1);
+  QuickHull::findHullRecursive(p1, p2, points, hull, BOTTOM_HULL);
 }
 
 void QuickHull::findHullRecursive(const Point &p1, const Point &p2,
@@ -98,7 +101,14 @@ void QuickHull::findHullRecursive(const Point &p1, const Point &p2,
   }
 
   /* 4. Recurse on the two subsets */
-  findHullRecursive(p1, q, leftSet, hull, side_multiplier);
-  hull.push_back(q);
-  findHullRecursive(q, p2, rightSet, hull, side_multiplier);
+  // if bottom hull i recurr on the right side first
+  if (side_multiplier == BOTTOM_HULL) {
+    findHullRecursive(q, p2, rightSet, hull, side_multiplier);
+    hull.push_back(q);
+    findHullRecursive(p1, q, leftSet, hull, side_multiplier);
+  } else {
+    findHullRecursive(p1, q, leftSet, hull, side_multiplier);
+    hull.push_back(q);
+    findHullRecursive(q, p2, rightSet, hull, side_multiplier);
+  }
 }
