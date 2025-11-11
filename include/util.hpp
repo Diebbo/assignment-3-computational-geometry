@@ -24,9 +24,10 @@ namespace util {
 float sidedness(const Line &l, const Point &p);
 float sidedness(const Point &p1, const Point &p2, const Point &p3);
 
-bool isAbove(const Line &l, const Point &p);
-bool isUnder(const Line &l, const Point &p);
+bool isLeft(const Point &p1, const Point &p2, const Point &p3);
+bool isRight(const Point &p1, const Point &p2, const Point &p3);
 bool isLeft(const Line &l, const Point &p);
+bool isRight(const Line &l, const Point &p);
 
 /* Determine if point p is inside triangle t
  *
@@ -43,9 +44,11 @@ bool isLeft(const Line &l, const Point &p);
  */
 bool is_inside(const Triangle &t, const Point &p);
 bool is_inside(const Points &polygon, const Point &p);
+bool is_valid_inside(const Points &polygon, const Point &p);
 bool is_partial_inside(const Points &polygon, const Point &p);
 
 bool is_hull(const Points &hull, const Points &points);
+bool is_valid_hull(const Points &hull, const Points &points);
 bool is_partial_hull(const Points &hull, const Points &points);
 
 float partial_distance(const Line &l, const Point &p);

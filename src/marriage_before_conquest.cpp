@@ -196,10 +196,15 @@ Points MarriageBeforeConquest::compute(const Points &points) {
   std::vector<Point> shuffledPoints = points;
   std::shuffle(shuffledPoints.begin(), shuffledPoints.end(), rng);
 
+  //print points
+  // std::cout << "Shuffled Points:" << std::endl;
+  // util::print_points(shuffledPoints);
+
   MBCUpperRecursive(shuffledPoints, hull);
-  if (hull.size() <= 2) {
+  if (shuffledPoints.size() <= 2) {
     return hull;
   }
+
   hull.pop_back(); // remove last point to avoid duplication of rightmost point
   MBCLowerRecursive(shuffledPoints, hull);
   hull.pop_back(); // remove last point to avoid duplication of leftmost point

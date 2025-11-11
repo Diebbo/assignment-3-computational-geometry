@@ -9,9 +9,16 @@ float sidedness(const Line &l, const Point &p) {
   return sidedness(l.p1, l.p2, p);
 }
 
-bool isAbove(const Line &l, const Point &p) { return sidedness(l, p) > 0; }
-bool isLeft(const Line &l, const Point &p) { return sidedness(l, p) > 0; }
-bool isUnder(const Line &l, const Point &p) { return sidedness(l, p) < 0; }
+bool isLeft(const Point &p1, const Point &p2, const Point &p3) {
+  return (p3.x - p2.x) * (p1.y - p2.y) > (p3.y - p2.y) * (p1.x - p2.x);
+}
+bool isRight(const Point &p1, const Point &p2, const Point &p3) {
+  return (p3.x - p2.x) * (p1.y - p2.y) < (p3.y - p2.y) * (p1.x - p2.x);
+}
+
+bool isLeft(const Line &l, const Point &p) { return isLeft(l.p1, l.p2, p); }
+
+bool isRight(const Line &l, const Point &p) { return isRight(l.p1, l.p2, p); }
 
 bool is_inside(const Triangle &t, const Point &p) {
   /* The point must be on the same side of all the triangle's edges */
@@ -72,7 +79,7 @@ bool is_hull(const Points &hull, const Points &points) {
 
     // Check if point is on hull
     for (const auto &hp : hull) {
-      if (p.x == hp.x && p.y == hp.y) {
+      if (p == hp) {
         on_hull = true;
         break;
       }
@@ -109,6 +116,70 @@ bool is_partial_hull(const Points &hull, const Points &points) {
       }
     }
   }
+  return true;
+}
+
+bool is_valid_inside(const Points &polygon, const Point &p) {
+  size_t n = polygon.size();
+  if (n < 3) {
+    return false; // A polygon must have at least 3 vertices
+  }
+
+  for (size_t i = 0; i < n; ++i) {
+    if (isLeft(Line(polygon[i], polygon[(i + 1) % n]), p)) {
+      return false; // Point is on the left side of an edge
+    }
+  }
+  return true; // Point is inside the polygon
+}
+
+bool is_valid_hull(const Points &hull, const Points &points) {
+  // check that the hull is convex
+  size_t n = hull.size();
+  if (n < 3) {
+    std::cout << "Hull has less than 3 vertices." << std::endl;
+    return false; // A hull must have at least 3 vertices
+  }
+
+  for (size_t i = 0; i < n; ++i) {
+    if (util::isLeft(hull[i], hull[(i + 1) % n], hull[(i + 2) % n])) {
+      print_points(hull);
+
+      std::cout << "Hull is not convex: " << i << " "
+                << sidedness(hull[i], hull[(i + 1) % n], hull[(i + 2) % n])
+                << std::endl
+                << "a=Point(" << hull[i].x << ", " << hull[i].y << "); b=Point("
+                << hull[(i + 1) % n].x << ", " << hull[(i + 1) % n].y
+                << "); c=Point(" << hull[(i + 2) % n].x << ", "
+                << hull[(i + 2) % n].y << ")" << std::endl;
+
+      return false; // Hull is not convex
+    }
+  }
+
+  // check that all points are either on the hull or inside it
+  for (const auto &p : points) {
+    bool on_hull = false;
+
+    // Check if point is on hull
+    for (const auto &hp : hull) {
+      if (p == hp) {
+        on_hull = true;
+        break;
+      }
+    }
+
+    if (!on_hull) {
+      // Check if point is inside hull
+      // A point is inside if it's on the same side of ALL edges
+      if (!is_valid_inside(hull, p)) {
+        std::cout << "Point (" << p.x << ", " << p.y << ") is outside the hull."
+                  << std::endl;
+        return false;
+      }
+    }
+  }
+
   return true;
 }
 
