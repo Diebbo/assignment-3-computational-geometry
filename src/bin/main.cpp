@@ -24,7 +24,7 @@ int main() {
 
   /* Define a point container and read points from a file */
   Points pointContainer;
-  util::read_points_from_file("points.txt", pointContainer);
+  util::read_points_from_file("parabola_points.txt", pointContainer);
   std::cout << "Read " << pointContainer.size() << " points from file."
             << std::endl;
   for (const auto &p : pointContainer) {
