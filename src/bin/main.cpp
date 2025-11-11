@@ -43,8 +43,9 @@ int main() {
   }
 
   /* We generate manually some points and compute their convex hull */
-  Points points = {Point(0, 0),  Point(1, 1), Point(0.5, 1.5),
-                   Point(1, -1), Point(2, 0), Point(1.5, 1.5)};
+  // Points points = {Point(0, 0),  Point(1, 1), Point(0.5, 1.5),
+  //                  Point(1, -1), Point(2, 0), Point(1.5, 1.5)};
+  Points points = pointContainer;
 
   ConvexHull<Points> *convexHullAlgorithm = new GrahamScan();
   Points hull = convexHullAlgorithm->compute(points);

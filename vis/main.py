@@ -1,18 +1,32 @@
-from manim import RED, WHITE, Arrow, Axes, Dot, MovingCameraScene
+from manim import RED, WHITE, Arrow, Axes, Dot, MovingCameraScene  # type: ignore
 
-pts = [
-    (1, 1),
-    (2, 0),
-    (3, 1),
-    (2, 2),
-    (2, 1),
-]
-hull = [
-    (1, 1),
-    (2, 2),
-    (3, 1),
-    (2, 0),
-]
+import os
+
+# open script directory and go one level up to find points.txt
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(os.path.join(script_dir, ".."))
+
+ponints_file = 'points.txt'
+path = os.path.exists(ponints_file)
+if not path:
+    raise FileNotFoundError(f"{ponints_file} not found in {os.getcwd()}")
+
+# read points from file 'points.txt'
+pts = []
+with open(ponints_file, 'r') as f:
+    # first line is number of points
+    n = int(f.readline().strip())
+    for line in f:
+        x, y = map(float, line.strip().split())
+        pts.append((x, y))
+
+# hull = []
+# with open('hull.txt', 'r') as f:
+#     n2 = int(f.readline().strip())
+#     for line in f:
+#         x, y = map(float, line.strip().split())
+#         hull.append((x, y))
+hull = [(-1, 0), (1, 2), (4, 3), (6, 1), (2, -2)]
 hull = [(x, y, 0) for x, y in hull]
 
 
