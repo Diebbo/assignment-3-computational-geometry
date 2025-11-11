@@ -20,8 +20,6 @@ endif()
 
 # ---- Dependencies ----
 find_package(benchmark REQUIRED)
-add_subdirectory(rapidcheck)
-include_directories(rapidcheck/include)
 
 # ---- Library ----
 file(GLOB LIB_SOURCES src/*.cpp)
@@ -29,7 +27,7 @@ add_library(hullib ${LIB_SOURCES})
 
 # ---- Main executable ----
 add_executable(convex_hull src/bin/main.cpp)
-target_link_libraries(convex_hull PRIVATE hullib rapidcheck)
+target_link_libraries(convex_hull PRIVATE hullib)
 
 # ---- Benchmarks ----
 add_executable(quickhull_bench benchmarks/quickhull_bench.cpp)

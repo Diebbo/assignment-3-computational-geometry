@@ -5,20 +5,11 @@
 #include <marriage_before_conquest.hpp>
 #include <ostream>
 #include <quickhull.hpp>
-#include <rapidcheck.h>
+#include <random>
 #include <util.hpp>
+#include <vector>
 
 bool verify_points_in_hull(const Points &points, const Points &hull);
-
-namespace rc {
-template <> struct Arbitrary<Point> {
-  static Gen<Point> arbitrary() {
-    return gen::build<Point>(gen::construct<Point>(),
-                             gen::set(&Point::x, rc::gen::inRange(-100, 100)),
-                             gen::set(&Point::y, rc::gen::inRange(-100, 100)));
-  }
-};
-} // namespace rc
 
 int main() {
   /* Quick test of the sidedness function */
@@ -79,27 +70,27 @@ int main() {
     std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
   }
 
-  rc::check("automatic test", []() {
-    int num = *rc::gen::inRange(5, 50);
-    std::vector<float> xs =
-        *rc::gen::container<std::vector<float>>(num, rc::gen::nonZero<float>());
-    std::vector<float> ys =
-        *rc::gen::container<std::vector<float>>(num, rc::gen::nonZero<float>());
-    std::vector<Point> pts;
-    for (int i = 0; i < num; i++) {
-      pts.push_back(Point(xs[i], ys[i]));
+  std::random_device rd;
+  for (int i = 0; i < 100; i++) {
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distr(5, 50);
+    int len = distr(gen);
+
+    std::uniform_real_distribution<> distr2(-10, 10);
+    std::vector<Point> pts(len);
+    for (int i = 0; i < len; i++) {
+      pts[i] = Point(distr2(gen), distr2(gen));
     }
 
     auto hull = GrahamScan().compute(pts);
     auto hull2 = QuickHullNS::QuickHull().compute(pts);
     auto hull3 = MarriageNS::MarriageBeforeConquest().compute(pts);
-    RC_ASSERT(util::is_hull(pts, hull));
-    RC_ASSERT(util::is_hull(pts, hull2));
-    RC_ASSERT(util::is_hull(pts, hull3));
-    // RC_ASSERT(hull == hull3);
-    // RC_ASSERT(hull2 == hull3);
-    RC_ASSERT(hull == hull2);
-  });
+    assert(util::is_hull(pts, hull));
+    assert(util::is_hull(pts, hull2));
+    assert(util::is_hull(pts, hull3));
+    // assert(hull == hull2);
+    // assert(hull == hull3);
+  }
 
   return 0;
 }
