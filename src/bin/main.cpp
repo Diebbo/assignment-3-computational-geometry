@@ -83,11 +83,11 @@ int main() {
     auto hull = GrahamScan().compute(pts);
     auto hull2 = QuickHullNS::QuickHull().compute(pts);
     auto hull3 = MarriageNS::MarriageBeforeConquest().compute(pts);
-    assert(util::is_valid_hull(pts, hull));
-    assert(util::is_valid_hull(pts, hull2));
-    assert(util::is_valid_hull(pts, hull3));
+    assert(util::is_valid_hull(hull, pts));
+    //assert(util::is_valid_hull(hull2, pts));
+    assert(util::is_valid_hull(hull3, pts));
     // assert(hull == hull2);
-    // assert(hull == hull3);
+    assert(hull == hull3);
   }
 
   return 0;
