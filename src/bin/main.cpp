@@ -53,6 +53,28 @@ int main() {
   /* Test Marriage Before Conquest Algorithm */
   Points hull3 = testAglorithm(new MarriageNS::MarriageBeforeConquest(), pointContainer, "Marriage Before Conquest");
 
+  // =================
+
+  // TODO: da rimuovere, solo per testare i casi limite in dev time
+
+  // (1, -1)  (2, 0)  (0, 0)  (0.5, 1.5)  (1, 1)  (1.5, 1.5)
+
+  // Points failPoints = {Point(1, -1),    Point(2, 0), Point(0, 0),
+  //                      Point(0.5, 1.5), Point(1, 1), Point(1.5, 1.5)};
+  Points failPoints = {Point(1, -1),    Point(1, 0), Point(1, 2.5),
+                       Point(1, 1.5), Point(1, 1), Point(1, -1.5)};
+  Points correctHull = GrahamScan().compute(failPoints);
+  std::cout << "Graham Hull Points:" << std::endl;
+  util::print_points(correctHull);
+  Points quickHull = QuickHullNS::QuickHull().compute(failPoints);
+  std::cout << "QuickHull Points:" << std::endl;
+  util::print_points(quickHull);
+  Points mbc_hull2 = MarriageNS::MarriageBeforeConquest().compute(failPoints);
+  std::cout << "MBC Hull Points:" << std::endl;
+  util::print_points(mbc_hull2);
+
+  //==================
+
   std::random_device rd;
   for (int i = 0; i < 100; i++) {
     std::mt19937 gen(rd());
@@ -69,7 +91,7 @@ int main() {
     auto hull2 = QuickHullNS::QuickHull().compute(pts);
     auto hull3 = MarriageNS::MarriageBeforeConquest().compute(pts);
     assert(util::is_valid_hull(hull, pts));
-    //assert(util::is_valid_hull(hull2, pts));
+    // assert(util::is_valid_hull(hull2, pts));
     assert(util::is_valid_hull(hull3, pts));
     // assert(hull == hull2);
     assert(hull == hull3);
