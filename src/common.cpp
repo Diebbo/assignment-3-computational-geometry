@@ -8,6 +8,10 @@ bool Point::operator==(Point const& other) const {
     return this->x == other.x && this->y == other.y;
 }
 
+bool Point::operator!=(Point const& other) const {
+    return !(*this == other);
+}
+
 std::string Point::to_string() const {
   std::ostringstream o;
   o << "(" << this->x << ", " << this->y << ")";

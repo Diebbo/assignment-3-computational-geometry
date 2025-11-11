@@ -11,6 +11,7 @@ public:
     Point();
     Point(float x, float y);
     bool operator==(const Point&) const;
+    bool operator!=(const Point&) const;
     std::string to_string() const;
 };
 void showValue(const Point &person, std::ostream &os);
