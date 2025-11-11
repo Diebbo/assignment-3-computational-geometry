@@ -9,8 +9,6 @@
 #include <util.hpp>
 #include <vector>
 
-bool verify_points_in_hull(const Points &points, const Points &hull);
-
 int main() {
   /* Quick test of the sidedness function */
   Point p1(0, 0);
@@ -50,7 +48,7 @@ int main() {
     std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
   }
 
-  bool is_correct = verify_points_in_hull(points, qhull);
+  bool is_correct = util::is_hull(qhull, points);
   if (is_correct) {
     std::cout << "Test Pass: QuickHull hull is valid" << std::endl;
   } else {
@@ -85,46 +83,12 @@ int main() {
     auto hull = GrahamScan().compute(pts);
     auto hull2 = QuickHullNS::QuickHull().compute(pts);
     auto hull3 = MarriageNS::MarriageBeforeConquest().compute(pts);
-    assert(util::is_hull(pts, hull));
-    assert(util::is_hull(pts, hull2));
-    assert(util::is_hull(pts, hull3));
+    assert(util::is_valid_hull(pts, hull));
+    assert(util::is_valid_hull(pts, hull2));
+    assert(util::is_valid_hull(pts, hull3));
     // assert(hull == hull2);
     // assert(hull == hull3);
   }
 
   return 0;
-}
-
-bool verify_points_in_hull(const Points &points, const Points &hull) {
-  for (const auto &p : points) {
-    bool on_hull = false;
-
-    // Check if point is on hull
-    for (const auto &hp : hull) {
-      if (p.x == hp.x && p.y == hp.y) {
-        on_hull = true;
-        break;
-      }
-    }
-
-    if (!on_hull) {
-      // Check if point is inside hull
-      // A point is inside if it's on the same side of ALL edges
-      int inside = util::sidedness(hull[0], hull[1], p);
-
-      for (size_t i = 1; i < hull.size() - 1; i++) {
-        Point p1 = hull[i];
-        Point p2 = hull[(i + 1) % hull.size()];
-
-        // For a counter-clockwise hull, all interior points should be
-        // on the left side (positive sidedness) of all edges
-        float side = util::sidedness(p1, p2, p);
-
-        if (inside * side < 0) {
-          return false;
-        }
-      }
-    }
-  }
-  return true;
 }
