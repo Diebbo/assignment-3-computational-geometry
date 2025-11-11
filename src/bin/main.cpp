@@ -9,6 +9,19 @@
 #include <util.hpp>
 #include <vector>
 
+Points testAglorithm(ConvexHull<Points> *algorithm, const Points &points,
+                   const std::string &name) {
+  std::cout << "------ Testing " << name << " algorithm..." << std::endl;
+  Points hull = algorithm->compute(points);
+  bool is_correct = util::is_hull(hull, points);
+  if (is_correct) {
+    std::cout << "Test Pass: Hull is valid" << std::endl;
+  } else {
+    std::cout << "Test Fail: Hull is NOT valid" << std::endl;
+  }
+  return hull;
+}
+
 int main() {
   /* Quick test of the sidedness function */
   Point p1(0, 0);
@@ -31,42 +44,14 @@ int main() {
     std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
   }
 
-  /* We generate manually some points and compute their convex hull */
-  // Points points = {Point(0, 0),  Point(1, 1), Point(0.5, 1.5),
-  //                  Point(1, -1), Point(2, 0), Point(1.5, 1.5)};
-  Points points = pointContainer;
+  /* Test Graham Scan Algorithm */
+  Points hull = testAglorithm(new GrahamScan(), pointContainer, "Graham Scan");
 
-  ConvexHull<Points> *convexHullAlgorithm = new GrahamScan();
-  Points hull = convexHullAlgorithm->compute(points);
+  /* Test QuickHull Algorithm */
+  Points hull2 = testAglorithm(new QuickHullNS::QuickHull(), pointContainer, "QuickHull");
 
-  /* Quick Hull */
-  ConvexHull<Points> *quickHullAlgorithm = new QuickHullNS::QuickHull();
-  Points qhull = quickHullAlgorithm->compute(points);
-
-  std::cout << "QuickHull Convex Hull Points:" << std::endl;
-  for (const auto &p : qhull) {
-    std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
-  }
-
-  bool is_correct = util::is_hull(qhull, points);
-  if (is_correct) {
-    std::cout << "Test Pass: QuickHull hull is valid" << std::endl;
-  } else {
-    std::cout << "Test Fail: QuickHull hull is NOT valid" << std::endl;
-  }
-
-  Points mbc_hull = MarriageNS::MarriageBeforeConquest().compute(points);
-  if (util::is_hull(mbc_hull, points)) {
-    std::cout << "Test Pass: Marriage Before Conquest hull is valid"
-              << std::endl;
-  } else {
-    std::cout << "Test Fail: Marriage Before Conquest hull is NOT valid"
-              << std::endl;
-  }
-  std::cout << "MBC Convex Hull Points:" << std::endl;
-  for (const auto &p : mbc_hull) {
-    std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
-  }
+  /* Test Marriage Before Conquest Algorithm */
+  Points hull3 = testAglorithm(new MarriageNS::MarriageBeforeConquest(), pointContainer, "Marriage Before Conquest");
 
   std::random_device rd;
   for (int i = 0; i < 100; i++) {
