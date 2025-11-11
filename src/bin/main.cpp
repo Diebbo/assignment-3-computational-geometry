@@ -9,7 +9,7 @@
 #include <util.hpp>
 #include <vector>
 
-Points testAglorithm(ConvexHull<Points> *algorithm, const Points &points,
+Points testAlgorithm(ConvexHull<Points> *algorithm, const Points &points,
                    const std::string &name) {
   std::cout << "------ Testing " << name << " algorithm..." << std::endl;
   Points hull = algorithm->compute(points);
@@ -45,14 +45,15 @@ int main() {
   }
   util::print_points(pointContainer);
   /* Test Graham Scan Algorithm */
-  Points hull = testAglorithm(new GrahamScan(), pointContainer, "Graham Scan");
+  Points hull = testAlgorithm(new GrahamScan(), pointContainer, "Graham Scan");
   util::print_points(hull);
   /* Test QuickHull Algorithm */
-  Points hull2 = testAglorithm(new QuickHullNS::QuickHull(), pointContainer, "QuickHull");
+  Points hull2 = testAlgorithm(new QuickHullNS::QuickHull(), pointContainer, "QuickHull");
 
   /* Test Marriage Before Conquest Algorithm */
-  Points hull3 = testAglorithm(new MarriageNS::MarriageBeforeConquest(), pointContainer, "Marriage Before Conquest");
-
+  Points hull3 = testAlgorithm(new MarriageNS::MarriageBeforeConquest(), pointContainer, "Marriage Before Conquest");
+  std::cout << "MBC  correct Hull Points:" << std::endl;
+  util::print_points(hull3);
   // =================
 
   // TODO: da rimuovere, solo per testare i casi limite in dev time
