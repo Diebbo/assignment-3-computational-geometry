@@ -1,3 +1,4 @@
+#include <limits>
 #include <util.hpp>
 
 namespace util {
@@ -10,10 +11,10 @@ float sidedness(const Line &l, const Point &p) {
 }
 
 bool isLeft(const Point &p1, const Point &p2, const Point &p3) {
-  return (p3.x - p2.x) * (p1.y - p2.y) > (p3.y - p2.y) * (p1.x - p2.x);
+  return (p3.x - p2.x) * (p1.y - p2.y) - (p3.y - p2.y) * (p1.x - p2.x) > std::numeric_limits<float>::epsilon();
 }
 bool isRight(const Point &p1, const Point &p2, const Point &p3) {
-  return (p3.x - p2.x) * (p1.y - p2.y) < (p3.y - p2.y) * (p1.x - p2.x);
+  return (p3.x - p2.x) * (p1.y - p2.y) - (p3.y - p2.y) * (p1.x - p2.x) < -std::numeric_limits<float>::epsilon();
 }
 
 bool isLeft(const Line &l, const Point &p) { return isLeft(l.p1, l.p2, p); }

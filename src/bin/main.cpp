@@ -43,10 +43,10 @@ int main() {
   for (const auto &p : pointContainer) {
     std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
   }
-
+  util::print_points(pointContainer);
   /* Test Graham Scan Algorithm */
   Points hull = testAglorithm(new GrahamScan(), pointContainer, "Graham Scan");
-
+  util::print_points(hull);
   /* Test QuickHull Algorithm */
   Points hull2 = testAglorithm(new QuickHullNS::QuickHull(), pointContainer, "QuickHull");
 
@@ -63,9 +63,9 @@ int main() {
   //                      Point(0.5, 1.5), Point(1, 1), Point(1.5, 1.5)};
   Points failPoints = {Point(1, -1),    Point(1, 0), Point(1, 2.5),
                        Point(1, 1.5), Point(1, 1), Point(1, -1.5)};
-  Points correctHull = GrahamScan().compute(failPoints);
+  Points grahamHull = GrahamScan().compute(failPoints);
   std::cout << "Graham Hull Points:" << std::endl;
-  util::print_points(correctHull);
+  util::print_points(grahamHull);
   Points quickHull = QuickHullNS::QuickHull().compute(failPoints);
   std::cout << "QuickHull Points:" << std::endl;
   util::print_points(quickHull);
