@@ -34,7 +34,7 @@ void compute_inner(const Points& points, Points& half, float side) {
   }
 }
 
-Points GrahamScan::compute(const Points &points) {
+Points GrahamScan::compute(const Points &points) const {
   if (points.size() <= 2)
     return Points();
 

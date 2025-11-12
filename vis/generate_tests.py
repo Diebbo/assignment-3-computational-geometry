@@ -1,17 +1,20 @@
-import numpy as np
-import random
 import os
+import random
+
+import numpy as np
 
 # create output folder
 os.makedirs("build/tests/", exist_ok=True)
 types = {
     "parabola": lambda x: x**2,
     "square": lambda x: np.random.uniform(LOWER_X, UPPER_X),
-    "circle": lambda x: np.random.choice([(R**2 - x**2)**0.5, -(R**2 - x**2)**0.5])
+    "circle": lambda x: np.random.choice(
+        [(R**2 - x**2) ** 0.5, -((R**2 - x**2) ** 0.5)]
+    ),
 }
 
 for shape in types.keys():
-    path = os.path.join("build/tests/", f"{shape}_tests")
+    path = os.path.join("build/tests/", shape)
     os.makedirs(path, exist_ok=True)
 
     for size in [2**i for i in range(8, 20)]:
@@ -32,8 +35,7 @@ for shape in types.keys():
         x_vals = sorted(x_vals)
         y_vals = [types[shape](x) for x in x_vals]
 
-        file_name = f"{shape}_points_{size}.txt"
-        with open(os.path.join(path, file_name), "w") as f:
+        with open(os.path.join(path, str(size)), "w") as f:
             f.write(f"{size}\n")
             for x, y in zip(x_vals, y_vals):
                 f.write(f"{x:.3f} {y:.3f}\n")

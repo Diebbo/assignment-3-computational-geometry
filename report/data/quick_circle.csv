@@ -1,0 +1,12 @@
+2025-11-12T12:41:16+01:00
+Running ./build/bench
+Run on (8 X 24 MHz CPU s)
+CPU Caches:
+  L1 Data 64 KiB
+  L1 Instruction 128 KiB
+  L2 Unified 4096 KiB (x8)
+Load Average: 2.38, 2.11, 2.05
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"bench/quick_circle/256",4321,160469,160469,ns,,,,,
+"bench/quick_circle/512",2093,334400,334399,ns,,,,,
+"bench/quick_circle/1024",1062,660024,660024,ns,,,,,

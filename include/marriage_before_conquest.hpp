@@ -5,12 +5,12 @@
 namespace MarriageNS {
 class MarriageBeforeConquest : public ConvexHull<Points> {
 protected:
-  void MBCUpperRecursive(const Points &points, Points &hull);
-  void MBCLowerRecursive(const Points &points, Points &hull);
-  Line findUpperBridge(const Points &points);
-  Line findLowerBridge(const Points &points);
+  void MBCUpperRecursive(const Points &points, Points &hull) const;
+  void MBCLowerRecursive(const Points &points, Points &hull) const;
+  Line findUpperBridge(const Points &points) const;
+  Line findLowerBridge(const Points &points) const;
 
 public:
-  Points compute(const Points &points) override;
+  Points compute(const Points &points) const override;
 };
 } // namespace MarriageNS

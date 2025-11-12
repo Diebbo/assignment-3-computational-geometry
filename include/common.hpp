@@ -41,7 +41,7 @@ template <typename T>
 class ConvexHull {
 public:
     /* Every algorithm must implement the lower and upper hull and merge them */
-    virtual T compute(const T& points) = 0;
+    virtual T compute(const T& points) const = 0;
 };
 
 using Points = std::vector<Point>;

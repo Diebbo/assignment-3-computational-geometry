@@ -1,0 +1,54 @@
+#include "common.hpp"
+#include "graham_scan.hpp"
+#include "quickhull.hpp"
+#include "marriage_before_conquest.hpp"
+#include "util.hpp"
+#include <benchmark/benchmark.h>
+#include <sstream>
+#include <vector>
+
+typedef enum {
+  Circle = 0,
+  Parabola = 1,
+  Square = 2,
+} Shape;
+
+std::vector<Point> read_points(Shape shape, int size) {
+  std::stringstream s;
+  s << "build/tests/";
+  switch (shape) {
+  case Circle:
+    s << "circle/";
+    break;
+  case Parabola:
+    s << "parabola/";
+    break;
+  case Square:
+    s << "square/";
+    break;
+  }
+  s << size;
+
+  std::vector<Point> res;
+  util::read_points_from_file(s.str(), res);
+  return res;
+}
+
+void bench(benchmark::State &state, ConvexHull<std::vector<Point>> const& algo, Shape shape) {
+  std::vector<Point> points = read_points(shape, state.range());
+
+  for (auto _ : state)
+    benchmark::DoNotOptimize(algo.compute(points));
+}
+
+BENCHMARK_CAPTURE(bench, graham_circle, GrahamScan(), Circle)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, graham_square, GrahamScan(), Square)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, graham_parabola, GrahamScan(), Parabola)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, quick_circle, QuickHullNS::QuickHull(), Circle)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, quick_square, QuickHullNS::QuickHull(), Square)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, quick_parabola, QuickHullNS::QuickHull(), Parabola)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, marriage_circle, MarriageNS::MarriageBeforeConquest(), Circle)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, marriage_square, MarriageNS::MarriageBeforeConquest(), Square)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, marriage_parabola, MarriageNS::MarriageBeforeConquest(), Parabola)->RangeMultiplier(2)->Range(256, 524288);
+
+BENCHMARK_MAIN();

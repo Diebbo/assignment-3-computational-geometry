@@ -30,9 +30,5 @@ add_executable(convex_hull src/bin/main.cpp)
 target_link_libraries(convex_hull PRIVATE hullib)
 
 # ---- Benchmarks ----
-add_executable(quickhull_bench benchmarks/quickhull_bench.cpp)
-target_link_libraries(quickhull_bench PRIVATE hullib benchmark::benchmark)
-add_executable(graham_scan_bench benchmarks/graham_scan_bench.cpp)
-target_link_libraries(graham_scan_bench PRIVATE hullib benchmark::benchmark)
-add_executable(mbc_bench benchmarks/mbc_bench.cpp)
-target_link_libraries(mbc_bench PRIVATE hullib benchmark::benchmark)
+add_executable(bench benchmarks/bench.cpp)
+target_link_libraries(bench PRIVATE hullib benchmark::benchmark)

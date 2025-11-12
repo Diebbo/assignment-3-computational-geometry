@@ -6,7 +6,7 @@
 /* Convex Hull Factory */
 using namespace MarriageNS;
 
-Line MarriageBeforeConquest::findUpperBridge(const Points &points) {
+Line MarriageBeforeConquest::findUpperBridge(const Points &points) const {
   /* Find the bridge (tangent) for the given set of points */
 
   Point p1, p2;
@@ -73,7 +73,7 @@ Line MarriageBeforeConquest::findUpperBridge(const Points &points) {
   return bridge;
 }
 
-Line MarriageBeforeConquest::findLowerBridge(const Points &points) {
+Line MarriageBeforeConquest::findLowerBridge(const Points &points) const {
   /* Find the bridge (tangent) for the given set of points */
 
   Point p1, p2;
@@ -136,7 +136,7 @@ Line MarriageBeforeConquest::findLowerBridge(const Points &points) {
 }
 
 void MarriageBeforeConquest::MBCUpperRecursive(const Points &points,
-                                               Points &hull) {
+                                               Points &hull) const {
   /* If points.size() < 3, add them to the hull */
   if (points.empty()) {
     return;
@@ -185,7 +185,7 @@ void MarriageBeforeConquest::MBCUpperRecursive(const Points &points,
 }
 
 void MarriageBeforeConquest::MBCLowerRecursive(const Points &points,
-                                               Points &hull) {
+                                               Points &hull) const {
   /* If points.size() < 3, add them to the hull */
   if (points.empty()) {
     return;
@@ -243,7 +243,7 @@ void MarriageBeforeConquest::MBCLowerRecursive(const Points &points,
   MBCLowerRecursive(leftSet, hull);
 }
 
-Points MarriageBeforeConquest::compute(const Points &points) {
+Points MarriageBeforeConquest::compute(const Points &points) const {
 
   if (points.size() <= 2) {
     return points;

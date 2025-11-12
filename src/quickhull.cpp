@@ -15,7 +15,7 @@ using TPoint = std::pair<Point, Point>;
  *
  * returns a pair of points <(leftmost_ymin, leftmost_ymax), (rightmost_ymin, rightmost_ymax)>
  */
-std::pair<TPoint, TPoint> findExtremePointsCases(const Points &points){
+std::pair<TPoint, TPoint> findExtremePointsCases(const Points &points) {
   Point leftPointYMin = points[0];
   Point leftPointYMax = points[0];
   Point rightPointYMin = points[0];
@@ -64,7 +64,7 @@ std::pair<Point, Point> findExtremePoints(const Points &points) {
   return {minPoint, maxPoint};
 }
 
-Points QuickHull::compute(const Points &points) {
+Points QuickHull::compute(const Points &points) const {
   /* ·
    * To initialize, find the point q1 with the smallest x-coordinate and the
    * point q2 with the largest x- coordinate, and form the line segment s by
@@ -102,7 +102,7 @@ Points QuickHull::compute(const Points &points) {
     auto s2 = util::sidedness(q1lower, q2lower, p);
     if (s > 0) {
       upper_points.push_back(p);
-    } 
+    }
     if (s2 < 0) {
       lower_points.push_back(p);
     }
@@ -130,18 +130,18 @@ Points QuickHull::compute(const Points &points) {
 }
 
 void QuickHull::findTopHullRecursive(const Point &p1, const Point &p2,
-                                   const Points &points, Points &hull) {
+                                   const Points &points, Points &hull) const {
   QuickHull::findHullRecursive(p1, p2, points, hull, TOP_HULL);
 }
 
 void QuickHull::findBottomHullRecursive(const Point &p1, const Point &p2,
-                                   const Points &points, Points &hull) {
+                                   const Points &points, Points &hull) const {
   QuickHull::findHullRecursive(p1, p2, points, hull, BOTTOM_HULL);
 }
 
 void QuickHull::findHullRecursive(const Point &p1, const Point &p2,
                                    const Points &points, Points &hull,
-                                   int side_multiplier) {
+                                   int side_multiplier) const {
   /* No more points left */
   if (points.empty()) {
     return;

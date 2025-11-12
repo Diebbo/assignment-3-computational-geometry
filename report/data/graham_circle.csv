@@ -1,0 +1,21 @@
+2025-11-12T12:40:37+01:00
+Running ./build/bench
+Run on (8 X 24 MHz CPU s)
+CPU Caches:
+  L1 Data 64 KiB
+  L1 Instruction 128 KiB
+  L2 Unified 4096 KiB (x8)
+Load Average: 3.05, 2.17, 2.06
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"bench/graham_circle/256",20774,33544.2,33539.5,ns,,,,,
+"bench/graham_circle/512",10757,64820.5,64813.7,ns,,,,,
+"bench/graham_circle/1024",5511,127560,127548,ns,,,,,
+"bench/graham_circle/2048",2809,253753,253738,ns,,,,,
+"bench/graham_circle/4096",1389,506679,506665,ns,,,,,
+"bench/graham_circle/8192",634,1.02588e+06,1.02585e+06,ns,,,,,
+"bench/graham_circle/16384",333,2.09432e+06,2.09427e+06,ns,,,,,
+"bench/graham_circle/32768",166,4.18258e+06,4.18247e+06,ns,,,,,
+"bench/graham_circle/65536",82,8.48206e+06,8.48189e+06,ns,,,,,
+"bench/graham_circle/131072",41,1.72814e+07,1.7281e+07,ns,,,,,
+"bench/graham_circle/262144",20,3.47616e+07,3.4752e+07,ns,,,,,
+"bench/graham_circle/524288",9,7.4926e+07,7.47838e+07,ns,,,,,

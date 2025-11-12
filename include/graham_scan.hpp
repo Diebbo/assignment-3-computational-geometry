@@ -6,7 +6,7 @@
 /* Gramham Scan Implementation */
 class GrahamScan : public ConvexHull<Points> {
 public:
-  Points compute(const Points &points) override;
+  Points compute(const Points &points) const override;
 };
 
 #endif // GRAHAM_SCAN_HPP
