@@ -19,7 +19,11 @@
 
 #line(length: 100%)
 
+= Introduction
+
 #include "chapters/introduction.typ"
+
+= Convex Hulls
 
 #include "chapters/quickhull.typ"
 
