@@ -29,3 +29,6 @@ bench generate_tests="true" algorithm=algorithms shape=shapes: build
 _bench-individual algorithm shape:
     @mkdir -p report/data
     ./build/bench --benchmark_filter="bench/{{algorithm}}_{{shape}}/.*" --benchmark_out_format="csv" --benchmark_out="report/data/{{algorithm}}_{{shape}}.csv"
+
+report:
+    typst watch report/main.typ --root=.
