@@ -7,6 +7,16 @@
 
 In the following section, we will present the implementation of the QuickHull algorithm and the benchmarks we performed to evaluate its performance.
 
+#figure(
+  caption: [QuickHull working principle],
+  kind: auto,
+grid(
+    columns: 2,
+  image("../assets/Quickhull_example3.svg.png", width: 50%),
+  image("../assets/Quickhull_example6.svg.png", width: 50%)
+  )
+)
+
 Firstly, we will introduce some of the utility function created to support the core algorithm(see @lst:extremes).
 
 #figure(
@@ -166,7 +176,21 @@ void QuickHull::findHullRecursive(const Point &p1, const Point &p2,
 
 === Complexity Analysis
 
+Let's analyze the time complexity of the QuickHull algorithm:
+- The algorithm starts by finding the extreme points, which takes $O(n)$ time.
+- The partitioning of points into upper and lower subsets also takes $O(n)$ time.
+- The recursive step involves finding the point with the maximum distance from the line segment, which takes O(n) time in the worst case.
+- Then we recur two times on subsets of points $O(2 T(n/2))$.
+
+Let's now set up the recurrence relation for the time complexity:
+
+$ T(n) = T(k) + T(n - k) + O(n) $
+
+Where $k$ is the number of points in one of the subsets. In the worst case, $k$ can be as large as $n-1$, leading to unbalanced partitions. This results in a time complexity of $O(n^2)$ in the worst case.
+
 === Benchmarks
+
+In our benchmarks, we expect the QuickHull algorithm to perform efficiently on average, with a time complexity of $O(n log n)$ for random distributions of points. However, for some testcases such as a parabola distribution, we might observe performance degradation towards the worst-case scenario of $O(n^2)$.
 
 
 // full page
