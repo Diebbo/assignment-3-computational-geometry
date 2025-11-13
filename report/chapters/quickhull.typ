@@ -192,6 +192,13 @@ Where $k$ is the number of points in one of the subsets. In the worst case, $k$ 
 
 In our benchmarks, we expect the QuickHull algorithm to perform efficiently on average, with a time complexity of $O(n log n)$ for random distributions of points. However, for some testcases such as a parabola distribution, we might observe performance degradation towards the worst-case scenario of $O(n^2)$.
 
+#bench.diagram_points("circle", "1024"),
+#bench.diagram_points("square", "1024"),
+#bench.diagram_points("parabola", "1024"),
+
+Above are some example distributions of points used in our benchmarks.
+
+The results of our benchmarks shown in the diagram below respects our expectations, with QuickHull performing well on circular and square distributions, while showing increased computation time on the parabola distribution as the number of points increases.
 
 // full page
 #bench.lq.diagram(

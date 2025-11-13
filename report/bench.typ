@@ -57,3 +57,53 @@
 /// )
 /// ```
 #let plot_bench(algorithm, shape, col: "real") = lq.plot(..read_bench(algorithm, shape), label: shape)
+
+
+/// Plot points used in the benchmarks.
+#let read_points(shape, size) = {
+  let filepath = "../build/tests/" + shape + "/" + size
+  let data = read(filepath)
+  // remove first line that contains the number of points
+  let lines = data.split("\n").slice(1, none)
+  let points = lines.map(l => {
+    let coords = l.split(" ").map(s => s.trim())
+    (coords.at(0), coords.at(1))
+  })
+  points
+}
+
+/// Plot points used in the benchmarks.
+#let read_points(shape, size) = {
+  let filepath = "../build/tests/" + shape + "/" + size
+  let data = read(filepath)
+  // remove first line that contains the number of points
+  let lines = data.split("\n").slice(1)
+  let points = lines
+    .filter(l => l.trim() != "") // filter out empty lines
+    .map(l => {
+      let coords = l.split(" ")
+        .map(s => s.trim())
+        .filter(s => s != "") // handle multiple spaces
+      (float(coords.at(0)), float(coords.at(1))) // convert to float
+    })
+  points
+}
+
+/// Create a scatter plot of the given points.
+#let plot_points(shape, size) = {
+  let points = read_points(shape, size)
+  lq.scatter(
+    points.map(p => p.at(0)),
+    points.map(p => p.at(1)),
+    // point_size: 2pt,
+    label: shape + " - " + size + " points",
+  )
+}
+
+/// Create a diagram of the given points.
+#let diagram_points(shape, size) = lq.diagram(
+  plot_points(shape, size),
+  xaxis: (label: "X"),
+  yaxis: (label: "Y"),
+  legend: (position: top + left)
+)

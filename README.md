@@ -34,3 +34,9 @@ In the `reports/` folder you will find the generated data and to plot the graphs
   legend: (position: top + left),
 )
 ```
+
+In the requirements is also mentioned to plot the distribution of points, to do that you can use:
+
+```typst
+#bench.diagram_points("circle", "1024")
+```
