@@ -1,21 +1,23 @@
-2025-11-12T12:41:52+01:00
+2025-11-13T13:05:23+01:00
 Running ./build/bench
-Run on (8 X 24 MHz CPU s)
+Run on (8 X 4200 MHz CPU s)
 CPU Caches:
-  L1 Data 64 KiB
-  L1 Instruction 128 KiB
-  L2 Unified 4096 KiB (x8)
-Load Average: 2.18, 2.08, 2.04
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 1.93, 1.67, 1.51
+***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/marriage_circle/256",2230,308726,308607,ns,,,,,
-"bench/marriage_circle/512",1065,657489,657120,ns,,,,,
-"bench/marriage_circle/1024",505,1.3852e+06,1.3837e+06,ns,,,,,
-"bench/marriage_circle/2048",248,2.84492e+06,2.84045e+06,ns,,,,,
-"bench/marriage_circle/4096",120,5.82157e+06,5.81173e+06,ns,,,,,
-"bench/marriage_circle/8192",59,1.18864e+07,1.18781e+07,ns,,,,,
-"bench/marriage_circle/16384",29,2.39654e+07,2.39459e+07,ns,,,,,
-"bench/marriage_circle/32768",14,4.96619e+07,4.96146e+07,ns,,,,,
-"bench/marriage_circle/65536",7,1.0048e+08,1.00447e+08,ns,,,,,
-"bench/marriage_circle/131072",3,2.01276e+08,2.01262e+08,ns,,,,,
-"bench/marriage_circle/262144",2,3.98792e+08,3.98746e+08,ns,,,,,
-"bench/marriage_circle/524288",1,8.10879e+08,8.10818e+08,ns,,,,,
+"bench/marriage_circle/256",2419,289781,288702,ns,,,,,
+"bench/marriage_circle/512",1133,612444,610197,ns,,,,,
+"bench/marriage_circle/1024",527,1.34076e+06,1.3358e+06,ns,,,,,
+"bench/marriage_circle/2048",241,2.82142e+06,2.81146e+06,ns,,,,,
+"bench/marriage_circle/4096",116,5.97199e+06,5.94962e+06,ns,,,,,
+"bench/marriage_circle/8192",57,1.23149e+07,1.22628e+07,ns,,,,,
+"bench/marriage_circle/16384",27,2.57486e+07,2.56489e+07,ns,,,,,
+"bench/marriage_circle/32768",13,5.33476e+07,5.31382e+07,ns,,,,,
+"bench/marriage_circle/65536",6,1.11024e+08,1.10541e+08,ns,,,,,
+"bench/marriage_circle/131072",3,2.24791e+08,2.23555e+08,ns,,,,,
+"bench/marriage_circle/262144",2,4.46954e+08,4.44976e+08,ns,,,,,
+"bench/marriage_circle/524288",1,8.96594e+08,8.92872e+08,ns,,,,,

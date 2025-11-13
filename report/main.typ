@@ -19,3 +19,8 @@
 
 #line(length: 100%)
 
+#include "chapters/introduction.typ"
+
+#include "chapters/quickhull.typ"
+
+#include "chapters/conclusion.typ"
