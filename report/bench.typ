@@ -15,17 +15,28 @@
 /// the time to calculate the hull.
 #let read_bench(algorithm, shape, col: "real") = {
   let data = read("data/" + algorithm + "_" + shape + ".csv")
-  let data = csv(bytes(data.split("\n").slice(9).join("\n")))
+  let lines = data.split("\n")
+  // find the first index where the line starts with "bench/"
+  let start_idx = lines
+    .position(l => l.starts-with("\"bench/"))
+  
+  // if none found, panic
+  if start_idx == none {
+    panic("No benchmark data found in file: " + algorithm + "_" + shape + ".csv")
+  }
+  // slice from there
+  let filtered = lines.slice(start_idx, lines.len())
+  let data = csv(bytes(filtered.join("\n")))
   let col_idx = if col == "iterations" { 1 }
     else if col == "real" { 2 }
     else if col == "cpu" { 3 }
     else { panic("Can only specify col as `real`, `cpu` or `iterations`") }
-
   (
     data.map(x => x.at(0).split("/").last()).map(int),
     data.map(x => x.at(col_idx)).map(float),
   )
 }
+
 
 /// Log scale, with base 2.
 /// To use:
