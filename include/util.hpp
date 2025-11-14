@@ -98,6 +98,20 @@ std::pair<TPoint, TPoint> findExtremePointsCases(const Points &points);
 Line findExtremePoints(const Points &points, bool upper = true);
 
 
+/* Print the results of the three algorithms into files
+ *
+ * The files will be saved in the following paths:
+ * ./output/{label}/graham.txt
+ * ./output/{label}/quickhull.txt
+ * ./output/{label}/mbc.txt
+ *
+ * Parameters:
+ *  - grhamPoints: The points from Graham Scan algorithm
+ *  - quickHullPoints: The points from QuickHull algorithm
+ *  - mbcPoints: The points from Marriage Before Conquest algorithm
+ *  - label: The label to use for the output directory
+ */
+void print_results_comparison(const Points &grhamPoints, const Points &quickHullPoints, const Points &mbcPoints, const std::string &label);
 
 } // namespace util
 

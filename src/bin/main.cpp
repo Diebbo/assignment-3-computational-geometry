@@ -75,26 +75,27 @@ int main() {
 
   //==================
 
-  std::random_device rd;
-  for (int i = 0; i < 100; i++) {
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distr(5, 50);
-    int len = distr(gen);
-
-    std::uniform_real_distribution<> distr2(-10, 10);
-    std::vector<Point> pts(len);
-    for (int i = 0; i < len; i++) {
-      pts[i] = Point(distr2(gen), distr2(gen));
-    }
-
-    auto hull = GrahamScan().compute(pts);
-    auto hull2 = QuickHullNS::QuickHull().compute(pts);
-    auto hull3 = MarriageNS::MarriageBeforeConquest().compute(pts);
-    assert(util::is_valid_hull(hull, pts));
-    assert(util::is_valid_hull(hull2, pts));
-    assert(util::is_valid_hull(hull3, pts));
-    //assert(hull == hull2);
-    assert(hull == hull3);
+  // read 1024 points from file and print the hull points
+  Points bigPointContainer;
+  const std::vector<std::string> shape = {"circle", "square", "parabola"};
+  for (const auto &s : shape) {
+    std::string filepath = "build/tests/" + s + "/1024";
+    std::string filename = filepath;
+    util::read_points_from_file(filename, bigPointContainer);
+    std::cout << "Read " << bigPointContainer.size()
+              << " points from file: " << filename << std::endl;
+    Points grahamHull =
+        testAlgorithm(new GrahamScan(), bigPointContainer,
+                      "Graham Scan on " + s + " shape");
+    Points quickHull =
+        testAlgorithm(new QuickHullNS::QuickHull(), bigPointContainer,
+                      "QuickHull on " + s + " shape");
+    Points mbc_hull = testAlgorithm(
+        new MarriageNS::MarriageBeforeConquest(), bigPointContainer,
+        "Marriage Before Conquest on " + s + " shape");
+    const std::string label = s;
+    util::print_results_comparison(grahamHull, quickHull, mbc_hull, label);
+    bigPointContainer.clear();
   }
 
   return 0;

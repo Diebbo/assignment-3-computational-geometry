@@ -285,5 +285,37 @@ Line findExtremePoints(const Points &points, bool upper) {
   }
   return Line{maxPoint, minPoint};
 }
+void print_results_comparison(const Points &grhamPoints, const Points &quickHullPoints, const Points &mbcPoints, const std::string &label) {
+  // save points into path ./output/label/{grham, quick, mcb}.txt
+  std::string base_path = "./build/output/" + label + "/";
+  std::string graham_path = base_path + "graham";
+  std::string quickhull_path = base_path + "quick";
+  std::string mbc_path = base_path + "mbc";
+
+  // create output directory if it doesn't exist
+  std::string command = "mkdir -p " + base_path;
+  system(command.c_str());
+
+  // write graham points
+  std::ofstream graham_file(graham_path);
+  for (const auto &p : grhamPoints) {
+    graham_file << p.x << " " << p.y << std::endl;
+  }
+  graham_file.close();
+
+  // write quickhull points
+  std::ofstream quickhull_file(quickhull_path);
+  for (const auto &p : quickHullPoints) {
+    quickhull_file << p.x << " " << p.y << std::endl;
+  }
+  quickhull_file.close();
+
+  // write mbc points
+  std::ofstream mbc_file(mbc_path);
+  for (const auto &p : mbcPoints) {
+    mbc_file << p.x << " " << p.y << std::endl;
+  }
+  mbc_file.close();
+}
 
 } // namespace util

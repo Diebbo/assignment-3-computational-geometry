@@ -43,7 +43,8 @@
 /// ```typst
 /// #lq.diagram(
 ///   // ... plots here ...
-///   xaxis: (scale: log2),
+/// xscale: "log",
+/// yscale: "log",
 /// )
 /// ```
 #let log2 = lq.scale.log(base: 2)
@@ -107,3 +108,46 @@
   yaxis: (label: "Y"),
   legend: (position: top + left)
 )
+
+#let read_hull(shape, algorithm) = {
+  let filepath = "../build/output/" + shape + "/" + algorithm
+  let data = read(filepath)
+  let lines = data.split("\n").slice(1)
+  let points = lines
+    .filter(l => l.trim() != "") // filter out empty lines
+    .map(l => {
+      let coords = l.split(" ")
+        .map(s => s.trim())
+        .filter(s => s != "") // handle multiple spaces
+      (float(coords.at(0)), float(coords.at(1))) // convert to float
+    })
+  points
+}
+
+/// plot the points and connect them printing the convex hull
+#let plot_hull(shape, size, algorithm) = {
+  let points = read_points(shape, str(size))
+  let hull = read_hull(shape, algorithm)
+  
+  // Close the hull by appending the first point
+  let hull_closed = hull + (hull.at(0),)
+  
+  lq.diagram(
+    lq.scatter(
+      points.map(p => p.at(0)),
+      points.map(p => p.at(1)),
+      label: "Points",
+    ),
+    ..hull_closed.enumerate().slice(0, -1).map(((i, pt)) => {
+      lq.line(
+        pt,
+        hull_closed.at(i + 1),
+        stroke: (paint: red, thickness: 1.5pt),
+        label: if i == 0 { "Convex Hull" } else { none }, // Only label first segment
+      )
+    }),
+    xaxis: (label: "X"),
+    yaxis: (label: "Y"),
+    legend: (position: top + left)
+  )
+}

@@ -200,13 +200,35 @@ Above are some example distributions of points used in our benchmarks.
 
 The results of our benchmarks shown in the diagram below respects our expectations, with QuickHull performing well on circular and square distributions, while showing increased computation time on the parabola distribution as the number of points increases.
 
+Following up the results for the QuickHull algorithm in linear scale:
 // full page
 #bench.lq.diagram(
   bench.plot_bench("quick", "circle"),
   bench.plot_bench("quick", "square"),
   bench.plot_bench("quick", "parabola"),
-  xaxis: (label: "Number of elements", scale: bench.log2),
+  xaxis: (label: "Number of elements"),
   legend: (position: top + left),
   width: 100%,
   height: 6cm,
 )
+
+And in log-log scale. //(see @fig:quickhull-bench-loglog).
+
+#bench.lq.diagram(
+  bench.plot_bench("quick", "circle"),
+  bench.plot_bench("quick", "square"),
+  bench.plot_bench("quick", "parabola"),
+  xaxis: (label: "Number of elements"),
+  xscale: "log",
+  yscale: "log",
+  legend: (position: top + left),
+  width: 100%,
+  height: 6cm,
+)<fig:quickhull-bench-loglog>
+
+
+=== Results
+
+#bench.plot_hull("circle", 1024, "quick")
+#bench.plot_hull("parabola", 1024, "quick")
+#bench.plot_hull("square", 1024, "quick")
