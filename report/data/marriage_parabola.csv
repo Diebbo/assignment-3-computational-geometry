@@ -1,4 +1,4 @@
-2025-11-13T13:05:34+01:00
+2025-11-14T10:38:14+01:00
 Running ./build/bench
 Run on (8 X 4200 MHz CPU s)
 CPU Caches:
@@ -6,18 +6,18 @@ CPU Caches:
   L1 Instruction 32 KiB (x4)
   L2 Unified 1280 KiB (x4)
   L3 Unified 8192 KiB (x1)
-Load Average: 2.02, 1.70, 1.52
+Load Average: 3.23, 2.11, 1.63
 ***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/marriage_parabola/256",3342,211174,210325,ns,,,,,
-"bench/marriage_parabola/512",1540,454576,452573,ns,,,,,
-"bench/marriage_parabola/1024",722,966761,962718,ns,,,,,
-"bench/marriage_parabola/2048",337,2.07993e+06,2.07169e+06,ns,,,,,
-"bench/marriage_parabola/4096",155,4.42762e+06,4.40874e+06,ns,,,,,
-"bench/marriage_parabola/8192",77,9.0629e+06,9.02941e+06,ns,,,,,
-"bench/marriage_parabola/16384",38,1.8433e+07,1.83667e+07,ns,,,,,
-"bench/marriage_parabola/32768",20,3.58994e+07,3.57786e+07,ns,,,,,
-"bench/marriage_parabola/65536",10,7.0099e+07,6.98544e+07,ns,,,,,
-"bench/marriage_parabola/131072",5,1.36551e+08,1.3605e+08,ns,,,,,
-"bench/marriage_parabola/262144",3,2.62564e+08,2.6157e+08,ns,,,,,
-"bench/marriage_parabola/524288",1,5.33658e+08,5.31694e+08,ns,,,,,
+"bench/marriage_parabola/256",3352,209567,208928,ns,,,,,
+"bench/marriage_parabola/512",1559,442980,441738,ns,,,,,
+"bench/marriage_parabola/1024",730,948387,945641,ns,,,,,
+"bench/marriage_parabola/2048",344,2.05749e+06,2.05137e+06,ns,,,,,
+"bench/marriage_parabola/4096",161,4.34611e+06,4.33417e+06,ns,,,,,
+"bench/marriage_parabola/8192",77,9.03079e+06,9.00401e+06,ns,,,,,
+"bench/marriage_parabola/16384",39,1.86692e+07,1.86005e+07,ns,,,,,
+"bench/marriage_parabola/32768",19,3.5819e+07,3.56959e+07,ns,,,,,
+"bench/marriage_parabola/65536",10,7.02966e+07,7.00292e+07,ns,,,,,
+"bench/marriage_parabola/131072",5,1.33612e+08,1.33104e+08,ns,,,,,
+"bench/marriage_parabola/262144",3,2.67022e+08,2.66015e+08,ns,,,,,
+"bench/marriage_parabola/524288",1,5.34813e+08,5.32695e+08,ns,,,,,
