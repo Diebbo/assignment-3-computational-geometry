@@ -1,21 +1,21 @@
-2025-11-14T12:15:00+01:00
+2025-11-14T14:35:15+01:00
 Running ./build/bench
 Run on (8 X 24 MHz CPU s)
 CPU Caches:
   L1 Data 64 KiB
   L1 Instruction 128 KiB
   L2 Unified 4096 KiB (x8)
-Load Average: 2.55, 3.18, 2.47
+Load Average: 1.74, 1.46, 1.63
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/grahamvec_circle/256",14992,47099.8,47077,ns,,,,,
-"bench/grahamvec_circle/512",7595,91630.2,91621.9,ns,,,,,
-"bench/grahamvec_circle/1024",3957,180061,180046,ns,,,,,
-"bench/grahamvec_circle/2048",1902,369476,369390,ns,,,,,
-"bench/grahamvec_circle/4096",932,748953,748916,ns,,,,,
-"bench/grahamvec_circle/8192",464,1.51003e+06,1.5099e+06,ns,,,,,
-"bench/grahamvec_circle/16384",228,3.06658e+06,3.06619e+06,ns,,,,,
-"bench/grahamvec_circle/32768",112,6.24115e+06,6.24058e+06,ns,,,,,
-"bench/grahamvec_circle/65536",55,1.26994e+07,1.26985e+07,ns,,,,,
-"bench/grahamvec_circle/131072",27,2.57265e+07,2.5719e+07,ns,,,,,
-"bench/grahamvec_circle/262144",13,5.33401e+07,5.32811e+07,ns,,,,,
-"bench/grahamvec_circle/524288",6,1.0909e+08,1.09033e+08,ns,,,,,
+"bench/grahamvec_circle/256",14835,47468.7,47429.3,ns,,,,,
+"bench/grahamvec_circle/512",7411,94826.9,94817.3,ns,,,,,
+"bench/grahamvec_circle/1024",3820,184703,184675,ns,,,,,
+"bench/grahamvec_circle/2048",1916,367426,367338,ns,,,,,
+"bench/grahamvec_circle/4096",931,749853,749785,ns,,,,,
+"bench/grahamvec_circle/8192",459,1.52171e+06,1.52161e+06,ns,,,,,
+"bench/grahamvec_circle/16384",227,3.07806e+06,3.0778e+06,ns,,,,,
+"bench/grahamvec_circle/32768",111,6.26662e+06,6.26605e+06,ns,,,,,
+"bench/grahamvec_circle/65536",55,1.27402e+07,1.27391e+07,ns,,,,,
+"bench/grahamvec_circle/131072",27,2.57559e+07,2.57505e+07,ns,,,,,
+"bench/grahamvec_circle/262144",13,5.25674e+07,5.25628e+07,ns,,,,,
+"bench/grahamvec_circle/524288",6,1.10108e+08,1.10083e+08,ns,,,,,

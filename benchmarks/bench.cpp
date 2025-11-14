@@ -34,7 +34,8 @@ std::vector<Point> read_points(Shape shape, int size) {
   return res;
 }
 
-void bench(benchmark::State &state, ConvexHull<std::vector<Point>> const& algo, Shape shape) {
+template <typename T>
+void bench(benchmark::State &state, ConvexHull<T> const& algo, Shape shape) {
   std::vector<Point> points = read_points(shape, state.range());
 
   for (auto _ : state)
@@ -44,6 +45,12 @@ void bench(benchmark::State &state, ConvexHull<std::vector<Point>> const& algo, 
 BENCHMARK_CAPTURE(bench, grahamvec_circle, GrahamScan<std::vector<Point>>(), Circle)->RangeMultiplier(2)->Range(256, 524288);
 BENCHMARK_CAPTURE(bench, grahamvec_square, GrahamScan<std::vector<Point>>(), Square)->RangeMultiplier(2)->Range(256, 524288);
 BENCHMARK_CAPTURE(bench, grahamvec_parabola, GrahamScan<std::vector<Point>>(), Parabola)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, grahamlist_circle, GrahamScan<std::list<Point>>(), Circle)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, grahamlist_square, GrahamScan<std::list<Point>>(), Square)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, grahamlist_parabola, GrahamScan<std::list<Point>>(), Parabola)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, grahamdeque_circle, GrahamScan<std::deque<Point>>(), Circle)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, grahamdeque_square, GrahamScan<std::deque<Point>>(), Square)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, grahamdeque_parabola, GrahamScan<std::deque<Point>>(), Parabola)->RangeMultiplier(2)->Range(256, 524288);
 BENCHMARK_CAPTURE(bench, quick_circle, QuickHullNS::QuickHull(), Circle)->RangeMultiplier(2)->Range(256, 524288);
 BENCHMARK_CAPTURE(bench, quick_square, QuickHullNS::QuickHull(), Square)->RangeMultiplier(2)->Range(256, 524288);
 BENCHMARK_CAPTURE(bench, quick_parabola, QuickHullNS::QuickHull(), Parabola)->RangeMultiplier(2)->Range(256, 524288);
