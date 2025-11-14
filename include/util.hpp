@@ -21,8 +21,8 @@ namespace util {
  *  - < 0 if point is below the line
  *  - = 0 if point is on the line
  */
-float sidedness(const Line &l, const Point &p);
-float sidedness(const Point &p1, const Point &p2, const Point &p3);
+double sidedness(const Line &l, const Point &p);
+double sidedness(const Point &p1, const Point &p2, const Point &p3);
 
 bool isLeft(const Point &p1, const Point &p2, const Point &p3);
 bool isRight(const Point &p1, const Point &p2, const Point &p3);

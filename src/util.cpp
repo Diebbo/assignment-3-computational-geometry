@@ -1,12 +1,22 @@
 #include <limits>
 #include <util.hpp>
+#include <cassert>
 
 namespace util {
-float sidedness(const Point &p1, const Point &p2, const Point &p3) {
-  return (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
+double sidedness(const Point &p1, const Point &p2, const Point &p3) {
+  // cast to double to avoid precision issues
+  double x1 = static_cast<double>(p1.x);
+  double y1 = static_cast<double>(p1.y);
+  double x2 = static_cast<double>(p2.x);
+  double y2 = static_cast<double>(p2.y);
+  double x3 = static_cast<double>(p3.x);
+  double y3 = static_cast<double>(p3.y);
+
+  return (x2 - x1) * (y3 - y1) - (y2 - y1) * (x3 - x1);
+  //return (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
 }
 
-float sidedness(const Line &l, const Point &p) {
+double sidedness(const Line &l, const Point &p) {
   return sidedness(l.p1, l.p2, p);
 }
 
@@ -21,6 +31,11 @@ bool isLeft(const Point &p1, const Point &p2, const Point &p3) {
   double x3 = static_cast<double>(p3.x);
   double y3 = static_cast<double>(p3.y);
 
+  std::cout.precision(17);
+  bool float_result = (p3.x - p2.x) * (p1.y - p2.y) - (p3.y - p2.y) * (p1.x - p2.x) >
+                      std::numeric_limits<float>::epsilon();
+  bool double_result = x3 * y1 + x2 * y1 + y3 * x2 > x3 * y2 + y3 * x1 + y2 * x1;
+  assert(float_result == double_result);
   return x3 * y1 + x2 * y1 + y3 * x2 > x3 * y2 + y3 * x1 + y2 * x1;
 }
 
@@ -167,7 +182,7 @@ bool is_valid_hull(const Points &hull, const Points &points) {
 
   for (size_t i = 0; i < n; ++i) {
     if (util::isLeft(hull[i], hull[(i + 1) % n], hull[(i + 2) % n])) {
-      print_points(hull);
+      //print_points(hull);
 
       std::cout << "Hull is not convex: " << i << " "
                 << sidedness(hull[i], hull[(i + 1) % n], hull[(i + 2) % n])
