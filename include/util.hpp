@@ -46,7 +46,7 @@ bool is_valid_inside(const Points &polygon, const Point &p);
 
 bool is_valid_hull(const Points &hull, const Points &points);
 
-float partial_distance(const Line &l, const Point &p);
+double partial_distance(const Line &l, const Point &p);
 void print_points(const Points &points);
 
 /* Read points from a file
