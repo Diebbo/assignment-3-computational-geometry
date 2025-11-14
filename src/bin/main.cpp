@@ -45,31 +45,30 @@ int main() {
   }
   util::print_points(pointContainer);
 
-  /* Test Graham Scan Algorithm */
   auto hull = testAlgorithm(new GrahamScan<Points>(), pointContainer, "Graham Scan - std::vector");
   util::print_points(hull);
   auto hull4 = testAlgorithm(new GrahamScan<PointsList>(), pointContainer, "Graham Scan - std::list");
   util::print_points(hull4);
-  /* Test QuickHull Algorithm */
+  auto hull5 = testAlgorithm(new GrahamScan<PointsDeque>(), pointContainer, "Graham Scan - std::deque");
+  util::print_points(hull5);
   Points hull2 = testAlgorithm(new QuickHullNS::QuickHull(), pointContainer, "QuickHull");
-
-  /* Test Marriage Before Conquest Algorithm */
+  util::print_points(hull2);
   Points hull3 = testAlgorithm(new MarriageNS::MarriageBeforeConquest(), pointContainer, "Marriage Before Conquest");
-  std::cout << "MBC  correct Hull Points:" << std::endl;
   util::print_points(hull3);
-  // =================
 
-  // TODO: da rimuovere, solo per testare i casi limite in dev time
+  std::cout << "------ Testing for edge cases...." << std::endl;
 
-  // (1, -1)  (2, 0)  (0, 0)  (0.5, 1.5)  (1, 1)  (1.5, 1.5)
-
-  // Points failPoints = {Point(1, -1),    Point(2, 0), Point(0, 0),
-  //                      Point(0.5, 1.5), Point(1, 1), Point(1.5, 1.5)};
   Points failPoints = {Point(1, -1),    Point(1, 0), Point(1, 2.5),
                        Point(1, 1.5), Point(1, 1), Point(1, -1.5)};
   Points grahamHull = GrahamScan<Points>().compute(failPoints);
-  std::cout << "Graham Hull Points:" << std::endl;
+  std::cout << "Graham Hull Points with std::vector:" << std::endl;
   util::print_points(grahamHull);
+  auto grahamHullList = GrahamScan<PointsList>().compute(failPoints);
+  std::cout << "Graham Hull Points with std::list:" << std::endl;
+  util::print_points(grahamHullList);
+  auto grahamHullDeque = GrahamScan<PointsDeque>().compute(failPoints);
+  std::cout << "Graham Hull Points with std::deque:" << std::endl;
+  util::print_points(grahamHullDeque);
   Points quickHull = QuickHullNS::QuickHull().compute(failPoints);
   std::cout << "QuickHull Points:" << std::endl;
   util::print_points(quickHull);
@@ -93,17 +92,20 @@ int main() {
 
     auto hull = GrahamScan<Points>().compute(pts);
     auto hull2 = GrahamScan<PointsList>().compute(pts);
-    auto hull3 = QuickHullNS::QuickHull().compute(pts);
-    auto hull4 = MarriageNS::MarriageBeforeConquest().compute(pts);
+    auto hull3 = GrahamScan<PointsDeque>().compute(pts);
+    auto hull4 = QuickHullNS::QuickHull().compute(pts);
+    auto hull5 = MarriageNS::MarriageBeforeConquest().compute(pts);
 
     assert(util::is_valid_hull(hull, pts));
     assert(util::is_valid_hull(hull2, pts));
     assert(util::is_valid_hull(hull3, pts));
     assert(util::is_valid_hull(hull4, pts));
+    assert(util::is_valid_hull(hull5, pts));
 
     assert(hull == std::vector(hull2.begin(), hull2.end()));
+    assert(hull == std::vector(hull3.begin(), hull3.end()));
     // assert(hull == hull3);
-    assert(hull == hull4);
+    assert(hull == hull5);
   }
 
   return 0;

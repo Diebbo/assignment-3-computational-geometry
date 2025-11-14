@@ -1,6 +1,7 @@
 #ifndef COMMON_HPP
 #define COMMON_HPP
 
+#include <deque>
 #include <list>
 #include <vector>
 #include <ostream>
@@ -47,5 +48,6 @@ public:
 
 using Points = std::vector<Point>;
 using PointsList = std::list<Point>;
+using PointsDeque = std::deque<Point>;
 
 #endif // COMMON_HPP

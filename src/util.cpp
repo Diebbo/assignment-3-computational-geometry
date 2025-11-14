@@ -207,5 +207,6 @@ bool is_valid_hull(const T &hull, const Points &points) {
 
 template bool is_valid_hull<Points>(const Points &hull, const Points &points);
 template bool is_valid_hull<PointsList>(const PointsList &hull, const Points &points);
+template bool is_valid_hull<PointsDeque>(const PointsDeque &hull, const Points &points);
 
 } // namespace util

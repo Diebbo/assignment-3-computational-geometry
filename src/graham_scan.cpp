@@ -45,36 +45,17 @@ void compute_inner(const Points &points, T &half, float side) {
   }
 }
 
-template<>
-Points GrahamScan<std::vector<Point>>::compute(const std::vector<Point> &points) const {
+template<typename T>
+T GrahamScan<T>::compute(const std::vector<Point> &points) const {
   if (points.size() <= 2)
-    return Points();
-
-  Points pts(points);
-  std::sort(pts.begin(), pts.end(), point_cmp_x);
-
-  Points upper;
-  compute_inner(pts, upper, 1.0);
-  Points lower;
-  compute_inner(pts, lower, -1.0);
-
-  for (int i = lower.size() - 2; i >= 1; i--) {
-    upper.push_back(lower[i]);
-  }
-  return upper;
-}
-
-template<>
-std::list<Point> GrahamScan<std::list<Point>>::compute(const std::vector<Point> &points) const {
-  if (points.size() <= 2)
-    return std::list<Point>(points.begin(), points.end());
+    return T(points.begin(), points.end());
 
   std::vector<Point> pts(points.begin(), points.end());
   std::sort(pts.begin(), pts.end(), point_cmp_x);
 
-  std::list<Point> upper;
+  T upper;
   compute_inner(pts, upper, 1.0);
-  std::list<Point> lower;
+  T lower;
   compute_inner(pts, lower, -1.0);
 
   lower.pop_back();
@@ -85,3 +66,54 @@ std::list<Point> GrahamScan<std::list<Point>>::compute(const std::vector<Point> 
 
   return upper;
 }
+
+template<>
+PointsDeque GrahamScan<PointsDeque>::compute(Points const& points) const {
+  if (points.size() <= 2)
+    return PointsDeque(points.begin(), points.end());
+
+  std::vector<Point> pts(points.begin(), points.end());
+  std::sort(pts.begin(), pts.end(), point_cmp_x);
+
+  PointsDeque res;
+  res.push_back(pts[0]);
+  res.push_back(pts[1]);
+  res.push_front(pts[1]);
+  int uh = 2, lh = 2;
+  for (size_t i = 2; i < pts.size(); i++) {
+    // Upper
+    while (uh >= 2) {
+      Point const& m1 = res.back();
+      Point const& m2 = *std::prev(res.end(), 2);
+      if (turns(1.0, m2, m1, pts[i])) {
+        res.pop_back();
+        uh -= 1;
+      } else {
+        break;
+      }
+    }
+    res.push_back(pts[i]);
+    uh += 1;
+
+    // Lower
+    while (lh >= 2) {
+      Point const& m1 = res.front();
+      Point const& m2 = * ++res.begin();
+      if (turns(-1.0, m2, m1, pts[i])) {
+        res.pop_front();
+        lh -= 1;
+      } else {
+        break;
+      }
+    }
+    res.push_front(pts[i]);
+    lh += 1;
+  }
+
+  res.pop_back();
+  std::rotate(res.begin(), res.begin()+lh-1, res.end());
+  return res;
+}
+
+template Points GrahamScan<Points>::compute(const std::vector<Point> &points) const;
+template PointsList GrahamScan<PointsList>::compute(const std::vector<Point> &points) const;
