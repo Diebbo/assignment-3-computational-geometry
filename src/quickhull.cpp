@@ -66,7 +66,7 @@ Points QuickHull::compute(const Points &points) const {
   QuickHull::findBottomHullRecursive(q1lower, q2lower, lower_points, hull);
 
   // conclude the cycle of the bottom hull with the last point of the bottom hull if needed
-  if (hull.empty() || !(hull.back() == q1lower))
+  if (hull.empty() || !(hull.back() == q1lower || hull.front() == q1lower))
     hull.push_back(q1lower);
 
   return hull;
