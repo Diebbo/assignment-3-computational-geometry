@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cstddef>
 #include <marriage_before_conquest.hpp>
 #include <random>
 #include <util.hpp>
@@ -222,7 +223,7 @@ void MarriageBeforeConquest::MBCLowerRecursive(const Points &points,
   }
 
   Line bridge = findLowerBridge(points);
-
+  
   if (bridge.p1 == bridge.p2) {
     hull.push_back(bridge.p1);
     return;
@@ -283,9 +284,28 @@ Line MarriageBeforeConquestV2::findUpperBridge(const Points &points, const Line 
 
   float midX = (bridge.p1.x + bridge.p2.x) / 2.0f;
 
+  Points L, R;
+
   for (size_t i = 0; i < points.size(); ++i) {
     const auto &p = points[i];
-    if (util::isLeft(extremes, p) && util::isLeft(bridge, p)) {
+    if (util::isLeft(extremes, p)) {
+      if (p.x < midX) {
+        L.push_back(p);
+      } else {
+        R.push_back(p);
+      }
+    }
+  }
+  /*
+  New way:
+  itero su L
+  se nuovo punto maggiore, allora aggiorno p1 e cerco nuovo p2
+  
+  
+  */
+  for (size_t i = 0; i < points.size(); ++i) {
+    const auto &p = points[i];
+    if (util::isLeft(bridge, p)) {
       /* Point is above the bridge and above the extremes, update the bridge */
       if (p.x < midX) {
         bridge.p1 = p;

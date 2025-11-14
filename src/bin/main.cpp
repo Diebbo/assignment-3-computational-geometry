@@ -5,12 +5,11 @@
 #include <marriage_before_conquest.hpp>
 #include <ostream>
 #include <quickhull.hpp>
-#include <random>
 #include <util.hpp>
 #include <vector>
 
 Points testAlgorithm(ConvexHull<Points> *algorithm, const Points &points,
-                   const std::string &name) {
+                     const std::string &name) {
   std::cout << "------ Testing " << name << " algorithm..." << std::endl;
   Points hull = algorithm->compute(points);
   bool is_correct = util::is_valid_hull(hull, points);
@@ -40,40 +39,21 @@ int main() {
   util::read_points_from_file("parabola_points.txt", pointContainer);
   std::cout << "Read " << pointContainer.size() << " points from file."
             << std::endl;
-  for (const auto &p : pointContainer) {
-    std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
-  }
-  util::print_points(pointContainer);
+
   /* Test Graham Scan Algorithm */
   Points hull = testAlgorithm(new GrahamScan(), pointContainer, "Graham Scan");
-  util::print_points(hull);
+
   /* Test QuickHull Algorithm */
-  Points hull2 = testAlgorithm(new QuickHullNS::QuickHull(), pointContainer, "QuickHull");
+  Points hull2 =
+      testAlgorithm(new QuickHullNS::QuickHull(), pointContainer, "QuickHull");
 
   /* Test Marriage Before Conquest Algorithm */
-  Points hull3 = testAlgorithm(new MarriageNS::MarriageBeforeConquest(), pointContainer, "Marriage Before Conquest");
+  Points hull3 = testAlgorithm(new MarriageNS::MarriageBeforeConquest(),
+                               pointContainer, "Marriage Before Conquest");
 
-  // =================
-
-  // TODO: da rimuovere, solo per testare i casi limite in dev time
-
-  // (1, -1)  (2, 0)  (0, 0)  (0.5, 1.5)  (1, 1)  (1.5, 1.5)
-
-  // Points failPoints = {Point(1, -1),    Point(2, 0), Point(0, 0),
-  //                      Point(0.5, 1.5), Point(1, 1), Point(1.5, 1.5)};
-  Points failPoints = {Point(1, -1),    Point(1, 0), Point(1, 2.5),
-                       Point(1, 1.5), Point(1, 1), Point(1, -1.5)};
-  Points grahamHull = GrahamScan().compute(failPoints);
-  std::cout << "Graham Hull Points:" << std::endl;
-  util::print_points(grahamHull);
-  Points quickHull = QuickHullNS::QuickHull().compute(failPoints);
-  std::cout << "QuickHull Points:" << std::endl;
-  util::print_points(quickHull);
-  Points mbc_hull2 = MarriageNS::MarriageBeforeConquest().compute(failPoints);
-  std::cout << "MBC Hull Points:" << std::endl;
-  util::print_points(mbc_hull2);
-
-  //==================
+  /* Test Marriage Before Conquest V2 Algorithm */
+  Points hull4 = testAlgorithm(new MarriageNS::MarriageBeforeConquestV2(),
+                               pointContainer, "Marriage Before Conquest V2");
 
   // read 1024 points from file and print the hull points
   Points bigPointContainer;
@@ -84,15 +64,17 @@ int main() {
     util::read_points_from_file(filename, bigPointContainer);
     std::cout << "Read " << bigPointContainer.size()
               << " points from file: " << filename << std::endl;
-    Points grahamHull =
-        testAlgorithm(new GrahamScan(), bigPointContainer,
-                      "Graham Scan on " + s + " shape");
+    Points grahamHull = testAlgorithm(new GrahamScan(), bigPointContainer,
+                                      "Graham Scan on " + s + " shape");
     Points quickHull =
         testAlgorithm(new QuickHullNS::QuickHull(), bigPointContainer,
                       "QuickHull on " + s + " shape");
     Points mbc_hull = testAlgorithm(
         new MarriageNS::MarriageBeforeConquest(), bigPointContainer,
         "Marriage Before Conquest on " + s + " shape");
+    Points mbc_hull2 = testAlgorithm(
+        new MarriageNS::MarriageBeforeConquestV2(), bigPointContainer,
+        "Marriage Before Conquest V2 on " + s + " shape");
     const std::string label = s;
     util::print_results_comparison(grahamHull, quickHull, mbc_hull, label);
     bigPointContainer.clear();
