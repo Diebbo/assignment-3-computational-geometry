@@ -9,11 +9,11 @@
 #include <util.hpp>
 #include <vector>
 
-Points testAlgorithm(ConvexHull<Points> *algorithm, const Points &points,
-                   const std::string &name) {
+template<typename T>
+T testAlgorithm(ConvexHull<T> *algorithm, const Points &points, const std::string &name) {
   std::cout << "------ Testing " << name << " algorithm..." << std::endl;
-  Points hull = algorithm->compute(points);
-  bool is_correct = util::is_valid_hull(hull, points);
+  T hull = algorithm->compute(points);
+  bool is_correct = util::is_valid_hull<T>(hull, points);
   if (is_correct) {
     std::cout << "Test Pass: Hull is valid" << std::endl;
   } else {
@@ -21,6 +21,7 @@ Points testAlgorithm(ConvexHull<Points> *algorithm, const Points &points,
   }
   return hull;
 }
+
 
 int main() {
   /* Quick test of the sidedness function */
@@ -38,15 +39,17 @@ int main() {
   /* Define a point container and read points from a file */
   Points pointContainer;
   util::read_points_from_file("parabola_points.txt", pointContainer);
-  std::cout << "Read " << pointContainer.size() << " points from file."
-            << std::endl;
+  std::cout << "Read " << pointContainer.size() << " points from file." << std::endl;
   for (const auto &p : pointContainer) {
     std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
   }
   util::print_points(pointContainer);
+
   /* Test Graham Scan Algorithm */
-  Points hull = testAlgorithm(new GrahamScan(), pointContainer, "Graham Scan");
+  auto hull = testAlgorithm(new GrahamScan<Points>(), pointContainer, "Graham Scan - std::vector");
   util::print_points(hull);
+  auto hull4 = testAlgorithm(new GrahamScan<PointsList>(), pointContainer, "Graham Scan - std::list");
+  util::print_points(hull4);
   /* Test QuickHull Algorithm */
   Points hull2 = testAlgorithm(new QuickHullNS::QuickHull(), pointContainer, "QuickHull");
 
@@ -64,7 +67,7 @@ int main() {
   //                      Point(0.5, 1.5), Point(1, 1), Point(1.5, 1.5)};
   Points failPoints = {Point(1, -1),    Point(1, 0), Point(1, 2.5),
                        Point(1, 1.5), Point(1, 1), Point(1, -1.5)};
-  Points grahamHull = GrahamScan().compute(failPoints);
+  Points grahamHull = GrahamScan<Points>().compute(failPoints);
   std::cout << "Graham Hull Points:" << std::endl;
   util::print_points(grahamHull);
   Points quickHull = QuickHullNS::QuickHull().compute(failPoints);
@@ -88,14 +91,19 @@ int main() {
       pts[i] = Point(distr2(gen), distr2(gen));
     }
 
-    auto hull = GrahamScan().compute(pts);
-    auto hull2 = QuickHullNS::QuickHull().compute(pts);
-    auto hull3 = MarriageNS::MarriageBeforeConquest().compute(pts);
+    auto hull = GrahamScan<Points>().compute(pts);
+    auto hull2 = GrahamScan<PointsList>().compute(pts);
+    auto hull3 = QuickHullNS::QuickHull().compute(pts);
+    auto hull4 = MarriageNS::MarriageBeforeConquest().compute(pts);
+
     assert(util::is_valid_hull(hull, pts));
-    // assert(util::is_valid_hull(hull2, pts));
+    assert(util::is_valid_hull(hull2, pts));
     assert(util::is_valid_hull(hull3, pts));
-    // assert(hull == hull2);
-    assert(hull == hull3);
+    assert(util::is_valid_hull(hull4, pts));
+
+    assert(hull == std::vector(hull2.begin(), hull2.end()));
+    // assert(hull == hull3);
+    assert(hull == hull4);
   }
 
   return 0;

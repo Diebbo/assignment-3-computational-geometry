@@ -44,15 +44,19 @@ bool isRight(const Line &l, const Point &p);
  */
 bool is_inside(const Triangle &t, const Point &p);
 bool is_inside(const Points &polygon, const Point &p);
-bool is_valid_inside(const Points &polygon, const Point &p);
 bool is_partial_inside(const Points &polygon, const Point &p);
 
 bool is_hull(const Points &hull, const Points &points);
-bool is_valid_hull(const Points &hull, const Points &points);
 bool is_partial_hull(const Points &hull, const Points &points);
 
 float partial_distance(const Line &l, const Point &p);
-void print_points(const Points &points);
+
+template <typename T>
+bool is_valid_inside(const T &polygon, const Point &p);
+template <typename T>
+void print_points(const T &points);
+template <typename T>
+bool is_valid_hull(const T &hull, const Points &points);
 
 /* Read points from a file
  *

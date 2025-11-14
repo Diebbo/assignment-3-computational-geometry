@@ -41,9 +41,9 @@ void bench(benchmark::State &state, ConvexHull<std::vector<Point>> const& algo, 
     benchmark::DoNotOptimize(algo.compute(points));
 }
 
-BENCHMARK_CAPTURE(bench, graham_circle, GrahamScan(), Circle)->RangeMultiplier(2)->Range(256, 524288);
-BENCHMARK_CAPTURE(bench, graham_square, GrahamScan(), Square)->RangeMultiplier(2)->Range(256, 524288);
-BENCHMARK_CAPTURE(bench, graham_parabola, GrahamScan(), Parabola)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, grahamvec_circle, GrahamScan<std::vector<Point>>(), Circle)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, grahamvec_square, GrahamScan<std::vector<Point>>(), Square)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, grahamvec_parabola, GrahamScan<std::vector<Point>>(), Parabola)->RangeMultiplier(2)->Range(256, 524288);
 BENCHMARK_CAPTURE(bench, quick_circle, QuickHullNS::QuickHull(), Circle)->RangeMultiplier(2)->Range(256, 524288);
 BENCHMARK_CAPTURE(bench, quick_square, QuickHullNS::QuickHull(), Square)->RangeMultiplier(2)->Range(256, 524288);
 BENCHMARK_CAPTURE(bench, quick_parabola, QuickHullNS::QuickHull(), Parabola)->RangeMultiplier(2)->Range(256, 524288);

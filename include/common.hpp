@@ -1,6 +1,7 @@
 #ifndef COMMON_HPP
 #define COMMON_HPP
 
+#include <list>
 #include <vector>
 #include <ostream>
 
@@ -41,9 +42,10 @@ template <typename T>
 class ConvexHull {
 public:
     /* Every algorithm must implement the lower and upper hull and merge them */
-    virtual T compute(const T& points) const = 0;
+    virtual T compute(const std::vector<Point>& points) const = 0;
 };
 
 using Points = std::vector<Point>;
+using PointsList = std::list<Point>;
 
 #endif // COMMON_HPP

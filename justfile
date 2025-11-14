@@ -9,7 +9,7 @@ build:
     CMAKE_EXPORT_COMPILE_COMMANDS=true cmake -S . -B build -G Ninja
     cmake --build build
 
-algorithms := "graham quick marriage"
+algorithms := "grahamvec quick marriage"
 shapes := "circle parabola square"
 bench generate_tests="true" algorithm=algorithms shape=shapes: build
     #!/bin/sh

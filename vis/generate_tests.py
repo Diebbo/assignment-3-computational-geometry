@@ -17,7 +17,7 @@ for shape in types.keys():
     path = os.path.join("build/tests/", shape)
     os.makedirs(path, exist_ok=True)
 
-    for size in [2**i for i in range(8, 20)]:
+    for size in [2**i for i in range(4, 20)]:
         print(f"Generating {shape} test with size {size}")
         LOWER_X = -10.0 * (size / 256)
         UPPER_X = 10.0 * (size / 256)
