@@ -11,10 +11,33 @@ float sidedness(const Line &l, const Point &p) {
 }
 
 bool isLeft(const Point &p1, const Point &p2, const Point &p3) {
-  return (p3.x - p2.x) * (p1.y - p2.y) - (p3.y - p2.y) * (p1.x - p2.x) > std::numeric_limits<float>::epsilon();
+  // return (p3.x - p2.x) * (p1.y - p2.y) - (p3.y - p2.y) * (p1.x - p2.x) >
+  // std::numeric_limits<float>::epsilon();
+
+  double x1 = static_cast<double>(p1.x);
+  double y1 = static_cast<double>(p1.y);
+  double x2 = static_cast<double>(p2.x);
+  double y2 = static_cast<double>(p2.y);
+  double x3 = static_cast<double>(p3.x);
+  double y3 = static_cast<double>(p3.y);
+
+  return x3 * y1 + x2 * y1 + y3 * x2 > x3 * y2 + y3 * x1 + y2 * x1;
 }
+
+/*
+
+  return (p3.x - p2.x) * (p1.y - p2.y) > (p3.y - p2.y) * (p1.x - p2.x);
+
+
+  return p3.x*p1.y - p3.xP2.y - p2.x*p1.y + p2.x*p2.y > p3.y*p1.x - p3.y*p2.x -
+  p2.y*p1.x + p2.y*p2.x;
+
+  return p3.x*p1.y + p2.x*p1.y + p3.y*p2.x > p3.x*p2.y + p3.y*p1.x + p2.y*p1.x;
+*/
+
 bool isRight(const Point &p1, const Point &p2, const Point &p3) {
-  return (p3.x - p2.x) * (p1.y - p2.y) - (p3.y - p2.y) * (p1.x - p2.x) < -std::numeric_limits<float>::epsilon();
+  return (p3.x - p2.x) * (p1.y - p2.y) - (p3.y - p2.y) * (p1.x - p2.x) <
+         -std::numeric_limits<float>::epsilon();
 }
 
 bool isLeft(const Line &l, const Point &p) { return isLeft(l.p1, l.p2, p); }
@@ -189,6 +212,78 @@ void print_points(const Points &points) {
     std::cout << "(" << p.x << ", " << p.y << ")  ";
   }
   std::cout << std::endl;
+}
+
+// Tuple of two points
+using TPoint = std::pair<Point, Point>;
+
+/* Compute the extremes for the points: leftmost and rightmost.
+ * It cover the edge case where multiple points have the same x-coordinate but
+ * different y-coordinates.
+ *
+ * returns a pair of points <(leftmost_ymin, leftmost_ymax), (rightmost_ymin,
+ * rightmost_ymax)>
+ */
+std::pair<TPoint, TPoint> findExtremePointsCases(const Points &points) {
+  Point leftPointYMin = points[0];
+  Point leftPointYMax = points[0];
+  Point rightPointYMin = points[0];
+  Point rightPointYMax = points[0];
+
+  for (const auto &p : points) {
+    if (p.x < leftPointYMin.x) { // new leftmost point found
+      leftPointYMin = p;
+      leftPointYMax = p;
+    } else if (p.x == leftPointYMin.x) { // same x-coordinate as current
+                                         // leftmost, check y-coordinates
+      if (p.y < leftPointYMin.y) {
+        leftPointYMin = p;
+      }
+      if (p.y > leftPointYMax.y) {
+        leftPointYMax = p;
+      }
+    }
+
+    if (p.x > rightPointYMax.x) { // new rightmost point found
+      rightPointYMin = p;
+      rightPointYMax = p;
+    } else if (p.x == rightPointYMax.x) { // same x-coordinate as current
+                                          // rightmost, check y-coordinates
+      if (p.y < rightPointYMin.y) {
+        rightPointYMin = p;
+      }
+      if (p.y > rightPointYMax.y) {
+        rightPointYMax = p;
+      }
+    }
+  }
+  return {{leftPointYMin, leftPointYMax}, {rightPointYMin, rightPointYMax}};
+}
+
+Line findExtremePoints(const Points &points, bool upper) {
+  // Find leftmost and rightmost points with highest y in case of ties
+  Point minPoint = points[0];
+  Point maxPoint = points[0];
+  if (upper) {
+    for (const auto &p : points) {
+      if (p.x < minPoint.x || (p.x == minPoint.x && p.y > minPoint.y)) {
+        minPoint = p;
+      }
+      if (p.x > maxPoint.x || (p.x == maxPoint.x && p.y > maxPoint.y)) {
+        maxPoint = p;
+      }
+    }
+  } else {
+    for (const auto &p : points) {
+      if (p.x < minPoint.x || (p.x == minPoint.x && p.y < minPoint.y)) {
+        minPoint = p;
+      }
+      if (p.x > maxPoint.x || (p.x == maxPoint.x && p.y < maxPoint.y)) {
+        maxPoint = p;
+      }
+    }
+  }
+  return Line{maxPoint, minPoint};
 }
 
 } // namespace util

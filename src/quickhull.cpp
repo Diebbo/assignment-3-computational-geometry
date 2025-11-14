@@ -7,63 +7,6 @@ using namespace QuickHullNS;
 const int TOP_HULL = 1;
 const int BOTTOM_HULL = -1;
 
-// Tuple of two points
-using TPoint = std::pair<Point, Point>;
-
-/* Compute the extremes for the points: leftmost and rightmost.
- * It cover the edge case where multiple points have the same x-coordinate but different y-coordinates.
- *
- * returns a pair of points <(leftmost_ymin, leftmost_ymax), (rightmost_ymin, rightmost_ymax)>
- */
-std::pair<TPoint, TPoint> findExtremePointsCases(const Points &points) {
-  Point leftPointYMin = points[0];
-  Point leftPointYMax = points[0];
-  Point rightPointYMin = points[0];
-  Point rightPointYMax = points[0];
-
-  for (const auto &p : points) {
-    if (p.x < leftPointYMin.x) { // new leftmost point found
-      leftPointYMin = p;
-      leftPointYMax = p;
-    } else if (p.x == leftPointYMin.x) { // same x-coordinate as current leftmost, check y-coordinates
-      if (p.y < leftPointYMin.y) {
-        leftPointYMin = p;
-      }
-      if (p.y > leftPointYMax.y) {
-        leftPointYMax = p;
-      }
-    }
-
-    if (p.x > rightPointYMax.x) { // new rightmost point found
-      rightPointYMin = p;
-      rightPointYMax = p;
-    } else if (p.x == rightPointYMax.x) { // same x-coordinate as current rightmost, check y-coordinates
-      if (p.y < rightPointYMin.y) {
-        rightPointYMin = p;
-      }
-      if (p.y > rightPointYMax.y) {
-        rightPointYMax = p;
-      }
-    }
-  }
-  return {{leftPointYMin, leftPointYMax}, {rightPointYMin, rightPointYMax}};
-}
-
-std::pair<Point, Point> findExtremePoints(const Points &points) {
-  Point minPoint = points[0];
-  Point maxPoint = points[0];
-
-  for (const auto &p : points) {
-    if (p.x < minPoint.x) {
-      minPoint = p;
-    }
-    if (p.x > maxPoint.x) {
-      maxPoint = p;
-    }
-  }
-  return {minPoint, maxPoint};
-}
-
 Points QuickHull::compute(const Points &points) const {
   /* ·
    * To initialize, find the point q1 with the smallest x-coordinate and the
@@ -77,7 +20,7 @@ Points QuickHull::compute(const Points &points) const {
   Point q1upper, q2upper;
   Point q1lower, q2lower;
 
-  auto [q1, q2] = findExtremePointsCases(points);
+  auto [q1, q2] = util::findExtremePointsCases(points);
   // TPoint q1 = extremes.first;
   // TPoint q2 = extremes.second;
   // check if the leftmost points are the same, otherwise we compute differenyly and merge afterwards

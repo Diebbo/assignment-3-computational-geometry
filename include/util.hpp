@@ -84,6 +84,21 @@ void read_points_from_file(const std::string &filename, Container &container) {
   }
 }
 
+
+// Tuple of two points
+using TPoint = std::pair<Point, Point>;
+
+/* Compute the extremes for the points: leftmost and rightmost.
+ * It cover the edge case where multiple points have the same x-coordinate but different y-coordinates.
+ *
+ * returns a pair of points <(leftmost_ymin, leftmost_ymax), (rightmost_ymin, rightmost_ymax)>
+ */
+std::pair<TPoint, TPoint> findExtremePointsCases(const Points &points);
+
+Line findExtremePoints(const Points &points, bool upper = true);
+
+
+
 } // namespace util
 
 #endif // UTIL_HPP

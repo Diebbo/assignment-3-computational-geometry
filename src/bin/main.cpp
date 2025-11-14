@@ -52,8 +52,7 @@ int main() {
 
   /* Test Marriage Before Conquest Algorithm */
   Points hull3 = testAlgorithm(new MarriageNS::MarriageBeforeConquest(), pointContainer, "Marriage Before Conquest");
-  std::cout << "MBC  correct Hull Points:" << std::endl;
-  util::print_points(hull3);
+
   // =================
 
   // TODO: da rimuovere, solo per testare i casi limite in dev time
@@ -92,9 +91,9 @@ int main() {
     auto hull2 = QuickHullNS::QuickHull().compute(pts);
     auto hull3 = MarriageNS::MarriageBeforeConquest().compute(pts);
     assert(util::is_valid_hull(hull, pts));
-    // assert(util::is_valid_hull(hull2, pts));
+    assert(util::is_valid_hull(hull2, pts));
     assert(util::is_valid_hull(hull3, pts));
-    // assert(hull == hull2);
+    //assert(hull == hull2);
     assert(hull == hull3);
   }
 
