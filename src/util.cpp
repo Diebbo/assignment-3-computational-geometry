@@ -16,24 +16,18 @@ double sidedness(const Line &l, const Point &p) {
   return sidedness(l.p1, l.p2, p);
 }
 
-bool isLeft(const Point &p1, const Point &p2, const Point &p3,
-            bool tollerance) {
+bool isLeft(const Point &p1, const Point &p2, const Point &p3) {
   const double dx_32 = p3.x - p2.x;
   const double dy_12 = p1.y - p2.y;
   const double dy_32 = p3.y - p2.y;
   const double dx_12 = p1.x - p2.x;
 
-  const double D = (dx_32 * dy_12) - (dy_32 * dx_12);
+  return (dx_32 * dy_12) > (dy_32 * dx_12);
 
-  if (tollerance) {
-    return D > -std::numeric_limits<double>::epsilon();
-  } else {
-    return (dx_32 * dy_12) > (dy_32 * dx_12);
-  }
 }
 
 
-bool isLeft(const Line &l, const Point &p, bool tollerance) { return isLeft(l.p1, l.p2, p, tollerance); }
+bool isLeft(const Line &l, const Point &p) { return isLeft(l.p1, l.p2, p); }
 
 bool is_inside(const Triangle &t, const Point &p) {
   /* The point must be on the same side of all the triangle's edges */
@@ -82,7 +76,7 @@ bool is_valid_hull(const Points &hull, const Points &points) {
 
   // check convexity
   for (size_t i = 0; i < n; ++i) {
-    if (util::isLeft(hull[i], hull[(i + 1) % n], hull[(i + 2) % n]), false) {
+    if (util::isLeft(hull[i], hull[(i + 1) % n], hull[(i + 2) % n])) {
 
       std::cout << "Hull is not convex: " << i << " "
                 << sidedness(hull[i], hull[(i + 1) % n], hull[(i + 2) % n])

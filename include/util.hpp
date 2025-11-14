@@ -24,8 +24,8 @@ namespace util {
 double sidedness(const Line &l, const Point &p);
 double sidedness(const Point &p1, const Point &p2, const Point &p3);
 
-bool isLeft(const Point &p1, const Point &p2, const Point &p3, bool tollerance = false);
-bool isLeft(const Line &l, const Point &p, bool tollerance = false);
+bool isLeft(const Point &p1, const Point &p2, const Point &p3);
+bool isLeft(const Line &l, const Point &p);
 
 /* Determine if point p is inside triangle t
  *
