@@ -5,7 +5,7 @@
 #include <util.hpp>
 #include <vector>
 
-bool point_cmp_x(const Point &a, const Point &b) {
+bool point_cmp(const Point &a, const Point &b) {
   if (a.x != b.x) {
     return a.x < b.x;
   } else {
@@ -51,7 +51,7 @@ T GrahamScan<T>::compute(const std::vector<Point> &points) const {
     return T(points.begin(), points.end());
 
   std::vector<Point> pts(points.begin(), points.end());
-  std::sort(pts.begin(), pts.end(), point_cmp_x);
+  std::sort(pts.begin(), pts.end(), point_cmp);
 
   T upper;
   compute_inner(pts, upper, 1.0);
@@ -73,7 +73,7 @@ PointsDeque GrahamScan<PointsDeque>::compute(Points const& points) const {
     return PointsDeque(points.begin(), points.end());
 
   std::vector<Point> pts(points.begin(), points.end());
-  std::sort(pts.begin(), pts.end(), point_cmp_x);
+  std::sort(pts.begin(), pts.end(), point_cmp);
 
   PointsDeque res;
   res.push_back(pts[0]);
