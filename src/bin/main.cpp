@@ -59,7 +59,7 @@ int main() {
   Points bigPointContainer;
   const std::vector<std::string> shape = {"circle", "square", "parabola"};
   for (const auto &s : shape) {
-    std::string filepath = "build/tests/" + s + "/1024";
+    std::string filepath = "build/tests/" + s + "/256";
     std::string filename = filepath;
     util::read_points_from_file(filename, bigPointContainer);
     std::cout << "Read " << bigPointContainer.size()

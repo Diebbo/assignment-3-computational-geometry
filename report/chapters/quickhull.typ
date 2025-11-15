@@ -229,6 +229,6 @@ And in log-log scale. //(see @fig:quickhull-bench-loglog).
 
 === Results
 
-#bench.plot_hull("circle", 1024, "quick")
-#bench.plot_hull("parabola", 1024, "quick")
-#bench.plot_hull("square", 1024, "quick")
+#bench.plot_hull("circle", 256, "quick")
+#bench.plot_hull("parabola", 256, "quick")
+#bench.plot_hull("square", 256, "quick")
