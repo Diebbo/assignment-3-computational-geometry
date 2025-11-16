@@ -1,0 +1,23 @@
+2025-11-16T11:51:34+01:00
+Running ./build/bench
+Run on (8 X 4200 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 1.87, 1.43, 1.15
+***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"bench/quick_circle/256",140564,4974.21,4961.11,ns,,,,,
+"bench/quick_circle/512",72016,9763.4,9737.15,ns,,,,,
+"bench/quick_circle/1024",36930,18767.5,18717.5,ns,,,,,
+"bench/quick_circle/2048",17994,37988.8,37888.1,ns,,,,,
+"bench/quick_circle/4096",7884,84162.5,83927.2,ns,,,,,
+"bench/quick_circle/8192",3309,208333,207744,ns,,,,,
+"bench/quick_circle/16384",1603,434746,433591,ns,,,,,
+"bench/quick_circle/32768",782,896894,894344,ns,,,,,
+"bench/quick_circle/65536",388,1.81383e+06,1.80806e+06,ns,,,,,
+"bench/quick_circle/131072",194,3.63875e+06,3.62589e+06,ns,,,,,
+"bench/quick_circle/262144",95,7.36979e+06,7.34327e+06,ns,,,,,
+"bench/quick_circle/524288",47,1.49659e+07,1.49067e+07,ns,,,,,

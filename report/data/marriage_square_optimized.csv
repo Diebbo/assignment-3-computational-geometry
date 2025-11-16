@@ -1,0 +1,23 @@
+2025-11-16T11:52:34+01:00
+Running ./build/bench
+Run on (8 X 4200 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 2.11, 1.57, 1.21
+***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"bench/marriage_square/256",30898,23008.9,22943.9,ns,,,,,
+"bench/marriage_square/512",20666,34023.5,33936.5,ns,,,,,
+"bench/marriage_square/1024",8638,78963.9,78580.4,ns,,,,,
+"bench/marriage_square/2048",5568,126118,125732,ns,,,,,
+"bench/marriage_square/4096",3254,215367,214736,ns,,,,,
+"bench/marriage_square/8192",1385,508130,506523,ns,,,,,
+"bench/marriage_square/16384",828,841144,838203,ns,,,,,
+"bench/marriage_square/32768",381,1.81187e+06,1.80524e+06,ns,,,,,
+"bench/marriage_square/65536",247,2.89296e+06,2.87788e+06,ns,,,,,
+"bench/marriage_square/131072",96,7.27386e+06,7.22689e+06,ns,,,,,
+"bench/marriage_square/262144",34,2.01298e+07,1.99949e+07,ns,,,,,
+"bench/marriage_square/524288",23,3.15782e+07,3.14119e+07,ns,,,,,

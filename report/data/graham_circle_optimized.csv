@@ -1,0 +1,23 @@
+2025-11-16T11:50:58+01:00
+Running ./build/bench
+Run on (8 X 4200 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 1.33, 1.28, 1.09
+***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"bench/graham_circle/256",102677,6768.32,6753.33,ns,,,,,
+"bench/graham_circle/512",46185,14963.8,14933,ns,,,,,
+"bench/graham_circle/1024",17731,38269.5,38145.1,ns,,,,,
+"bench/graham_circle/2048",7740,90153.1,89938,ns,,,,,
+"bench/graham_circle/4096",3442,203841,203395,ns,,,,,
+"bench/graham_circle/8192",1615,430994,430104,ns,,,,,
+"bench/graham_circle/16384",758,919923,917882,ns,,,,,
+"bench/graham_circle/32768",371,1.90918e+06,1.90461e+06,ns,,,,,
+"bench/graham_circle/65536",179,3.91122e+06,3.90061e+06,ns,,,,,
+"bench/graham_circle/131072",86,8.14977e+06,8.12677e+06,ns,,,,,
+"bench/graham_circle/262144",42,1.69917e+07,1.69412e+07,ns,,,,,
+"bench/graham_circle/524288",20,3.54204e+07,3.53201e+07,ns,,,,,

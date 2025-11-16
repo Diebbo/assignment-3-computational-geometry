@@ -73,7 +73,7 @@ Points QuickHull::compute(const Points &points) const {
   Point q1upper, q2upper;
   Point q1lower, q2lower;
 
-  auto [q1, q2] = findExtremePointsCases(points);
+  auto [q1, q2] = util::findExtremePointsCases(points);
   if (q1.first.y == q1.second.y) {
     q1upper = q1lower = q1.first;
   } else {
@@ -91,25 +91,26 @@ Points QuickHull::compute(const Points &points) const {
   hull.push_back(q1upper);
 
   for (const auto &p : points) {
-    auto s = util::sidedness(q1upper, q2upper, p);
-    auto s2 = util::sidedness(q1lower, q2lower, p);
-    if (s > 0) {
+    if (util::isLeft(q1upper, q2upper, p)) {
       upper_points.push_back(p);
     }
-    if (s2 < 0) {
+    if (util::isLeft(q2lower, q1lower, p)) {
       lower_points.push_back(p);
     }
   }
-  QuickHull::findTopHullRecursive(q1upper, q2upper, upper_points, hull);
 
+  QuickHull::findHullRecursive(q1upper, q2upper, upper_points, hull);
   if (hull.empty() || !(hull.back() == q2upper))
     hull.push_back(q2upper);
+
   if (hull.empty() || !(hull.back() == q2lower))
     hull.push_back(q2lower);
 
-  QuickHull::findBottomHullRecursive(q1lower, q2lower, lower_points, hull);
-  if (hull.empty() || !(hull.back() == q1lower))
+  QuickHull::findHullRecursive(q2lower, q1lower, lower_points, hull);
+
+  if (hull.empty() || !(hull.back() == q1lower || hull.front() == q1lower))
     hull.push_back(q1lower);
+
   return hull;
 }
 ```
@@ -125,51 +126,48 @@ The recursive functions used to compute the upper and lower hulls are shown belo
   caption: [Recursive functions for QuickHull algorithm],
   kind: auto,
   ```cpp
-void QuickHull::findTopHullRecursive(const Point &p1, const Point &p2,
-                                     const Points &points, Points &hull) const {
-  QuickHull::findHullRecursive(p1, p2, points, hull, TOP_HULL);
-}
-void QuickHull::findBottomHullRecursive(const Point &p1, const Point &p2,
-                                        const Points &points, Points &hull) const {
-  QuickHull::findHullRecursive(p1, p2, points, hull, BOTTOM_HULL);
-}
 void QuickHull::findHullRecursive(const Point &p1, const Point &p2,
-                                  const Points &points, Points &hull,
-                                  int side_multiplier) const {
+                                  const Points &points, Points &hull) const {
   /* No more points left */
-  if (points.empty()) { return; }
-  if (points.size() == 1) { hull.push_back(points[0]); return; }
+  if (points.empty()) {
+    return;
+  }
+  if (points.size() == 1) {
+    hull.push_back(points[0]);
+    return;
+  }
 
   /* 1. Find the point q on one side of s that has the largest distance to s. */
-  float maxDistance = -1.0f;
+  double maxDistance = -1.0;
   Point q;
   for (const auto &p : points) {
-    float distance = util::partial_distance(Line(p1, p2), p);
+    double distance = util::partial_distance(Line(p1, p2), p);
     if (distance > maxDistance) {
       maxDistance = distance;
       q = p;
     }
   }
+
+  /* 2. Add q to the convex hull */
+  // NOTE: This is done after the recursive calls to maintain the correct order
+
   /* 3. Partition the remaining points into two subsets Pℓ and Pr */
   Points leftSet = Points();
   Points rightSet = Points();
   for (const auto &p : points) {
-    if (util::sidedness(p1, q, p) * side_multiplier > 0) {
+    if (util::isLeft(p1, q, p)) {
       leftSet.push_back(p);
-    } else if (util::sidedness(q, p2, p) * side_multiplier > 0) {
+    } else if (util::isLeft(q, p2, p)) {
       rightSet.push_back(p);
     }
   }
+
   /* 4. Recurse on the two subsets */
-  if (side_multiplier == BOTTOM_HULL) {
-    findHullRecursive(q, p2, rightSet, hull, side_multiplier);
-    hull.push_back(q);
-    findHullRecursive(p1, q, leftSet, hull, side_multiplier);
-  } else { // UPPER HULL
-    findHullRecursive(p1, q, leftSet, hull, side_multiplier);
-    hull.push_back(q);
-    findHullRecursive(q, p2, rightSet, hull, side_multiplier);
-  }
+  // if bottom hull i recurr on the right side first
+
+  findHullRecursive(p1, q, leftSet, hull);
+  hull.push_back(q);
+  findHullRecursive(q, p2, rightSet, hull);
 }
   ```
 ) <lst:recursive>
@@ -226,9 +224,31 @@ And in log-log scale. //(see @fig:quickhull-bench-loglog).
   height: 6cm,
 )<fig:quickhull-bench-loglog>
 
+=== Optimizations
 
-=== Results
+In order to have a more fair comparison we decided to test the algorithm on also a compiler-optimized version with the -O3 flag enabled. The results are shown below.
+
+#bench.lq.diagram(
+  bench.plot_bench("quick", "circle_optimized"),
+  bench.plot_bench("quick", "square_optimized"),
+  bench.plot_bench("quick", "parabola_optimized"),
+  xaxis: (label: "Number of elements"),
+  xscale: "log",
+  yscale: "log",
+  legend: (position: top + left),
+  width: 100%,
+  height: 6cm,
+)<fig:quickhull-bench-loglog>
+
+As we could expect, the optimization provided by the compiler improved the performance by a almost 10x factor across all the different distributions. But the overall behavior of the algorithm remained the same.
+
+=== Visual Results
+
+Following up are some visualizations of the convex hulls computed by the QuickHull algorithm on different point distributions.
 
 #bench.plot_hull("circle", 256, "quick")
 #bench.plot_hull("parabola", 256, "quick")
 #bench.plot_hull("square", 256, "quick")
+
+
+

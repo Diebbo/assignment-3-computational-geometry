@@ -30,5 +30,17 @@ _bench-individual algorithm shape:
     @mkdir -p report/data
     ./build/bench --benchmark_filter="bench/{{algorithm}}_{{shape}}/.*" --benchmark_out_format="csv" --benchmark_out="report/data/{{algorithm}}_{{shape}}.csv"
 
-report:
-    typst watch report/main.typ --root=.
+report algorithm=algorithms shape=shapes: build
+    #!/bin/sh
+
+    # Generate input files if not ./build/tests directory exists
+    if [ ./build/tests -d ]; then
+        echo "Input files already exist, skipping generation."
+    else
+        uv run --with numpy vis/generate_tests.py
+    fi
+
+    just run
+
+    xdg-open ./report/main.pdf&
+    typst watch ./report/main.typ --root=. 

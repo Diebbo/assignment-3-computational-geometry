@@ -80,9 +80,7 @@ The point generation is done through a python script that creates different dist
 types = {
     "parabola": lambda x: x**2,
     "square": lambda x: np.random.uniform(LOWER_X, UPPER_X),
-    "circle": lambda x: np.random.choice(
-        [(R**2 - x**2) ** 0.5, -((R**2 - x**2) ** 0.5)]
-    ),
+    "circle": lambda x: np.random.uniform(-(R**2 - x**2) ** 0.5, ((R**2 - x**2) ** 0.5)),
 }
 
 for shape in types.keys():

@@ -112,7 +112,7 @@
 #let read_hull(shape, algorithm) = {
   let filepath = "../build/output/" + shape + "/" + algorithm
   let data = read(filepath)
-  let lines = data.split("\n").slice(1)
+  let lines = data.split("\n")
   let points = lines
     .filter(l => l.trim() != "") // filter out empty lines
     .map(l => {
