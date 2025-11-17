@@ -283,6 +283,7 @@ Line findExtremePoints(const Points &points, bool upper) {
     return Line{maxPoint, minPoint};
   }
 }
+
 void print_results_comparison(const Points &grhamPoints,
                               const Points &quickHullPoints,
                               const Points &mbcPoints,

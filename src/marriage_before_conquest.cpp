@@ -4,11 +4,10 @@
 #include <random>
 #include <util.hpp>
 
-/* Convex Hull Factory */
 using namespace MarriageNS;
 
 Line MarriageBeforeConquest::findUpperBridge(const Points &points) const {
-  /* Find the bridge (tangent) for the given set of points */
+  /* Find the upper bridge for the given set of points */
 
   Point p1, p2;
   p1 = points[0];
@@ -32,7 +31,7 @@ Line MarriageBeforeConquest::findUpperBridge(const Points &points) const {
 
   if (bridge.p1.x == bridge.p2.x) {
     // all points have the same x
-    // for lower bridge, take the lowest point
+      // for upper bridge, take the highest point
     bridge = {maxY, maxY};
     return bridge;
   }
@@ -77,7 +76,7 @@ Line MarriageBeforeConquest::findUpperBridge(const Points &points) const {
 }
 
 Line MarriageBeforeConquest::findLowerBridge(const Points &points) const {
-  /* Find the bridge (tangent) for the given set of points */
+  /* Find the lower bridge for the given set of points */
 
   Point p1, p2;
   p1 = points[0];
