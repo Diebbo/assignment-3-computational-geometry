@@ -32,5 +32,6 @@
 #include "chapters/graham-description.typ"
 #include "chapters/graham-complexity.typ"
 #include "chapters/quickhull.typ"
+#include "chapters/mbc.typ"
 
 #include "chapters/conclusion.typ"

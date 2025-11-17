@@ -14,6 +14,7 @@ Line MarriageBeforeConquest::findUpperBridge(const Points &points) const {
   p1 = points[0];
   Line bridge = {p1, p1};
   Point maxY = points[0];
+
   for (size_t i = 1; i < points.size(); ++i) {
     p2 = points[i];
     if (p2.y > maxY.y) {
@@ -28,6 +29,7 @@ Line MarriageBeforeConquest::findUpperBridge(const Points &points) const {
       break;
     }
   }
+
   if (bridge.p1.x == bridge.p2.x) {
     // all points have the same x
     // for lower bridge, take the lowest point
@@ -223,7 +225,7 @@ void MarriageBeforeConquest::MBCLowerRecursive(const Points &points,
   }
 
   Line bridge = findLowerBridge(points);
-  
+
   if (bridge.p1 == bridge.p2) {
     hull.push_back(bridge.p1);
     return;
@@ -267,10 +269,10 @@ Points MarriageBeforeConquest::compute(const Points &points) const {
   return hull;
 }
 
-
 // MarriageBeforeConquestV2 Implementation
 
-Line MarriageBeforeConquestV2::findUpperBridge(const Points &points, const Line &extremes) const {
+Line MarriageBeforeConquestV2::findUpperBridge(const Points &points,
+                                               const Line &extremes) const {
   /* Find the upper bridge for the given set of points */
 
   Point p1, p2;
@@ -296,21 +298,33 @@ Line MarriageBeforeConquestV2::findUpperBridge(const Points &points, const Line 
       }
     }
   }
+
+  auto condition = [extremes](const Point &p) {
+    return util::isLeft(extremes, p) || p == extremes.p1 || p == extremes.p2;
+  };
+
+  Points prunedPoints;
+
+  // Use std::copy_if to copy values that satisfy the condition into
+  // prunedPoints
+  std::copy_if(points.begin(), points.end(), std::back_inserter(prunedPoints),
+               condition);
+
   /*
   New way:
   itero su L
   se nuovo punto maggiore, allora aggiorno p1 e cerco nuovo p2
-  
-  
+
+
   */
-  for (size_t i = 0; i < points.size(); ++i) {
-    const auto &p = points[i];
+  for (size_t i = 0; i < prunedPoints.size(); ++i) {
+    const auto &p = prunedPoints[i];
     if (util::isLeft(bridge, p)) {
       /* Point is above the bridge and above the extremes, update the bridge */
       if (p.x < midX) {
         bridge.p1 = p;
         for (size_t j = 0; j < i; ++j) {
-          const auto &q = points[j];
+          const auto &q = prunedPoints[j];
           if (q.x >= midX) {
             if (util::isLeft(bridge, q)) {
               bridge.p2 = q;
@@ -320,7 +334,7 @@ Line MarriageBeforeConquestV2::findUpperBridge(const Points &points, const Line 
       } else {
         bridge.p2 = p;
         for (size_t j = 0; j < i; ++j) {
-          const auto &q = points[j];
+          const auto &q = prunedPoints[j];
           if (q.x <= midX) {
             if (util::isLeft(bridge, q)) {
               bridge.p1 = q;
@@ -334,7 +348,8 @@ Line MarriageBeforeConquestV2::findUpperBridge(const Points &points, const Line 
   return bridge;
 }
 
-Line MarriageBeforeConquestV2::findLowerBridge(const Points &points, const Line &extremes) const {
+Line MarriageBeforeConquestV2::findLowerBridge(const Points &points,
+                                               const Line &extremes) const {
   /* Find the lower bridge for the given set of points */
 
   Point p1, p2;
@@ -348,14 +363,25 @@ Line MarriageBeforeConquestV2::findLowerBridge(const Points &points, const Line 
 
   float midX = (bridge.p1.x + bridge.p2.x) / 2.0f;
 
-  for (size_t i = 0; i < points.size(); ++i) {
-    const auto &p = points[i];
+  auto condition = [extremes](const Point &p) {
+    return util::isLeft(extremes, p) || p == extremes.p1 || p == extremes.p2;
+  };
+
+  Points prunedPoints;
+
+  // Use std::copy_if to copy values that satisfy the condition into
+  // prunedPoints
+  std::copy_if(points.begin(), points.end(), std::back_inserter(prunedPoints),
+               condition);
+
+  for (size_t i = 0; i < prunedPoints.size(); ++i) {
+    const auto &p = prunedPoints[i];
     if (util::isLeft(extremes, p) && util::isLeft(bridge, p)) {
       /* Point is under the bridge and under the extremes, update the bridge */
       if (p.x > midX) {
         bridge.p1 = p;
         for (size_t j = 0; j < i; ++j) {
-          const auto &q = points[j];
+          const auto &q = prunedPoints[j];
           if (q.x <= midX) {
             if (util::isLeft(bridge, q)) {
               bridge.p2 = q;
@@ -365,7 +391,7 @@ Line MarriageBeforeConquestV2::findLowerBridge(const Points &points, const Line 
       } else {
         bridge.p2 = p;
         for (size_t j = 0; j < i; ++j) {
-          const auto &q = points[j];
+          const auto &q = prunedPoints[j];
           if (q.x >= midX) {
             if (util::isLeft(bridge, q)) {
               bridge.p1 = q;
@@ -380,7 +406,7 @@ Line MarriageBeforeConquestV2::findLowerBridge(const Points &points, const Line 
 }
 
 void MarriageBeforeConquestV2::MBCUpperRecursive(const Points &points,
-                                               Points &hull) const {
+                                                 Points &hull) const {
   /* If points.size() < 3, add them to the hull */
   if (points.empty()) {
     return;
@@ -431,7 +457,7 @@ void MarriageBeforeConquestV2::MBCUpperRecursive(const Points &points,
 }
 
 void MarriageBeforeConquestV2::MBCLowerRecursive(const Points &points,
-                                               Points &hull) const {
+                                                 Points &hull) const {
   /* If points.size() < 3, add them to the hull */
   if (points.empty()) {
     return;
@@ -468,7 +494,7 @@ void MarriageBeforeConquestV2::MBCLowerRecursive(const Points &points,
   }
 
   Line extremes = util::findExtremePoints(points, false);
-  
+
   Line bridge = findLowerBridge(points, extremes);
 
   if (bridge.p1 == bridge.p2) {
