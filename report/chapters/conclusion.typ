@@ -1,0 +1,74 @@
+#import "../bench.typ" as bench
+= Conclusion
+
+=== correctness and Visual Results
+
+Following up are some visualizations of the convex hulls computed by one of the algorithms to give a visual proof of correctness.
+
+#bench.plot_hull("circle", 256, "quick")
+#bench.plot_hull("parabola", 256, "quick")
+#bench.plot_hull("square", 256, "quick")
+
+The actual correctness of the algorithms has been verified at each iteration through a unit test that checks that each point is either on the hull or inside it.
+
+#figure(
+caption: [Unit test code snippet for hull correctness verification],
+kind: auto,
+```cpp
+template <typename T>
+bool is_valid_hull(const T &hull, const Points &points) {
+  // check that the hull is convex
+  size_t n = hull.size();
+  if (n < 3) {
+    return false; // A hull must have at least 3 vertices
+  }
+
+  auto it = hull.begin();
+  for (size_t i = 0; i < n; ++i) {
+    auto it2 = it;
+    auto i1 = *it2;
+    if (++it2 == hull.end()) it2 = hull.begin();
+    auto i2 = *it2;
+    if (++it2 == hull.end()) it2 = hull.begin();
+    auto i3 = *it2;
+
+    if (util::isLeft(i1, i2, i3)) {
+      return false; // Hull is not convex
+    }
+  }
+
+  // check that all points are either on the hull or inside it
+  for (const auto &p : points) {
+    bool on_hull = false;
+
+    // Check if point is on hull
+    for (const auto &hp : hull) {
+      if (p == hp) {
+        on_hull = true;
+        break;
+      }
+    }
+
+    if (!on_hull) {
+      // Check if point is inside hull
+      // A point is inside if it's on the same side of ALL edges
+      if (!is_valid_inside<T>(hull, p)) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+```
+)<lst:correctness_unittest>
+
+
+=== Benchmark Results
+
+Comparing all the algorithms implemented we can see how they perform on different distributions of points and different sizes.
+
+#bench.plot_benchmarks("circle")
+#bench.plot_benchmarks("parabola")
+#bench.plot_benchmarks("square")
+

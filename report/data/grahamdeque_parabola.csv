@@ -1,0 +1,22 @@
+2025-11-17T19:23:38+01:00
+Running ./build/bench
+Run on (8 X 400 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 2.12, 1.65, 1.35
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"bench/grahamdeque_parabola/256",16108,44059,43907,ns,,,,,
+"bench/grahamdeque_parabola/512",7321,94119,93815,ns,,,,,
+"bench/grahamdeque_parabola/1024",3355,208110,207388,ns,,,,,
+"bench/grahamdeque_parabola/2048",1556,450500,448987,ns,,,,,
+"bench/grahamdeque_parabola/4096",737,952394,949018,ns,,,,,
+"bench/grahamdeque_parabola/8192",344,2.03731e+06,2.0307e+06,ns,,,,,
+"bench/grahamdeque_parabola/16384",163,4.29958e+06,4.28545e+06,ns,,,,,
+"bench/grahamdeque_parabola/32768",77,9.11576e+06,9.08773e+06,ns,,,,,
+"bench/grahamdeque_parabola/65536",37,1.92213e+07,1.91551e+07,ns,,,,,
+"bench/grahamdeque_parabola/131072",17,4.04756e+07,4.03302e+07,ns,,,,,
+"bench/grahamdeque_parabola/262144",8,8.46926e+07,8.43832e+07,ns,,,,,
+"bench/grahamdeque_parabola/524288",4,1.75569e+08,1.74957e+08,ns,,,,,

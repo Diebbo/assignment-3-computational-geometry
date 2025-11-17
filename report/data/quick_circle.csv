@@ -1,0 +1,22 @@
+2025-11-17T19:24:25+01:00
+Running ./build/bench
+Run on (8 X 945.244 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 2.32, 1.77, 1.40
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"bench/quick_circle/256",26669,26121.5,26047.3,ns,,,,,
+"bench/quick_circle/512",10000,51287.2,51114.3,ns,,,,,
+"bench/quick_circle/1024",6693,102074,101689,ns,,,,,
+"bench/quick_circle/2048",3637,192641,191908,ns,,,,,
+"bench/quick_circle/4096",1806,381430,379986,ns,,,,,
+"bench/quick_circle/8192",896,770091,767279,ns,,,,,
+"bench/quick_circle/16384",461,1.53931e+06,1.53324e+06,ns,,,,,
+"bench/quick_circle/32768",231,3.04046e+06,3.03004e+06,ns,,,,,
+"bench/quick_circle/65536",114,6.16821e+06,6.14369e+06,ns,,,,,
+"bench/quick_circle/131072",52,1.21994e+07,1.21528e+07,ns,,,,,
+"bench/quick_circle/262144",23,2.30345e+07,2.29638e+07,ns,,,,,
+"bench/quick_circle/524288",15,4.60445e+07,4.59091e+07,ns,,,,,

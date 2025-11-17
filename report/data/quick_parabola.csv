@@ -1,0 +1,22 @@
+2025-11-17T19:24:49+01:00
+Running ./build/bench
+Run on (8 X 1787.05 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 2.45, 1.85, 1.44
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"bench/quick_parabola/256",5261,133768,133328,ns,,,,,
+"bench/quick_parabola/512",2269,321611,320240,ns,,,,,
+"bench/quick_parabola/1024",1017,681636,679146,ns,,,,,
+"bench/quick_parabola/2048",483,1.46039e+06,1.45477e+06,ns,,,,,
+"bench/quick_parabola/4096",210,3.09545e+06,3.08374e+06,ns,,,,,
+"bench/quick_parabola/8192",107,6.63108e+06,6.6017e+06,ns,,,,,
+"bench/quick_parabola/16384",53,1.30286e+07,1.29766e+07,ns,,,,,
+"bench/quick_parabola/32768",28,2.4986e+07,2.48815e+07,ns,,,,,
+"bench/quick_parabola/65536",14,4.54279e+07,4.52516e+07,ns,,,,,
+"bench/quick_parabola/131072",8,9.0351e+07,8.99382e+07,ns,,,,,
+"bench/quick_parabola/262144",4,1.87312e+08,1.86609e+08,ns,,,,,
+"bench/quick_parabola/524288",2,3.37981e+08,3.36809e+08,ns,,,,,

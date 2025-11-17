@@ -1,0 +1,22 @@
+2025-11-17T19:27:08+01:00
+Running ./build/bench
+Run on (8 X 3800 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 2.61, 2.12, 1.60
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"bench/marriagev2_parabola/256",2077,339516,338404,ns,,,,,
+"bench/marriagev2_parabola/512",984,732052,729353,ns,,,,,
+"bench/marriagev2_parabola/1024",441,1.56806e+06,1.56215e+06,ns,,,,,
+"bench/marriagev2_parabola/2048",195,3.31865e+06,3.30757e+06,ns,,,,,
+"bench/marriagev2_parabola/4096",102,7.02114e+06,6.99251e+06,ns,,,,,
+"bench/marriagev2_parabola/8192",49,1.44788e+07,1.44234e+07,ns,,,,,
+"bench/marriagev2_parabola/16384",24,2.85454e+07,2.84491e+07,ns,,,,,
+"bench/marriagev2_parabola/32768",13,5.58359e+07,5.56272e+07,ns,,,,,
+"bench/marriagev2_parabola/65536",7,1.07502e+08,1.07127e+08,ns,,,,,
+"bench/marriagev2_parabola/131072",3,1.99439e+08,1.98795e+08,ns,,,,,
+"bench/marriagev2_parabola/262144",2,3.79548e+08,3.78319e+08,ns,,,,,
+"bench/marriagev2_parabola/524288",1,7.60874e+08,7.58064e+08,ns,,,,,

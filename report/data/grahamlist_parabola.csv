@@ -1,0 +1,22 @@
+2025-11-17T19:22:27+01:00
+Running ./build/bench
+Run on (8 X 1779.9 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 2.08, 1.52, 1.28
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"bench/grahamlist_parabola/256",6833,102541,102203,ns,,,,,
+"bench/grahamlist_parabola/512",3327,211859,211083,ns,,,,,
+"bench/grahamlist_parabola/1024",1589,443989,442428,ns,,,,,
+"bench/grahamlist_parabola/2048",760,921303,918233,ns,,,,,
+"bench/grahamlist_parabola/4096",375,1.88233e+06,1.87591e+06,ns,,,,,
+"bench/grahamlist_parabola/8192",182,3.85249e+06,3.84051e+06,ns,,,,,
+"bench/grahamlist_parabola/16384",90,7.78994e+06,7.76373e+06,ns,,,,,
+"bench/grahamlist_parabola/32768",45,1.57316e+07,1.56796e+07,ns,,,,,
+"bench/grahamlist_parabola/65536",22,3.16929e+07,3.15896e+07,ns,,,,,
+"bench/grahamlist_parabola/131072",11,6.47476e+07,6.45272e+07,ns,,,,,
+"bench/grahamlist_parabola/262144",5,1.29847e+08,1.29411e+08,ns,,,,,
+"bench/grahamlist_parabola/524288",3,2.64289e+08,2.63386e+08,ns,,,,,

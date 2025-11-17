@@ -1,0 +1,22 @@
+2025-11-17T19:25:24+01:00
+Running ./build/bench_opt
+Run on (8 X 2688.01 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 2.36, 1.90, 1.47
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"bench/quick_square/256",100000,5042.98,5025.7,ns,,,,,
+"bench/quick_square/512",67647,11264.4,11221.3,ns,,,,,
+"bench/quick_square/1024",31642,20381.7,20291.4,ns,,,,,
+"bench/quick_square/2048",19942,32681.8,32527.4,ns,,,,,
+"bench/quick_square/4096",8824,81216.5,80912.7,ns,,,,,
+"bench/quick_square/8192",3307,181623,180892,ns,,,,,
+"bench/quick_square/16384",1639,413033,410908,ns,,,,,
+"bench/quick_square/32768",808,893785,889824,ns,,,,,
+"bench/quick_square/65536",364,1.52522e+06,1.51786e+06,ns,,,,,
+"bench/quick_square/131072",198,3.14104e+06,3.12724e+06,ns,,,,,
+"bench/quick_square/262144",116,5.78811e+06,5.75856e+06,ns,,,,,
+"bench/quick_square/524288",56,1.27782e+07,1.27218e+07,ns,,,,,

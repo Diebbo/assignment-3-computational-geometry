@@ -1,0 +1,22 @@
+2025-11-17T19:26:56+01:00
+Running ./build/bench_opt
+Run on (8 X 2998.45 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 2.61, 2.09, 1.58
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"bench/marriagev2_circle/256",18059,38382.2,38253,ns,,,,,
+"bench/marriagev2_circle/512",9482,74419.7,74180.1,ns,,,,,
+"bench/marriagev2_circle/1024",4965,141159,140623,ns,,,,,
+"bench/marriagev2_circle/2048",2559,274796,273857,ns,,,,,
+"bench/marriagev2_circle/4096",1259,551599,549671,ns,,,,,
+"bench/marriagev2_circle/8192",646,1.08113e+06,1.07758e+06,ns,,,,,
+"bench/marriagev2_circle/16384",321,2.1778e+06,2.16973e+06,ns,,,,,
+"bench/marriagev2_circle/32768",146,4.78272e+06,4.76367e+06,ns,,,,,
+"bench/marriagev2_circle/65536",68,1.01857e+07,1.01473e+07,ns,,,,,
+"bench/marriagev2_circle/131072",34,2.09116e+07,2.08292e+07,ns,,,,,
+"bench/marriagev2_circle/262144",16,4.49686e+07,4.47788e+07,ns,,,,,
+"bench/marriagev2_circle/524288",7,9.38927e+07,9.34965e+07,ns,,,,,

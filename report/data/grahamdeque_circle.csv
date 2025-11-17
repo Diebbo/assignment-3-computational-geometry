@@ -1,0 +1,22 @@
+2025-11-17T19:23:15+01:00
+Running ./build/bench
+Run on (8 X 790.261 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 2.10, 1.60, 1.32
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"bench/grahamdeque_circle/256",11922,62208,62046.3,ns,,,,,
+"bench/grahamdeque_circle/512",5359,130511,129957,ns,,,,,
+"bench/grahamdeque_circle/1024",2492,280245,279079,ns,,,,,
+"bench/grahamdeque_circle/2048",1174,592761,590828,ns,,,,,
+"bench/grahamdeque_circle/4096",563,1.23307e+06,1.2293e+06,ns,,,,,
+"bench/grahamdeque_circle/8192",272,2.57797e+06,2.5666e+06,ns,,,,,
+"bench/grahamdeque_circle/16384",131,5.36871e+06,5.35093e+06,ns,,,,,
+"bench/grahamdeque_circle/32768",64,1.11315e+07,1.10948e+07,ns,,,,,
+"bench/grahamdeque_circle/65536",31,2.29558e+07,2.28561e+07,ns,,,,,
+"bench/grahamdeque_circle/131072",15,4.78755e+07,4.77159e+07,ns,,,,,
+"bench/grahamdeque_circle/262144",7,1.00646e+08,1.00167e+08,ns,,,,,
+"bench/grahamdeque_circle/524288",3,2.01501e+08,2.00599e+08,ns,,,,,
