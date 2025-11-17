@@ -31,7 +31,25 @@
 
 #include "chapters/graham-description.typ"
 #include "chapters/graham-complexity.typ"
+#include "chapters/graham-bench.typ"
 #include "chapters/quickhull.typ"
 #include "chapters/mbc.typ"
 
 #include "chapters/conclusion.typ"
+
+// Configure appendix
+
+#set heading(numbering: "A.", supplement: [Appendix])
+#show heading: it => stack(
+  spacing: 1.2em,
+  if it.numbering != none {
+    text(size: 1.2em, weight: "semibold")[Appendix #counter(heading).display()]
+  },
+  text(size: 1.5em, weight: "bold", it.body),
+  [],
+)
+#counter(heading).update(0)
+#pagebreak()
+
+#include "appendix/graham_impl.typ"
+#include "appendix/graham_deque.typ"

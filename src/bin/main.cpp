@@ -124,7 +124,7 @@ int main() {
   //==================
 
   std::random_device rd;
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < 1000; i++) {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distr(5, 50);
     int len = distr(gen);
@@ -149,7 +149,7 @@ int main() {
 
     assert(hull == std::vector(hull2.begin(), hull2.end()));
     assert(hull == std::vector(hull3.begin(), hull3.end()));
-    // assert(hull == hull3);
+    assert(hull == hull4);
     assert(hull == hull5);
   }
 
