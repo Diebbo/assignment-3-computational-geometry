@@ -117,7 +117,7 @@ int main() {
         new MarriageNS::MarriageBeforeConquestV2(), bigPointContainer,
         "Marriage Before Conquest V2 on " + s + " shape");
     const std::string label = s;
-    util::print_results_comparison(grahamHull, quickHull, mbc_hull, label);
+    util::print_results_comparison(grahamHull, quickHull, mbc_hull, mbc_hull2, label);
     bigPointContainer.clear();
   }
 

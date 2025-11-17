@@ -119,6 +119,7 @@ Line findExtremePoints(const Points &points, bool upper = true);
 void print_results_comparison(const Points &grhamPoints,
                               const Points &quickHullPoints,
                               const Points &mbcPoints,
+                              const Points &mbcV2Points,
                               const std::string &label);
 
 } // namespace util

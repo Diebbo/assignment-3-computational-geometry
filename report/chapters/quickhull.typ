@@ -236,5 +236,5 @@ In order to have a more fair comparison we decided to test the algorithm on also
   height: 6cm,
 )<fig:quickhull-bench-loglog>
 
-As we could expect, the optimization provided by the compiler improved the performance by a almost 10x factor across all the different distributions. But the overall behavior of the algorithm remained the same.
+As we could expect, the optimization provided by the compiler improved the performance by almost a 10x factor across all the different distributions. But the overall behavior of the algorithm remained the same.
 

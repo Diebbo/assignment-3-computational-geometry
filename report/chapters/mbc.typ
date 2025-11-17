@@ -243,7 +243,7 @@ Finding a bridge takes $O(n)$ time. Points that cannot contribute to the convex 
 
 For a balanced partitioning on the median
 
-At each recursion level $i$, the algorithm solves at most  $2^i$ subproblems, each containing at most $n/2^i$ points. Since each subproblem identifies a single edge of the convex hull, the total number of subproblems is bounded by $h$, the number of points on the hull. In the worst case, when no points can be discarded early, the recursion depth is $O(log h)$, and each level processes $O(n)$ points in linear time. This results in an overall time complexity of $O(n log h)$.
+At each recursion level $i$, the algorithm solves at most  $2^i$ subproblems, each containing at most $n/2^i$ points. Since each subproblem identifies a single edge of the convex hull, the total number of subproblems is bounded by $h$, the number of points on the hull. In the worst case, when no points can be discarded early, the recursion depth is $O(log h)$, and each level processes $O(n)$ points in linear time. This results in an overall time complexity of $O(n log h)$. This makes the Marriage Before Conquest algorithm an output-sensitive algorithm, as its performance depends on the size of the output (the number of points on the convex hull) rather than just the input size.
 
 
 
@@ -251,43 +251,55 @@ At each recursion level $i$, the algorithm solves at most  $2^i$ subproblems, ea
 
 In our benchmarks, we expect the Marriage Before Conquest algorithm to perform efficiently on average, with a time complexity of $O(n log n)$ for random distributions of points.
 
-#bench.diagram_points("circle", "1024"),
-#bench.diagram_points("square", "1024"),
-#bench.diagram_points("parabola", "1024"),
+The results of our benchmarks shown in the diagram below respects our expectations, with Marriage Before Conquest performing well on circular and square distributions, while showing increased computation time on the parabola distribution as the number of points on the hull increases, since it is output-sensitive.
 
-Above are some example distributions of points used in our benchmarks.
-
-The results of our benchmarks shown in the diagram below respects our expectations, with QuickHull performing well on circular and square distributions, while showing increased computation time on the parabola distribution as the number of points increases.
-
-Following up the results for the QuickHull algorithm in linear scale:
+Following up the results for the Marriage Before Conquest algorithm in linear scale:
 // full page
-// #bench.lq.diagram(
-//   bench.plot_bench("marriage", "circle"),
-//   bench.plot_bench("marriage", "square"),
-//   bench.plot_bench("marriage", "parabola"),
-//   xaxis: (label: "Number of elements"),
-//   legend: (position: top + left),
-//   width: 100%,
-//   height: 6cm,
-// )
+#bench.lq.diagram(
+  bench.plot_bench("marriage", "circle"),
+  bench.plot_bench("marriage", "square"),
+  bench.plot_bench("marriage", "parabola"),
+  xaxis: (label: "Number of elements"),
+  legend: (position: top + left),
+  width: 100%,
+  height: 6cm,
+)
 
-And in log-log scale. //(see @fig:marriagehull-bench-loglog).
+And in log-log scale. //(see @fig:mbc-bench-loglog).
 
-// #bench.lq.diagram(
-//   bench.plot_bench("marriage", "circle"),
-//   bench.plot_bench("marriage", "square"),
-//   bench.plot_bench("marriage", "parabola"),
-//   xaxis: (label: "Number of elements"),
-//   xscale: "log",
-//   yscale: "log",
-//   legend: (position: top + left),
-//   width: 100%,
-//   height: 6cm,
-// )<fig:mbc-bench-loglog>
+#bench.lq.diagram(
+  bench.plot_bench("marriage", "circle"),
+  bench.plot_bench("marriage", "square"),
+  bench.plot_bench("marriage", "parabola"),
+  xaxis: (label: "Number of elements"),
+  xscale: "log",
+  yscale: "log",
+  legend: (position: top + left),
+  width: 100%,
+  height: 6cm,
+)<fig:mbc-bench-loglog>
+
+=== Optimizations
+
+In order to have a more fair comparison we decided to test the algorithm on also a compiler-optimized version with the -O3 flag enabled. The results are shown below.
+
+#bench.lq.diagram(
+  bench.plot_bench("marriage", "circle_optimized"),
+  bench.plot_bench("marriage", "square_optimized"),
+  bench.plot_bench("marriage", "parabola_optimized"),
+  xaxis: (label: "Number of elements"),
+  xscale: "log",
+  yscale: "log",
+  legend: (position: top + left),
+  width: 100%,
+  height: 6cm,
+)<fig:mbc-bench-loglog>
+
+As we could expect, the optimization provided by the compiler improved the performance by almost a 10x factor across all the different distributions. But the overall behavior of the algorithm remained the same.
 
 
-=== Results
+// #bench.plot_hull("circle", 256, "mbc")
+// #bench.plot_hull("circle", 256, "mbc_v2")
+// #bench.plot_hull("parabola", 256, "mbc_v2")
+// #bench.plot_hull("square", 256, "mbc_v2")
 
-// #bench.plot_hull("circle", 256, "marriage")
-// #bench.plot_hull("parabola", 256, "marriage")
-// #bench.plot_hull("square", 256, "marriage")

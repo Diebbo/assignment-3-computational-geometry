@@ -287,12 +287,14 @@ Line findExtremePoints(const Points &points, bool upper) {
 void print_results_comparison(const Points &grhamPoints,
                               const Points &quickHullPoints,
                               const Points &mbcPoints,
+                              const Points &mbcV2Points,
                               const std::string &label) {
   // save points into path ./output/label/{grham, quick, mcb}.txt
   std::string base_path = "./build/output/" + label + "/";
   std::string graham_path = base_path + "graham";
   std::string quickhull_path = base_path + "quick";
   std::string mbc_path = base_path + "mbc";
+  std::string mbc_v2_path = base_path + "mbc_v2";
 
   // create output directory if it doesn't exist
   std::string command = "mkdir -p " + base_path;
@@ -318,6 +320,13 @@ void print_results_comparison(const Points &grhamPoints,
     mbc_file << p.x << " " << p.y << std::endl;
   }
   mbc_file.close();
+
+  // write mbc v2 points
+  std::ofstream mbc_v2_file(mbc_v2_path);
+  for (const auto &p : mbcV2Points) {
+    mbc_v2_file << p.x << " " << p.y << std::endl;
+  }
+  mbc_v2_file.close();
 }
 
 } // namespace util
