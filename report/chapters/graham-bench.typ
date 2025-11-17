@@ -24,7 +24,9 @@ afterwards, we check both ends of the container for the turning direction they h
 
 The code (in this example, using the `std::deque` container) can be found in @app:graham_deque.
 
-From the benchmark below we can see that this change doesn't affect the running time.
+#bench.algocmp_plot("grahamvec", "grahamdeque", label1: "Normal version", label2: "Single-pass version")
+
+From the benchmark above we can see that this change doesn't affect the running time.
 We hypothesized that this was due to differences in the cache behaviour,
 either between the two underlying data structures,
 or because we insert separately at the beginning and at the end.
@@ -33,11 +35,9 @@ and found that that was not what was happening;
 instead, the cache misses increased by just 3%.
 
 We tried collecting a FlameGraph#footnote[https://www.brendangregg.com/flamegraphs.html] to investigate,
-and found that to be because I
+and found that, in the "normal" case, the merging takes so little time that it is invisible on the graph.
 
 #figure(image("../assets/graham_vec_flame.png"))
-
-#bench.algocmp_plot("grahamvec", "grahamdeque", label1: "Normal version", label2: "Single-pass version")
 
 === Optimizations
 
