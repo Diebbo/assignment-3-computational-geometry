@@ -31,7 +31,7 @@ Line MarriageBeforeConquest::findUpperBridge(const Points &points) const {
 
   if (bridge.p1.x == bridge.p2.x) {
     // all points have the same x
-      // for upper bridge, take the highest point
+    // for upper bridge, take the highest point
     bridge = {maxY, maxY};
     return bridge;
   }
@@ -254,8 +254,8 @@ Points MarriageBeforeConquest::compute(const Points &points) const {
   Points hull = Points();
 
   std::random_device rd;
-  std::default_random_engine rng(rd());
-
+  std::mt19937 rng(rd());
+  
   std::vector<Point> shuffledPoints = points;
   std::shuffle(shuffledPoints.begin(), shuffledPoints.end(), rng);
 
@@ -285,7 +285,6 @@ Line MarriageBeforeConquestV2::findUpperBridge(const Points &points,
 
   float midX = (bridge.p1.x + bridge.p2.x) / 2.0f;
 
-
   auto condition = [extremes](const Point &p) {
     return util::isLeft(extremes, p) || p == extremes.p1 || p == extremes.p2;
   };
@@ -296,7 +295,6 @@ Line MarriageBeforeConquestV2::findUpperBridge(const Points &points,
   // prunedPoints
   std::copy_if(points.begin(), points.end(), std::back_inserter(prunedPoints),
                condition);
-
 
   for (size_t i = 0; i < prunedPoints.size(); ++i) {
     const auto &p = prunedPoints[i];
@@ -507,7 +505,7 @@ Points MarriageBeforeConquestV2::compute(const Points &points) const {
   Points hull = Points();
 
   std::random_device rd;
-  std::default_random_engine rng(rd());
+  std::mt19937 rng(rd());
 
   std::vector<Point> shuffledPoints = points;
   std::shuffle(shuffledPoints.begin(), shuffledPoints.end(), rng);
