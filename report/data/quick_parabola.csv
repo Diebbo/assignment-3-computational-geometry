@@ -1,23 +1,21 @@
-2025-11-14T10:37:39+01:00
+2025-11-17T13:50:00+01:00
 Running ./build/bench
-Run on (8 X 4200 MHz CPU s)
+Run on (8 X 24 MHz CPU s)
 CPU Caches:
-  L1 Data 48 KiB (x4)
-  L1 Instruction 32 KiB (x4)
-  L2 Unified 1280 KiB (x4)
-  L3 Unified 8192 KiB (x1)
-Load Average: 2.85, 1.91, 1.55
-***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+  L1 Data 64 KiB
+  L1 Instruction 128 KiB
+  L2 Unified 4096 KiB (x8)
+Load Average: 2.48, 2.29, 2.54
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/quick_parabola/256",6461,110029,109746,ns,,,,,
-"bench/quick_parabola/512",2899,241475,240492,ns,,,,,
-"bench/quick_parabola/1024",1339,526138,524056,ns,,,,,
-"bench/quick_parabola/2048",618,1.13872e+06,1.13486e+06,ns,,,,,
-"bench/quick_parabola/4096",278,2.61761e+06,2.60756e+06,ns,,,,,
-"bench/quick_parabola/8192",125,5.57856e+06,5.56092e+06,ns,,,,,
-"bench/quick_parabola/16384",57,1.23829e+07,1.23326e+07,ns,,,,,
-"bench/quick_parabola/32768",26,2.65635e+07,2.6465e+07,ns,,,,,
-"bench/quick_parabola/65536",12,5.68132e+07,5.66086e+07,ns,,,,,
-"bench/quick_parabola/131072",6,1.23026e+08,1.22683e+08,ns,,,,,
-"bench/quick_parabola/262144",3,2.61498e+08,2.60373e+08,ns,,,,,
-"bench/quick_parabola/524288",1,5.66958e+08,5.65274e+08,ns,,,,,
+"bench/quick_parabola/256",23278,30099.3,30052.5,ns,,,,,
+"bench/quick_parabola/512",10932,63645.2,63553,ns,,,,,
+"bench/quick_parabola/1024",5238,132812,132699,ns,,,,,
+"bench/quick_parabola/2048",2558,273389,273046,ns,,,,,
+"bench/quick_parabola/4096",1248,561151,560679,ns,,,,,
+"bench/quick_parabola/8192",621,1.12842e+06,1.12743e+06,ns,,,,,
+"bench/quick_parabola/16384",322,2.17949e+06,2.17746e+06,ns,,,,,
+"bench/quick_parabola/32768",172,4.09535e+06,4.09024e+06,ns,,,,,
+"bench/quick_parabola/65536",94,7.45065e+06,7.44302e+06,ns,,,,,
+"bench/quick_parabola/131072",51,1.3673e+07,1.36579e+07,ns,,,,,
+"bench/quick_parabola/262144",28,2.52716e+07,2.52421e+07,ns,,,,,
+"bench/quick_parabola/524288",15,4.74066e+07,4.73818e+07,ns,,,,,

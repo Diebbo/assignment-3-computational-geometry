@@ -11,7 +11,7 @@ add_compile_options(-O3)
 if (MSVC)
     add_compile_options(/W4)
 else()
-    add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+    add_compile_options(-Wall -Wextra -Wpedantic -Werror -O2)
 endif()
 
 if (SANITIZE_UNDEFINED)

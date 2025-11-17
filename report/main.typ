@@ -21,12 +21,16 @@
 
 #show figure: set block(breakable: true, width: 100%)
 
+#outline()
+
 = Introduction
 
 #include "chapters/introduction.typ"
 
 = Convex Hulls
 
+#include "chapters/graham-description.typ"
+#include "chapters/graham-complexity.typ"
 #include "chapters/quickhull.typ"
 
 #include "chapters/conclusion.typ"

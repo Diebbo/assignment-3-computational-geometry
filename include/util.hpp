@@ -42,12 +42,14 @@ bool isLeft(const Line &l, const Point &p);
  */
 bool is_inside(const Triangle &t, const Point &p);
 
-bool is_valid_inside(const Points &polygon, const Point &p);
-
-bool is_valid_hull(const Points &hull, const Points &points);
+bool is_hull(const Points &hull, const Points &points);
+bool is_partial_hull(const Points &hull, const Points &points);
 
 double partial_distance(const Line &l, const Point &p);
-void print_points(const Points &points);
+
+template <typename T> bool is_valid_inside(const T &polygon, const Point &p);
+template <typename T> void print_points(const T &points);
+template <typename T> bool is_valid_hull(const T &hull, const Points &points);
 
 /* Read points from a file
  *
@@ -79,19 +81,19 @@ void read_points_from_file(const std::string &filename, Container &container) {
   }
 }
 
-
 // Tuple of two points
 using TPoint = std::pair<Point, Point>;
 
 /* Compute the extremes for the points: leftmost and rightmost.
- * It cover the edge case where multiple points have the same x-coordinate but different y-coordinates.
+ * It cover the edge case where multiple points have the same x-coordinate but
+ * different y-coordinates.
  *
- * returns a pair of points <(leftmost_ymin, leftmost_ymax), (rightmost_ymin, rightmost_ymax)>
+ * returns a pair of points <(leftmost_ymin, leftmost_ymax), (rightmost_ymin,
+ * rightmost_ymax)>
  */
 std::pair<TPoint, TPoint> findExtremePointsCases(const Points &points);
 
 Line findExtremePoints(const Points &points, bool upper = true);
-
 
 /* Print the results of the three algorithms into files
  *
@@ -106,7 +108,10 @@ Line findExtremePoints(const Points &points, bool upper = true);
  *  - mbcPoints: The points from Marriage Before Conquest algorithm
  *  - label: The label to use for the output directory
  */
-void print_results_comparison(const Points &grhamPoints, const Points &quickHullPoints, const Points &mbcPoints, const std::string &label);
+void print_results_comparison(const Points &grhamPoints,
+                              const Points &quickHullPoints,
+                              const Points &mbcPoints,
+                              const std::string &label);
 
 } // namespace util
 

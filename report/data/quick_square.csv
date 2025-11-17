@@ -1,23 +1,21 @@
-2025-11-14T10:37:50+01:00
+2025-11-17T13:50:13+01:00
 Running ./build/bench
-Run on (8 X 4200 MHz CPU s)
+Run on (8 X 24 MHz CPU s)
 CPU Caches:
-  L1 Data 48 KiB (x4)
-  L1 Instruction 32 KiB (x4)
-  L2 Unified 1280 KiB (x4)
-  L3 Unified 8192 KiB (x1)
-Load Average: 2.95, 1.96, 1.57
-***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+  L1 Data 64 KiB
+  L1 Instruction 128 KiB
+  L2 Unified 4096 KiB (x8)
+Load Average: 2.31, 2.26, 2.53
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/quick_square/256",36829,18547.9,18497.5,ns,,,,,
-"bench/quick_square/512",20140,35001.4,34900.7,ns,,,,,
-"bench/quick_square/1024",11147,58965.9,58788.4,ns,,,,,
-"bench/quick_square/2048",5873,119374,119025,ns,,,,,
-"bench/quick_square/4096",2545,274390,273542,ns,,,,,
-"bench/quick_square/8192",1344,514364,512859,ns,,,,,
-"bench/quick_square/16384",662,1.0439e+06,1.04149e+06,ns,,,,,
-"bench/quick_square/32768",339,2.07741e+06,2.07088e+06,ns,,,,,
-"bench/quick_square/65536",180,3.91268e+06,3.89914e+06,ns,,,,,
-"bench/quick_square/131072",83,8.4137e+06,8.38327e+06,ns,,,,,
-"bench/quick_square/262144",43,1.60664e+07,1.60101e+07,ns,,,,,
-"bench/quick_square/524288",23,3.00511e+07,2.99434e+07,ns,,,,,
+"bench/quick_square/256",160961,4318.47,4312.34,ns,,,,,
+"bench/quick_square/512",102810,6798.14,6789.79,ns,,,,,
+"bench/quick_square/1024",48128,14358,14344.9,ns,,,,,
+"bench/quick_square/2048",29840,23298.4,23276.3,ns,,,,,
+"bench/quick_square/4096",13151,53780.4,53671.4,ns,,,,,
+"bench/quick_square/8192",5376,128061,127523,ns,,,,,
+"bench/quick_square/16384",2603,270521,269119,ns,,,,,
+"bench/quick_square/32768",1383,503427,502999,ns,,,,,
+"bench/quick_square/65536",844,833801,832821,ns,,,,,
+"bench/quick_square/131072",294,2.38838e+06,2.38354e+06,ns,,,,,
+"bench/quick_square/262144",149,4.68981e+06,4.68509e+06,ns,,,,,
+"bench/quick_square/524288",80,8.71396e+06,8.7093e+06,ns,,,,,

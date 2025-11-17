@@ -1,23 +1,21 @@
-2025-11-14T10:37:27+01:00
+2025-11-17T13:49:47+01:00
 Running ./build/bench
-Run on (8 X 4200 MHz CPU s)
+Run on (8 X 24 MHz CPU s)
 CPU Caches:
-  L1 Data 48 KiB (x4)
-  L1 Instruction 32 KiB (x4)
-  L2 Unified 1280 KiB (x4)
-  L3 Unified 8192 KiB (x1)
-Load Average: 2.83, 1.87, 1.54
-***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+  L1 Data 64 KiB
+  L1 Instruction 128 KiB
+  L2 Unified 4096 KiB (x8)
+Load Average: 2.67, 2.32, 2.56
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/quick_circle/256",29283,24723.6,24660.8,ns,,,,,
-"bench/quick_circle/512",15705,44345.7,44179.5,ns,,,,,
-"bench/quick_circle/1024",8802,79754.9,79547.6,ns,,,,,
-"bench/quick_circle/2048",4353,162599,162133,ns,,,,,
-"bench/quick_circle/4096",2271,308463,307589,ns,,,,,
-"bench/quick_circle/8192",1074,632748,630783,ns,,,,,
-"bench/quick_circle/16384",564,1.23946e+06,1.23581e+06,ns,,,,,
-"bench/quick_circle/32768",280,2.52541e+06,2.51783e+06,ns,,,,,
-"bench/quick_circle/65536",138,5.07261e+06,5.05581e+06,ns,,,,,
-"bench/quick_circle/131072",72,9.63836e+06,9.60942e+06,ns,,,,,
-"bench/quick_circle/262144",36,1.93786e+07,1.93143e+07,ns,,,,,
-"bench/quick_circle/524288",18,3.87778e+07,3.86604e+07,ns,,,,,
+"bench/quick_circle/256",115411,6051.37,6041.44,ns,,,,,
+"bench/quick_circle/512",71704,9513.56,9502.18,ns,,,,,
+"bench/quick_circle/1024",40653,16977.2,16961.7,ns,,,,,
+"bench/quick_circle/2048",19145,35655.8,35614.2,ns,,,,,
+"bench/quick_circle/4096",8521,78500.4,78441.4,ns,,,,,
+"bench/quick_circle/8192",3912,177550,177369,ns,,,,,
+"bench/quick_circle/16384",1876,369802,369319,ns,,,,,
+"bench/quick_circle/32768",918,754922,754302,ns,,,,,
+"bench/quick_circle/65536",456,1.53931e+06,1.53773e+06,ns,,,,,
+"bench/quick_circle/131072",229,3.05698e+06,3.05194e+06,ns,,,,,
+"bench/quick_circle/262144",114,6.06979e+06,6.06422e+06,ns,,,,,
+"bench/quick_circle/524288",58,1.20974e+07,1.20923e+07,ns,,,,,

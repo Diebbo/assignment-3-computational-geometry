@@ -1,23 +1,21 @@
-2025-11-14T10:38:26+01:00
+2025-11-17T13:51:04+01:00
 Running ./build/bench
-Run on (8 X 4200 MHz CPU s)
+Run on (8 X 24 MHz CPU s)
 CPU Caches:
-  L1 Data 48 KiB (x4)
-  L1 Instruction 32 KiB (x4)
-  L2 Unified 1280 KiB (x4)
-  L3 Unified 8192 KiB (x1)
-Load Average: 3.26, 2.17, 1.66
-***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+  L1 Data 64 KiB
+  L1 Instruction 128 KiB
+  L2 Unified 4096 KiB (x8)
+Load Average: 3.41, 2.50, 2.60
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/marriage_square/256",12370,49589.9,49356,ns,,,,,
-"bench/marriage_square/512",6275,111448,111076,ns,,,,,
-"bench/marriage_square/1024",3172,221912,221278,ns,,,,,
-"bench/marriage_square/2048",1567,447643,446190,ns,,,,,
-"bench/marriage_square/4096",937,746130,742798,ns,,,,,
-"bench/marriage_square/8192",443,1.55175e+06,1.54589e+06,ns,,,,,
-"bench/marriage_square/16384",213,3.16995e+06,3.15913e+06,ns,,,,,
-"bench/marriage_square/32768",106,6.17753e+06,6.15222e+06,ns,,,,,
-"bench/marriage_square/65536",53,1.25474e+07,1.25049e+07,ns,,,,,
-"bench/marriage_square/131072",28,2.71772e+07,2.70765e+07,ns,,,,,
-"bench/marriage_square/262144",14,3.95498e+07,3.94173e+07,ns,,,,,
-"bench/marriage_square/524288",7,1.17587e+08,1.17189e+08,ns,,,,,
+"bench/marriage_square/256",34902,19912.9,19887.2,ns,,,,,
+"bench/marriage_square/512",18412,38149.7,38096.9,ns,,,,,
+"bench/marriage_square/1024",12307,56225.4,56182,ns,,,,,
+"bench/marriage_square/2048",6949,101262,101181,ns,,,,,
+"bench/marriage_square/4096",3754,186642,186468,ns,,,,,
+"bench/marriage_square/8192",1988,350291,349865,ns,,,,,
+"bench/marriage_square/16384",673,1.03884e+06,1.03793e+06,ns,,,,,
+"bench/marriage_square/32768",443,1.58928e+06,1.58783e+06,ns,,,,,
+"bench/marriage_square/65536",163,4.13056e+06,4.12433e+06,ns,,,,,
+"bench/marriage_square/131072",90,7.26406e+06,7.25837e+06,ns,,,,,
+"bench/marriage_square/262144",48,1.49683e+07,1.49546e+07,ns,,,,,
+"bench/marriage_square/524288",27,2.54282e+07,2.54045e+07,ns,,,,,
