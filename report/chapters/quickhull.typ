@@ -84,9 +84,9 @@ Where $k$ is the number of points in one of the subsets. In the worst case, $k$ 
 
 === Benchmarks
 
-In our benchmarks, we expect the QuickHull algorithm to perform efficiently on average, with a time complexity of $O(n log n)$ for random distributions of points. However, for some testcases such as a parabola distribution, we might observe performance degradation towards the worst-case scenario of $O(n^2)$.
+In our benchmarks, we expect the QuickHull algorithm to perform efficiently on average, it's conjectured that on average the algorithms runs in $O(n log n)$ time when the input precision is restricted to $O(log n)$ (#link("https://dpd.cs.princeton.edu/Papers/BarberDobkinHuhdanpaa.pdf")[see quickhull-average]).
 
-// TODO: why is nlog n as average ?
+However, for some testcases such as a parabola distribution, we might observe performance degradation towards the worst-case scenario of $O(n^2)$.
 
 The results of our benchmarks shown in the diagram below respects our expectations, with QuickHull performing well on circular and square distributions, while showing increased computation time on the parabola distribution as the number of points increases.
 
