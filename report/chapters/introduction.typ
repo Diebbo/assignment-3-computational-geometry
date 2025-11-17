@@ -1,3 +1,5 @@
+#import "../bench.typ" as bench
+
 This report compares the results obtained from implementing some Convex Hulls algorithms in both 2D.
 
 We decided to implement the tests in C++ due to its performance, the availability of standard libraries and ease of handling with abstract data types.
@@ -111,5 +113,11 @@ caption: [Python code snippet for point generation],
 kind: auto,
 benchmark_code
 )<lst:pointgen>
+
+The following lines from the script generates different distributions of points:
+
+#bench.diagram_points("circle", "1024"),
+#bench.diagram_points("square", "1024"),
+#bench.diagram_points("parabola", "1024"),
 
 The results are then saved in a csv file that can be later analyzed and plotted directly from Typst.

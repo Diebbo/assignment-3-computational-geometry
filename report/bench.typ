@@ -50,6 +50,7 @@
 #let log2 = lq.scale.log(base: 2)
 
 /// Create a plot for the given benchmark.
+// remove the second part of the shape name for the label
 // To use:
 /// ```typst
 /// #lq.diagram(
@@ -57,7 +58,7 @@
 ///   // ... plot options here ...
 /// )
 /// ```
-#let plot_bench(algorithm, shape, col: "real") = lq.plot(..read_bench(algorithm, shape), label: shape)
+#let plot_bench(algorithm, shape, col: "real") = lq.plot(..read_bench(algorithm, shape), label: shape.replace("_", " ") + " - " + algorithm,)
 
 
 /// Plot points used in the benchmarks.
@@ -149,5 +150,19 @@
     xaxis: (label: "X"),
     yaxis: (label: "Y"),
     legend: (position: top + left)
+  )
+}
+
+
+// create a diagram with all benchmarks
+#let plot_benchmarks(shape) = {
+  lq.diagram(
+    plot_bench("grahamvec", shape),
+    plot_bench("marriage", shape),
+    plot_bench("quick", shape),
+    xaxis: (label: "Number of elements"),
+    legend: (position: top + left),
+    width: 100%,
+    height: 6cm,
   )
 }

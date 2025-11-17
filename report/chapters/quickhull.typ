@@ -190,11 +190,7 @@ Where $k$ is the number of points in one of the subsets. In the worst case, $k$ 
 
 In our benchmarks, we expect the QuickHull algorithm to perform efficiently on average, with a time complexity of $O(n log n)$ for random distributions of points. However, for some testcases such as a parabola distribution, we might observe performance degradation towards the worst-case scenario of $O(n^2)$.
 
-#bench.diagram_points("circle", "1024"),
-#bench.diagram_points("square", "1024"),
-#bench.diagram_points("parabola", "1024"),
-
-Above are some example distributions of points used in our benchmarks.
+// TODO: why is nlog n as average ?
 
 The results of our benchmarks shown in the diagram below respects our expectations, with QuickHull performing well on circular and square distributions, while showing increased computation time on the parabola distribution as the number of points increases.
 
@@ -241,14 +237,4 @@ In order to have a more fair comparison we decided to test the algorithm on also
 )<fig:quickhull-bench-loglog>
 
 As we could expect, the optimization provided by the compiler improved the performance by a almost 10x factor across all the different distributions. But the overall behavior of the algorithm remained the same.
-
-=== Visual Results
-
-Following up are some visualizations of the convex hulls computed by the QuickHull algorithm on different point distributions.
-
-#bench.plot_hull("circle", 256, "quick")
-#bench.plot_hull("parabola", 256, "quick")
-#bench.plot_hull("square", 256, "quick")
-
-
 
