@@ -25,5 +25,31 @@ afterwards, we check both ends of the container for the turning direction they h
 The code (in this example, using the `std::deque` container) can be found in @app:graham_deque.
 
 From the benchmark below we can see that this change actually makes the algorithm run slower.
+We hypothesized that this was due to differences in the cache behaviour,
+either between the two underlying data structures,
+or because we insert separately at the beginning and at the end.
+We tried running `perf stat` on our code,
+and found that that was not what was happening.
+instead, the cache misses increased by just 3%.
+We were unable to pinpoint exactly why the second version was slower.
+
+Upon digging more into the results, we found that
 
 #bench.algocmp_plot("grahamvec", "grahamdeque", label1: "Normal version", label2: "Single-pass version")
+
+=== Optimizations
+
+In order to have a more fair comparison we decided to also benchmark the code
+compiled with optimizations turned on. The results are shown below.
+
+#bench.lq.diagram(
+  bench.plot_bench("grahamvec", "square_optimized"),
+  bench.plot_bench("grahamvec", "square"),
+  xlabel: "Number of elements",
+  ylabel: "Running time (ms)",
+  xscale: bench.log2,
+  yscale: "log",
+  legend: (position: top + left),
+  width: 100%,
+  height: 6cm,
+)<fig:quickhull-bench-loglog>
