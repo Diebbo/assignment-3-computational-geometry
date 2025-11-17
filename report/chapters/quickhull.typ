@@ -59,118 +59,14 @@ std::pair<TPoint, TPoint> findExtremePointsCases(const Points &points) {
 ```
 )<lst:extremes>
 
-The function shown above finds the extreme points in a set of 2D points, specifically the leftmost and rightmost points, while handling cases where multiple points share the same x-coordinate but have different y-coordinates (i.e., vertical alignments).
-
-#figure(
-  caption: [Compute function for QuickHull algorithm],
-  kind: auto,
-```cpp
-Points QuickHull::compute(const Points &points) const {
-  Points upper_points = Points();
-  Points lower_points = Points();
-  Points hull = Points();
-
-  Point q1upper, q2upper;
-  Point q1lower, q2lower;
-
-  auto [q1, q2] = util::findExtremePointsCases(points);
-  if (q1.first.y == q1.second.y) {
-    q1upper = q1lower = q1.first;
-  } else {
-    q1upper = q1.second;
-    q1lower = q1.first;
-  }
-
-  if (q2.first.x == q2.second.x) {
-    q2upper = q2lower = q2.first;
-  } else {
-    q2upper = q2.second;
-    q2lower = q2.first;
-  }
-
-  hull.push_back(q1upper);
-
-  for (const auto &p : points) {
-    if (util::isLeft(q1upper, q2upper, p)) {
-      upper_points.push_back(p);
-    }
-    if (util::isLeft(q2lower, q1lower, p)) {
-      lower_points.push_back(p);
-    }
-  }
-
-  QuickHull::findHullRecursive(q1upper, q2upper, upper_points, hull);
-  if (hull.empty() || !(hull.back() == q2upper))
-    hull.push_back(q2upper);
-
-  if (hull.empty() || !(hull.back() == q2lower))
-    hull.push_back(q2lower);
-
-  QuickHull::findHullRecursive(q2lower, q1lower, lower_points, hull);
-
-  if (hull.empty() || !(hull.back() == q1lower || hull.front() == q1lower))
-    hull.push_back(q1lower);
-
-  return hull;
-}
-```
-)<lst:compute>
+The function shown above finds the extreme points in a set of 2D points, specifically the leftmost and rightmost points, while handling cases where multiple points share the same x-coordinate but have different y-coordinates (i.e., vertical alignments). The full algorithm implementation is shown below @app:quickhull.
 
 As we have mentioned before, the compute function is the core of all the ConvexHull classes. In this particular case, it initializes the QuickHull algorithm by finding the extreme points and partitioning the input points into upper and lower subsets. It then calls the recursive functions to compute the upper and lower hulls, finally combining them into a single convex hull.
 
 A lot of the extra steps are made to cover edge cases where multiple points share the same x-coordinate, ensuring that the algorithm correctly identifies and processes these points without introducing duplicates in the final hull.
 
-The recursive functions used to compute the upper and lower hulls are shown below @lst:recursive.
+The recursive functions used to compute the upper and lower hulls are shown below @app:quickhull_recursive.
 
-#figure(
-  caption: [Recursive functions for QuickHull algorithm],
-  kind: auto,
-  ```cpp
-void QuickHull::findHullRecursive(const Point &p1, const Point &p2,
-                                  const Points &points, Points &hull) const {
-  /* No more points left */
-  if (points.empty()) {
-    return;
-  }
-  if (points.size() == 1) {
-    hull.push_back(points[0]);
-    return;
-  }
-
-  /* 1. Find the point q on one side of s that has the largest distance to s. */
-  double maxDistance = -1.0;
-  Point q;
-  for (const auto &p : points) {
-    double distance = util::partial_distance(Line(p1, p2), p);
-    if (distance > maxDistance) {
-      maxDistance = distance;
-      q = p;
-    }
-  }
-
-  /* 2. Add q to the convex hull */
-  // NOTE: This is done after the recursive calls to maintain the correct order
-
-  /* 3. Partition the remaining points into two subsets Pℓ and Pr */
-  Points leftSet = Points();
-  Points rightSet = Points();
-  for (const auto &p : points) {
-    if (util::isLeft(p1, q, p)) {
-      leftSet.push_back(p);
-    } else if (util::isLeft(q, p2, p)) {
-      rightSet.push_back(p);
-    }
-  }
-
-  /* 4. Recurse on the two subsets */
-  // if bottom hull i recurr on the right side first
-
-  findHullRecursive(p1, q, leftSet, hull);
-  hull.push_back(q);
-  findHullRecursive(q, p2, rightSet, hull);
-}
-  ```
-) <lst:recursive>
 
 === Complexity Analysis
 
@@ -236,5 +132,14 @@ In order to have a more fair comparison we decided to test the algorithm on also
   height: 6cm,
 )<fig:quickhull-bench-loglog>
 
-As we could expect, the optimization provided by the compiler improved the performance by almost a 10x factor across all the different distributions. But the overall behavior of the algorithm remained the same.
+As we could expect, the optimization provided by the compiler improved the performance by a 5-10x factor across all the different distributions. But the overall behavior of the algorithm remained the same.
 
+In addition, we've also measured time taken for each function inside the implementation with a flame graph (see @fig:quickhull-flame).
+
+#figure(
+  caption: [Flame graph for QuickHull algorithm],
+  kind: auto,
+  image("../assets/quick_flame.png", width: 100%)
+)<fig:quickhull-flame>
+
+The results reported respect our expectations, as the majority is equally split between the `isLeft`, `findExtremePointsCases`, `std::push_back` functions.
