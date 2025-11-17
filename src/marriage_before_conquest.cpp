@@ -285,18 +285,6 @@ Line MarriageBeforeConquestV2::findUpperBridge(const Points &points,
 
   float midX = (bridge.p1.x + bridge.p2.x) / 2.0f;
 
-  Points L, R;
-
-  for (size_t i = 0; i < points.size(); ++i) {
-    const auto &p = points[i];
-    if (util::isLeft(extremes, p)) {
-      if (p.x < midX) {
-        L.push_back(p);
-      } else {
-        R.push_back(p);
-      }
-    }
-  }
 
   auto condition = [extremes](const Point &p) {
     return util::isLeft(extremes, p) || p == extremes.p1 || p == extremes.p2;
@@ -309,13 +297,7 @@ Line MarriageBeforeConquestV2::findUpperBridge(const Points &points,
   std::copy_if(points.begin(), points.end(), std::back_inserter(prunedPoints),
                condition);
 
-  /*
-  New way:
-  itero su L
-  se nuovo punto maggiore, allora aggiorno p1 e cerco nuovo p2
 
-
-  */
   for (size_t i = 0; i < prunedPoints.size(); ++i) {
     const auto &p = prunedPoints[i];
     if (util::isLeft(bridge, p)) {

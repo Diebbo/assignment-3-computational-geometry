@@ -295,11 +295,26 @@ In order to have a more fair comparison we decided to test the algorithm on also
   height: 6cm,
 )<fig:mbc-bench-loglog>
 
-As we could expect, the optimization provided by the compiler improved the performance by almost a 10x factor across all the different distributions. But the overall behavior of the algorithm remained the same.
+As we could expect, the optimization provided by the compiler improved the performance by a small constant factor across all the different distributions, so overall the behavior of the algorithm remained the same.
+
+=== Second version
+We also implemented a second version of the Marriage Before Conquest algorithm, add an extra pruning step before solving the LP subproblem: we find the point $p_l$ with the smallest x-coordinate (if there are more than one, take the one with the largest y-coordinate) and the point $p_r$ with the largest x-coordinate (if there are more than one, take the one with the largest y-coordinate), then prune all the points that lie under the line segment $overline(p_l p_r)$
 
 
-// #bench.plot_hull("circle", 256, "mbc")
-// #bench.plot_hull("circle", 256, "mbc_v2")
-// #bench.plot_hull("parabola", 256, "mbc_v2")
-// #bench.plot_hull("square", 256, "mbc_v2")
+#let plot_benchmarks_mbc(shape) = {
+  bench.lq.diagram(
+    bench.plot_bench("marriage", shape),
+    bench.plot_bench("marriagev2", shape),
+    xaxis: (label: "Number of elements", scale: bench.log2),
+    yaxis: (label: "Running time (ms)", scale: "log"),
+    legend: (position: top + left),
+    width: 100%,
+    height: 6cm,
+  )
+}
 
+#plot_benchmarks_mbc("circle")
+#plot_benchmarks_mbc("parabola")
+#plot_benchmarks_mbc("square")
+
+As we can see we get a small improvement in performance only in the circle distribution, while in the other distributions the performance are even worse. For the parabola distribution this is expected since the pruning step does not remove any point and in the lower hull.

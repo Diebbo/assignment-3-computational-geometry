@@ -177,3 +177,18 @@
   width: 100%,
   height: 6cm,
 )
+
+// create a diagram with all benchmarks
+#let plot_benchmarks(shape) = {
+  lq.diagram(
+    plot_bench("grahamvec", shape),
+    plot_bench("marriage", shape),
+    plot_bench("quick", shape),
+    //plot_bench("marriagev2", shape),
+    xaxis: (label: "Number of elements", scale: log2),
+    yaxis: (label: "Running time (ms)", scale: "log"),
+    legend: (position: top + left),
+    width: 100%,
+    height: 6cm,
+  )
+}
