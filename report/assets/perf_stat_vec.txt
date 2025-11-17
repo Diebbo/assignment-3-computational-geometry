@@ -1,0 +1,24 @@
+2025-11-17T18:13:40+01:00
+Running ./build/bench
+Run on (8 X 3800 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 1.26, 1.16, 1.17
+
+ Performance counter stats for './build/bench --benchmark_filter=bench/grahamvec_square/524288':
+
+    13,492,980,685      instructions:u                                                        
+     2,064,228,973      branches:u                                                            
+        27,652,568      branch-misses:u                  #    1.34% of all branches           
+         2,865,384      cache-references:u                                                    
+           982,498      cache-misses:u                   #   34.29% of all cache refs         
+
+       1.246743237 seconds time elapsed
+
+       1.228554000 seconds user
+       0.012939000 seconds sys
+
+
