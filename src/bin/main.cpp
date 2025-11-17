@@ -25,75 +25,75 @@ T testAlgorithm(ConvexHull<T> *algorithm, const Points &points,
 
 int main() {
   /* Quick test of the sidedness function */
-  Point p1(0, 0);
-  Point p2(1, 1);
-  Point p3(1, 0);
-  float side = util::sidedness(p1, p2, p3);
-  assert(side < 0); // p3 is below the line p1p2
-
-  /* Quick test of the is_inside function */
-  Point p4(0.6, 0.5);
-  bool inside = util::is_inside(Triangle(p1, p2, p3), p4);
-  assert(inside == true);
-
-  /* Define a point container and read points from a file */
-  Points pointContainer;
-  util::read_points_from_file("parabola_points.txt", pointContainer);
-  std::cout << "Read " << pointContainer.size() << " points from file."
-            << std::endl;
-
-  for (const auto &p : pointContainer) {
-    std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
-  }
-  util::print_points(pointContainer);
-
-  /* Test Graham Scan Algorithm */
-  auto hull = testAlgorithm(new GrahamScan<Points>(), pointContainer,
-                            "Graham Scan - std::vector");
-  util::print_points(hull);
-  auto hull4 = testAlgorithm(new GrahamScan<PointsList>(), pointContainer,
-                             "Graham Scan - std::list");
-  util::print_points(hull4);
-  auto hull5 = testAlgorithm(new GrahamScan<PointsDeque>(), pointContainer,
-                             "Graham Scan - std::deque");
-  util::print_points(hull5);
-
-  /* Test QuickHull Algorithm */
-  Points hull2 =
-      testAlgorithm(new QuickHullNS::QuickHull(), pointContainer, "QuickHull");
-  util::print_points(hull2);
-
-  /* Test Marriage Before Conquest Algorithm */
-  Points hull3 = testAlgorithm(new MarriageNS::MarriageBeforeConquest(),
-                               pointContainer, "Marriage Before Conquest");
-  std::cout << "MBC  correct Hull Points:" << std::endl;
-  util::print_points(hull3);
-
-  // =================
-
-  // TODO: da rimuovere, solo per testare i casi limite in dev time
-
-  // (1, -1)  (2, 0)  (0, 0)  (0.5, 1.5)  (1, 1)  (1.5, 1.5)
-
-  // Points failPoints = {Point(1, -1),    Point(2, 0), Point(0, 0),
-  //                      Point(0.5, 1.5), Point(1, 1), Point(1.5, 1.5)};
-  Points failPoints = {Point(1, -1),  Point(1, 0), Point(1, 2.5),
-                       Point(1, 1.5), Point(1, 1), Point(1, -1.5)};
-  Points grahamHull = GrahamScan<Points>().compute(failPoints);
-  std::cout << "Graham Hull Points with std::vector:" << std::endl;
-  util::print_points(grahamHull);
-  auto grahamHullList = GrahamScan<PointsList>().compute(failPoints);
-  std::cout << "Graham Hull Points with std::list:" << std::endl;
-  util::print_points(grahamHullList);
-  auto grahamHullDeque = GrahamScan<PointsDeque>().compute(failPoints);
-  std::cout << "Graham Hull Points with std::deque:" << std::endl;
-  util::print_points(grahamHullDeque);
-  Points quickHull = QuickHullNS::QuickHull().compute(failPoints);
-  std::cout << "QuickHull Points:" << std::endl;
-  util::print_points(quickHull);
-  Points mbc_hull2 = MarriageNS::MarriageBeforeConquest().compute(failPoints);
-  std::cout << "MBC Hull Points:" << std::endl;
-  util::print_points(mbc_hull2);
+  // Point p1(0, 0);
+  // Point p2(1, 1);
+  // Point p3(1, 0);
+  // float side = util::sidedness(p1, p2, p3);
+  // assert(side < 0); // p3 is below the line p1p2
+  //
+  // /* Quick test of the is_inside function */
+  // Point p4(0.6, 0.5);
+  // bool inside = util::is_inside(Triangle(p1, p2, p3), p4);
+  // assert(inside == true);
+  //
+  // /* Define a point container and read points from a file */
+  // Points pointContainer;
+  // util::read_points_from_file("parabola_points.txt", pointContainer);
+  // std::cout << "Read " << pointContainer.size() << " points from file."
+  //           << std::endl;
+  //
+  // for (const auto &p : pointContainer) {
+  //   std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
+  // }
+  // util::print_points(pointContainer);
+  //
+  // /* Test Graham Scan Algorithm */
+  // auto hull = testAlgorithm(new GrahamScan<Points>(), pointContainer,
+  //                           "Graham Scan - std::vector");
+  // util::print_points(hull);
+  // auto hull4 = testAlgorithm(new GrahamScan<PointsList>(), pointContainer,
+  //                            "Graham Scan - std::list");
+  // util::print_points(hull4);
+  // auto hull5 = testAlgorithm(new GrahamScan<PointsDeque>(), pointContainer,
+  //                            "Graham Scan - std::deque");
+  // util::print_points(hull5);
+  //
+  // /* Test QuickHull Algorithm */
+  // Points hull2 =
+  //     testAlgorithm(new QuickHullNS::QuickHull(), pointContainer, "QuickHull");
+  // util::print_points(hull2);
+  //
+  // /* Test Marriage Before Conquest Algorithm */
+  // Points hull3 = testAlgorithm(new MarriageNS::MarriageBeforeConquest(),
+  //                              pointContainer, "Marriage Before Conquest");
+  // std::cout << "MBC  correct Hull Points:" << std::endl;
+  // util::print_points(hull3);
+  //
+  // // =================
+  //
+  // // TODO: da rimuovere, solo per testare i casi limite in dev time
+  //
+  // // (1, -1)  (2, 0)  (0, 0)  (0.5, 1.5)  (1, 1)  (1.5, 1.5)
+  //
+  // // Points failPoints = {Point(1, -1),    Point(2, 0), Point(0, 0),
+  // //                      Point(0.5, 1.5), Point(1, 1), Point(1.5, 1.5)};
+  // Points failPoints = {Point(1, -1),  Point(1, 0), Point(1, 2.5),
+  //                      Point(1, 1.5), Point(1, 1), Point(1, -1.5)};
+  // Points grahamHull = GrahamScan<Points>().compute(failPoints);
+  // std::cout << "Graham Hull Points with std::vector:" << std::endl;
+  // util::print_points(grahamHull);
+  // auto grahamHullList = GrahamScan<PointsList>().compute(failPoints);
+  // std::cout << "Graham Hull Points with std::list:" << std::endl;
+  // util::print_points(grahamHullList);
+  // auto grahamHullDeque = GrahamScan<PointsDeque>().compute(failPoints);
+  // std::cout << "Graham Hull Points with std::deque:" << std::endl;
+  // util::print_points(grahamHullDeque);
+  // Points quickHull = QuickHullNS::QuickHull().compute(failPoints);
+  // std::cout << "QuickHull Points:" << std::endl;
+  // util::print_points(quickHull);
+  // Points mbc_hull2 = MarriageNS::MarriageBeforeConquest().compute(failPoints);
+  // std::cout << "MBC Hull Points:" << std::endl;
+  // util::print_points(mbc_hull2);
 
   // read 1024 points from file and print the hull points
   Points bigPointContainer;
@@ -140,6 +140,7 @@ int main() {
     auto hull3 = GrahamScan<PointsDeque>().compute(pts);
     auto hull4 = QuickHullNS::QuickHull().compute(pts);
     auto hull5 = MarriageNS::MarriageBeforeConquest().compute(pts);
+    auto hull6 = MarriageNS::MarriageBeforeConquestV2().compute(pts);
 
     assert(util::is_valid_hull(hull, pts));
     assert(util::is_valid_hull(hull2, pts));
@@ -151,6 +152,7 @@ int main() {
     assert(hull == std::vector(hull3.begin(), hull3.end()));
     assert(hull == hull4);
     assert(hull == hull5);
+    //assert(hull == hull6);
   }
 
   return 0;

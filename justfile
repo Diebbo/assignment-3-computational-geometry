@@ -53,3 +53,9 @@ report algorithm=algorithms shape=shapes: build
 
     xdg-open ./report/main.pdf&
     typst watch ./report/main.typ --root=. 
+flame: build
+    perf record --call-graph dwarf ./build/convex_hull_opt
+    perf script | inferno-collapse-perf > stacks.folded
+    cat stacks.folded | inferno-flamegraph > ./report/assets/flamegraph.svg
+    rm stacks.folded perf.data
+
