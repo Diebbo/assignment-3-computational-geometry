@@ -4,6 +4,10 @@ This report compares the results obtained from implementing some Convex Hulls al
 
 We decided to implement the tests in C++ due to its performance, the availability of standard libraries and ease of handling with abstract data types.
 
+It's important to note that the performance in this case are highly dependent on the hardware and the specific implementation details. Moreover, we will run the comparison on the same machine to ensure a fair comparison, with the following specifications:
+- CPU: Intel i5-1135G7, 4 cores, 8 threads, 4.2 GHz
+- RAM: 8 GB
+- OS: Arch Linux - Kernel 6.16.7-arch1-1
 
 == Utility Classes and Functions
 
