@@ -48,7 +48,15 @@ bool is_partial_hull(const Points &hull, const Points &points);
 double partial_distance(const Line &l, const Point &p);
 
 template <typename T> bool is_valid_inside(const T &polygon, const Point &p);
-template <typename T> void print_points(const T &points);
+
+template <typename T>
+void print_points(const T &points) {
+  for (const auto &p : points) {
+    std::cout << "(" << p.x << ", " << p.y << ")  ";
+  }
+  std::cout << std::endl;
+}
+
 template <typename T> bool is_valid_hull(const T &hull, const Points &points);
 
 /* Read points from a file

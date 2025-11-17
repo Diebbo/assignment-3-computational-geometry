@@ -129,14 +129,6 @@ bool is_partial_hull(const Points &hull, const Points &points) {
 }
 
 template <typename T>
-void print_points(const T &points) {
-  for (const auto &p : points) {
-    std::cout << "(" << p.x << ", " << p.y << ")  ";
-  }
-  std::cout << std::endl;
-}
-
-template <typename T>
 bool is_valid_inside(const T &polygon, const Point &p) {
   size_t n = polygon.size();
   if (n < 3) {
