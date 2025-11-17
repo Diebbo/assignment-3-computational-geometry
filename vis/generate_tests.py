@@ -33,7 +33,15 @@ for shape in types.keys():
         x_vals = sorted(x_vals)
         y_vals = [types[shape](x) for x in x_vals]
 
-        with open(os.path.join(path, str(size)), "w") as f:
+        with open(os.path.join(path, str(size)+"_sorted"), "w") as f:
             f.write(f"{size}\n")
             for x, y in zip(x_vals, y_vals):
+                f.write(f"{x:.3f} {y:.3f}\n")
+            
+        # shuffle for unsorted version
+        combined = list(zip(x_vals, y_vals))
+        random.shuffle(combined)
+        with open(os.path.join(path, str(size)), "w") as f:
+            f.write(f"{size}\n")
+            for x, y in combined:
                 f.write(f"{x:.3f} {y:.3f}\n")
