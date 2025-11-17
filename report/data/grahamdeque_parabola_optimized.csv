@@ -1,22 +1,22 @@
-2025-11-17T17:23:56+01:00
+2025-11-17T19:23:50+01:00
 Running ./build/bench_opt
-Run on (8 X 1925.8 MHz CPU s)
+Run on (8 X 2409.92 MHz CPU s)
 CPU Caches:
   L1 Data 48 KiB (x4)
   L1 Instruction 32 KiB (x4)
   L2 Unified 1280 KiB (x4)
   L3 Unified 8192 KiB (x1)
-Load Average: 1.89, 1.53, 1.52
+Load Average: 2.11, 1.66, 1.36
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/grahamdeque_parabola/256",138875,5067.75,5043.37,ns,,,,,
-"bench/grahamdeque_parabola/512",64376,11142.9,11096.4,ns,,,,,
-"bench/grahamdeque_parabola/1024",25155,27836.8,27760.3,ns,,,,,
-"bench/grahamdeque_parabola/2048",8340,84831.9,84588.4,ns,,,,,
-"bench/grahamdeque_parabola/4096",2908,241852,241187,ns,,,,,
-"bench/grahamdeque_parabola/8192",1243,563423,561203,ns,,,,,
-"bench/grahamdeque_parabola/16384",565,1.24345e+06,1.2396e+06,ns,,,,,
-"bench/grahamdeque_parabola/32768",265,2.6377e+06,2.62746e+06,ns,,,,,
-"bench/grahamdeque_parabola/65536",123,5.69529e+06,5.67158e+06,ns,,,,,
-"bench/grahamdeque_parabola/131072",57,1.21219e+07,1.20845e+07,ns,,,,,
-"bench/grahamdeque_parabola/262144",28,2.49372e+07,2.4868e+07,ns,,,,,
-"bench/grahamdeque_parabola/524288",13,5.30743e+07,5.2796e+07,ns,,,,,
+"bench/grahamdeque_parabola/256",140386,5012.43,4999.83,ns,,,,,
+"bench/grahamdeque_parabola/512",63815,10939,10910.5,ns,,,,,
+"bench/grahamdeque_parabola/1024",28023,25818.4,25740.3,ns,,,,,
+"bench/grahamdeque_parabola/2048",8880,79227.1,78889.6,ns,,,,,
+"bench/grahamdeque_parabola/4096",3030,232899,232252,ns,,,,,
+"bench/grahamdeque_parabola/8192",1269,546527,545145,ns,,,,,
+"bench/grahamdeque_parabola/16384",580,1.208e+06,1.20496e+06,ns,,,,,
+"bench/grahamdeque_parabola/32768",271,2.58858e+06,2.5815e+06,ns,,,,,
+"bench/grahamdeque_parabola/65536",123,5.55225e+06,5.52855e+06,ns,,,,,
+"bench/grahamdeque_parabola/131072",59,1.19146e+07,1.18717e+07,ns,,,,,
+"bench/grahamdeque_parabola/262144",28,2.50549e+07,2.49849e+07,ns,,,,,
+"bench/grahamdeque_parabola/524288",13,5.17378e+07,5.15568e+07,ns,,,,,

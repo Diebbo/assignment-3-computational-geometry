@@ -1,22 +1,22 @@
-2025-11-17T17:24:19+01:00
+2025-11-17T19:24:37+01:00
 Running ./build/bench_opt
-Run on (8 X 486.877 MHz CPU s)
+Run on (8 X 3700 MHz CPU s)
 CPU Caches:
   L1 Data 48 KiB (x4)
   L1 Instruction 32 KiB (x4)
   L2 Unified 1280 KiB (x4)
   L3 Unified 8192 KiB (x1)
-Load Average: 1.93, 1.57, 1.53
+Load Average: 2.54, 1.84, 1.43
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/quick_circle/256",131156,5744.03,5727.22,ns,,,,,
-"bench/quick_circle/512",67270,10710.9,10668.3,ns,,,,,
-"bench/quick_circle/1024",34636,20348.6,20282.9,ns,,,,,
-"bench/quick_circle/2048",17501,38874.3,38741.1,ns,,,,,
-"bench/quick_circle/4096",7550,93398.1,93016.6,ns,,,,,
-"bench/quick_circle/8192",3026,228150,227359,ns,,,,,
-"bench/quick_circle/16384",1377,496354,494687,ns,,,,,
-"bench/quick_circle/32768",708,997638,994336,ns,,,,,
-"bench/quick_circle/65536",320,2.16507e+06,2.15746e+06,ns,,,,,
-"bench/quick_circle/131072",170,4.03229e+06,4.01693e+06,ns,,,,,
-"bench/quick_circle/262144",82,8.19535e+06,8.16141e+06,ns,,,,,
-"bench/quick_circle/524288",42,1.68045e+07,1.67361e+07,ns,,,,,
+"bench/quick_circle/256",129754,5691.38,5675.24,ns,,,,,
+"bench/quick_circle/512",66360,11128.8,11088.8,ns,,,,,
+"bench/quick_circle/1024",33963,22015.9,21936.2,ns,,,,,
+"bench/quick_circle/2048",14771,40262.2,40136.3,ns,,,,,
+"bench/quick_circle/4096",7023,98064.5,97714.9,ns,,,,,
+"bench/quick_circle/8192",2822,225169,224409,ns,,,,,
+"bench/quick_circle/16384",1421,476629,475312,ns,,,,,
+"bench/quick_circle/32768",703,1.006e+06,1.00262e+06,ns,,,,,
+"bench/quick_circle/65536",320,2.03733e+06,2.03012e+06,ns,,,,,
+"bench/quick_circle/131072",170,4.05157e+06,4.0378e+06,ns,,,,,
+"bench/quick_circle/262144",81,8.31851e+06,8.28742e+06,ns,,,,,
+"bench/quick_circle/524288",42,1.67762e+07,1.67168e+07,ns,,,,,

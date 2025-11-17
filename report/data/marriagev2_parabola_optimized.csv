@@ -1,22 +1,22 @@
-2025-11-17T17:28:26+01:00
+2025-11-17T19:27:20+01:00
 Running ./build/bench_opt
-Run on (8 X 1169.11 MHz CPU s)
+Run on (8 X 628.913 MHz CPU s)
 CPU Caches:
   L1 Data 48 KiB (x4)
   L1 Instruction 32 KiB (x4)
   L2 Unified 1280 KiB (x4)
   L3 Unified 8192 KiB (x1)
-Load Average: 1.24, 1.46, 1.51
+Load Average: 2.51, 2.11, 1.61
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/marriagev2_parabola/256",8837,79901.9,79738.5,ns,,,,,
-"bench/marriagev2_parabola/512",4121,174503,172801,ns,,,,,
-"bench/marriagev2_parabola/1024",1879,382460,380904,ns,,,,,
-"bench/marriagev2_parabola/2048",863,817678,814323,ns,,,,,
-"bench/marriagev2_parabola/4096",430,1.61474e+06,1.60533e+06,ns,,,,,
-"bench/marriagev2_parabola/8192",212,3.31675e+06,3.30551e+06,ns,,,,,
-"bench/marriagev2_parabola/16384",104,6.6902e+06,6.66187e+06,ns,,,,,
-"bench/marriagev2_parabola/32768",54,1.31077e+07,1.30568e+07,ns,,,,,
-"bench/marriagev2_parabola/65536",28,2.47905e+07,2.46776e+07,ns,,,,,
-"bench/marriagev2_parabola/131072",15,4.70523e+07,4.68655e+07,ns,,,,,
-"bench/marriagev2_parabola/262144",8,8.90204e+07,8.85724e+07,ns,,,,,
-"bench/marriagev2_parabola/524288",4,1.74468e+08,1.7357e+08,ns,,,,,
+"bench/marriagev2_parabola/256",7764,94511.3,94134.5,ns,,,,,
+"bench/marriagev2_parabola/512",3712,188309,187673,ns,,,,,
+"bench/marriagev2_parabola/1024",1764,399464,398151,ns,,,,,
+"bench/marriagev2_parabola/2048",845,843268,837867,ns,,,,,
+"bench/marriagev2_parabola/4096",403,1.76296e+06,1.74668e+06,ns,,,,,
+"bench/marriagev2_parabola/8192",197,3.56409e+06,3.54811e+06,ns,,,,,
+"bench/marriagev2_parabola/16384",99,7.14379e+06,7.1183e+06,ns,,,,,
+"bench/marriagev2_parabola/32768",51,1.38423e+07,1.37897e+07,ns,,,,,
+"bench/marriagev2_parabola/65536",27,2.61721e+07,2.60716e+07,ns,,,,,
+"bench/marriagev2_parabola/131072",14,5.02163e+07,5.0029e+07,ns,,,,,
+"bench/marriagev2_parabola/262144",7,9.46932e+07,9.43339e+07,ns,,,,,
+"bench/marriagev2_parabola/524288",4,1.86792e+08,1.86091e+08,ns,,,,,
