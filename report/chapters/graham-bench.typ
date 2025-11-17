@@ -4,7 +4,7 @@
 
 We expected the Graham's Scan algorithm to perform with a time complexity of $O(n log n)$.
 From the benchmark though we can observe that the parabola case
-takes significantly less time than the other cases.
+takes less time than the other cases.
 This is because the parabola, being continuous,
 makes the calculation of the lower hull extremely simple,
 since no "backtracking" is necessary.

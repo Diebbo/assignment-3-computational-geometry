@@ -172,7 +172,7 @@
   plot_bench(algo1, "square", label: if label1 != auto { label1 } else { algo1 }),
   plot_bench(algo2, "square", label: if label2 != auto { label2 } else { algo2 }),
   xaxis: (label: "Number of elements", scale: log2),
-  yaxis: (label: "Running time (ms)"),
+  yaxis: (label: "Running time (ms)", scale: "log"),
   legend: (position: top + left),
   width: 100%,
   height: 6cm,
