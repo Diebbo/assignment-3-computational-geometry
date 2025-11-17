@@ -54,3 +54,4 @@
 #include "appendix/graham_impl.typ"
 #include "appendix/graham_deque.typ"
 #include "appendix/quick_impl.typ"
+#include "appendix/mbc_impl.typ"

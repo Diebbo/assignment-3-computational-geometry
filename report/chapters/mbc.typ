@@ -70,167 +70,17 @@ Line findExtremePoints(const Points &points, bool upper) {
 
 The function shown above finds the extreme points in a set of 2D points, specifically the leftmost and rightmost points, while handling cases where multiple points share the same x-coordinate but have different y-coordinates, based on whether we are considering the upper or lower hull.
 
-#figure(
-  caption: [Compute function for Marriage Before Conquest algorithm],
-  kind: auto,
-```cpp
-Points MarriageBeforeConquest::compute(const Points &points) const {
+The algorithm implementation is shown below @app:mbc.
 
-  if (points.size() <= 2) {
-    return points;
-  }
+The compute function implements the core logic of the Marriage Before Conquest algorithm. It first checks if the number of points is less than or equal to two, in which case it simply returns the points as they already form a convex hull. For larger sets of points, it initializes an empty hull and shuffles the input points randomly to ensure a good distribution for the algorithm's performance. It then calls the recursive functions for constructing the upper and lower hulls, finally ensuring that the leftmost point is not duplicated in the final hull.
 
-  Points hull = Points();
+The MBCUpperRecursive function is a recursive implementation of the upper hull construction in the Marriage Before Conquest algorithm. It handles base cases for small sets of points and recursively finds the upper bridge, partitioning the points into left and right subsets for further processing, after finding a valid bridge.
 
-  std::random_device rd;
-  std::default_random_engine rng(rd());
-
-  std::vector<Point> shuffledPoints = points;
-  std::shuffle(shuffledPoints.begin(), shuffledPoints.end(), rng);
-
-  MBCUpperRecursive(shuffledPoints, hull);
-
-  MBCLowerRecursive(shuffledPoints, hull);
-  if (hull.front() == hull.back()) {
-    hull.pop_back(); // remove last point to avoid duplication of leftmost point
-  }
-  return hull;
-}
-```
-)
-
-The compute function above implements the core logic of the Marriage Before Conquest algorithm. It first checks if the number of points is less than or equal to two, in which case it simply returns the points as they already form a convex hull. For larger sets of points, it initializes an empty hull and shuffles the input points randomly to ensure a good distribution for the algorithm's performance. It then calls the recursive functions for constructing the upper and lower hulls, finally ensuring that the leftmost point is not duplicated in the final hull.
-
-#figure(
-  caption: [Recursive functions for QuickHull algorithm],
-  kind: auto,
-  ```cpp
-void MarriageBeforeConquest::MBCUpperRecursive(const Points &points,
-                                               Points &hull) const {
-  /* If points.size() < 3, add them to the hull */
-  if (points.empty()) {
-    return;
-  } else if (points.size() == 1) {
-    hull.push_back(points[0]);
-    return;
-  } else if (points.size() == 2) {
-    // add first the leftmost point
-    if (points[0].x < points[1].x) {
-      hull.push_back(points[0]);
-      hull.push_back(points[1]);
-    } else if (points[0].x > points[1].x) {
-      hull.push_back(points[1]);
-      hull.push_back(points[0]);
-    } else {
-      // same x, add the lower one first
-      if (points[0].y < points[1].y) {
-        hull.push_back(points[1]);
-      } else {
-        hull.push_back(points[0]);
-      }
-    }
-    return;
-  }
-
-  Line bridge = findUpperBridge(points);
-
-  if (bridge.p1 == bridge.p2) {
-    hull.push_back(bridge.p1);
-    return;
-  }
-
-  Points leftSet;
-  Points rightSet;
-
-  for (const auto &p : points) {
-    if (p.x <= bridge.p1.x) {
-      leftSet.push_back(p);
-    } else if (p.x >= bridge.p2.x) {
-      rightSet.push_back(p);
-    }
-  }
-
-  MBCUpperRecursive(leftSet, hull);
-  MBCUpperRecursive(rightSet, hull);
-}
-  ```
-)
-
-The MBCUpperRecursive function above is a recursive implementation of the upper hull construction in the Marriage Before Conquest algorithm. It handles base cases for small sets of points and recursively finds the upper bridge, partitioning the points into left and right subsets for further processing, after finding a valid bridge.
-
-#figure(
-  caption: [Function to find the upper bridge in Marriage Before Conquest algorithm],
-  kind: auto,
-```cpp
-Line MarriageBeforeConquest::findUpperBridge(const Points &points) const {
-
-  Point p1, p2;
-  p1 = points[0];
-  Line bridge = {p1, p1};
-  Point maxY = points[0];
-
-  for (size_t i = 1; i < points.size(); ++i) {
-    p2 = points[i];
-    if (p2.y > maxY.y) {
-      maxY = p2;
-    }
-    if (p1.x != p2.x) {
-      if (p1.x < p2.x) {
-        bridge = {p1, p2};
-      } else {
-        bridge = {p2, p1};
-      }
-      break;
-    }
-  }
-
-  if (bridge.p1.x == bridge.p2.x) {
-
-    bridge = {maxY, maxY};
-    return bridge;
-  }
-
-  float midX = (bridge.p1.x + bridge.p2.x) / 2.0f;
-
-  for (size_t i = 0; i < points.size(); ++i) {
-    const auto &p = points[i];
-    if (util::isLeft(bridge, p)) {
-
-      if (p.x < midX) {
-        bridge.p1 = p;
-        for (size_t j = 0; j < i; ++j) {
-          const auto &q = points[j];
-          if (q.x >= midX) {
-            if (util::isLeft(bridge, q)) {
-              bridge.p2 = q;
-            }
-          }
-        }
-      } else {
-        bridge.p2 = p;
-        for (size_t j = 0; j < i; ++j) {
-          const auto &q = points[j];
-          if (q.x <= midX) {
-            if (util::isLeft(bridge, q)) {
-              bridge.p1 = q;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  return bridge;
-}
-```
-)
-
-The _findUpperBridge_ function above identifies the upper bridge for a given set of points in the Marriage Before Conquest algorithm. It initializes the bridge with two points and iteratively refines it by checking the relative positions of other points, ensuring that the bridge correctly represents the upper boundary of the convex hull.
+The _findUpperBridge_ function identifies the upper bridge for a given set of points in the Marriage Before Conquest algorithm. It initializes the bridge with two points and iteratively refines it by checking the relative positions of other points, ensuring that the bridge correctly represents the upper boundary of the convex hull.
 
 The algorithm for finding the upper bridge takes $O(n)$ expected time, but in the worst case, it can take $O(n^2)$ time due to the nested loops when updating the bridge points. That's why the algorithm relies on randomization (in the _compute_ function) to achieve better average performance.
 
 It is worth noting that the implementation of the lower hull construction and the corresponding bridge finding function follows a similar logic, adjusted for the lower hull case.
-
 
 === Complexity Analysis
 
@@ -307,7 +157,7 @@ In addition, we've also measured time taken for each function inside the impleme
   image("../assets/mbc_flame.png", width: 100%)
 )<fig:mbc-flame>
 
-The results reported show that the `std::shuffle` function consumes a significant portion of the total execution time, indicating that the randomization step is a notable factor in the algorithm's performance.
+The results reported show that the `std::shuffle` function consumes a significant portion of the total execution time, indicating that the randomization step is a notable factor in the algorithm's performance. Thus, we changed the PRNG to a faster one, to reduce the overhead introduced by the shuffling process.
 
 === Second version
 We also implemented a second version of the Marriage Before Conquest algorithm, add an extra pruning step before solving the LP subproblem: we find the point $p_l$ with the smallest x-coordinate (if there are more than one, take the one with the largest y-coordinate) and the point $p_r$ with the largest x-coordinate (if there are more than one, take the one with the largest y-coordinate), then prune all the points that lie under the line segment $overline(p_l p_r)$
