@@ -1,0 +1,22 @@
+2025-11-17T17:22:46+01:00
+Running ./build/bench_opt
+Run on (8 X 3800 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 1.26, 1.35, 1.46
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"bench/grahamvec_parabola/256",100000,5232.14,5172.08,ns,,,,,
+"bench/grahamvec_parabola/512",65418,10800.6,10769.2,ns,,,,,
+"bench/grahamvec_parabola/1024",29822,23664.1,23589.6,ns,,,,,
+"bench/grahamvec_parabola/2048",9178,77037,76811.4,ns,,,,,
+"bench/grahamvec_parabola/4096",3060,227782,227078,ns,,,,,
+"bench/grahamvec_parabola/8192",1249,557578,555671,ns,,,,,
+"bench/grahamvec_parabola/16384",555,1.26576e+06,1.26123e+06,ns,,,,,
+"bench/grahamvec_parabola/32768",268,2.62586e+06,2.61765e+06,ns,,,,,
+"bench/grahamvec_parabola/65536",121,5.63667e+06,5.61739e+06,ns,,,,,
+"bench/grahamvec_parabola/131072",59,1.2023e+07,1.19826e+07,ns,,,,,
+"bench/grahamvec_parabola/262144",28,2.46106e+07,2.45362e+07,ns,,,,,
+"bench/grahamvec_parabola/524288",13,5.30442e+07,5.28923e+07,ns,,,,,

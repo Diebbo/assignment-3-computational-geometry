@@ -11,7 +11,7 @@ build:
 
 algorithms := "grahamvec grahamlist grahamdeque quick marriage"
 shapes := "circle parabola square"
-bench generate_tests="true" algorithm=algorithms shape=shapes: build
+bench only_opt="false" generate_tests="true" algorithm=algorithms shape=shapes: build
     #!/bin/sh
 
     # Generate input files
@@ -22,9 +22,18 @@ bench generate_tests="true" algorithm=algorithms shape=shapes: build
     # Run benchmarks
     for algo in {{algorithm}}; do
         for shape in {{shape}}; do
+            if [ "{{only_opt}}" == "true" ]; then
+                just _bench-individual-opt $algo $shape
+                continue
+            fi
             just _bench-individual $algo $shape
+            just _bench-individual-opt $algo $shape
         done
     done
+
+_bench-individual-opt algorithm shape:
+    @mkdir -p report/data
+    ./build/bench_opt --benchmark_filter="bench/{{algorithm}}_{{shape}}/.*" --benchmark_out_format="csv" --benchmark_out="report/data/{{algorithm}}_{{shape}}_optimized.csv"
 
 _bench-individual algorithm shape:
     @mkdir -p report/data

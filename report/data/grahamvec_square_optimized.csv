@@ -1,0 +1,22 @@
+2025-11-17T17:22:57+01:00
+Running ./build/bench_opt
+Run on (8 X 3800 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 1.56, 1.42, 1.48
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"bench/grahamvec_square/256",114874,6226.31,6208.72,ns,,,,,
+"bench/grahamvec_square/512",50459,13641.9,13606,ns,,,,,
+"bench/grahamvec_square/1024",20721,34324.5,34102.1,ns,,,,,
+"bench/grahamvec_square/2048",5532,126733,126307,ns,,,,,
+"bench/grahamvec_square/4096",2133,328400,327336,ns,,,,,
+"bench/grahamvec_square/8192",982,731541,729275,ns,,,,,
+"bench/grahamvec_square/16384",462,1.51704e+06,1.51207e+06,ns,,,,,
+"bench/grahamvec_square/32768",222,3.16873e+06,3.15833e+06,ns,,,,,
+"bench/grahamvec_square/65536",106,6.61667e+06,6.59424e+06,ns,,,,,
+"bench/grahamvec_square/131072",51,1.40209e+07,1.39826e+07,ns,,,,,
+"bench/grahamvec_square/262144",24,2.89581e+07,2.88708e+07,ns,,,,,
+"bench/grahamvec_square/524288",12,5.95406e+07,5.93644e+07,ns,,,,,

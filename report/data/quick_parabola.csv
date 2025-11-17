@@ -1,21 +1,22 @@
-2025-11-17T13:50:00+01:00
+2025-11-17T17:10:49+01:00
 Running ./build/bench
-Run on (8 X 24 MHz CPU s)
+Run on (8 X 932.919 MHz CPU s)
 CPU Caches:
-  L1 Data 64 KiB
-  L1 Instruction 128 KiB
-  L2 Unified 4096 KiB (x8)
-Load Average: 2.48, 2.29, 2.54
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 2.09, 1.84, 1.55
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/quick_parabola/256",23278,30099.3,30052.5,ns,,,,,
-"bench/quick_parabola/512",10932,63645.2,63553,ns,,,,,
-"bench/quick_parabola/1024",5238,132812,132699,ns,,,,,
-"bench/quick_parabola/2048",2558,273389,273046,ns,,,,,
-"bench/quick_parabola/4096",1248,561151,560679,ns,,,,,
-"bench/quick_parabola/8192",621,1.12842e+06,1.12743e+06,ns,,,,,
-"bench/quick_parabola/16384",322,2.17949e+06,2.17746e+06,ns,,,,,
-"bench/quick_parabola/32768",172,4.09535e+06,4.09024e+06,ns,,,,,
-"bench/quick_parabola/65536",94,7.45065e+06,7.44302e+06,ns,,,,,
-"bench/quick_parabola/131072",51,1.3673e+07,1.36579e+07,ns,,,,,
-"bench/quick_parabola/262144",28,2.52716e+07,2.52421e+07,ns,,,,,
-"bench/quick_parabola/524288",15,4.74066e+07,4.73818e+07,ns,,,,,
+"bench/quick_parabola/256",5364,129947,129453,ns,,,,,
+"bench/quick_parabola/512",2316,300261,299233,ns,,,,,
+"bench/quick_parabola/1024",1042,655145,652451,ns,,,,,
+"bench/quick_parabola/2048",498,1.39917e+06,1.39502e+06,ns,,,,,
+"bench/quick_parabola/4096",237,2.96641e+06,2.95328e+06,ns,,,,,
+"bench/quick_parabola/8192",109,6.2225e+06,6.19487e+06,ns,,,,,
+"bench/quick_parabola/16384",56,1.26345e+07,1.25622e+07,ns,,,,,
+"bench/quick_parabola/32768",29,2.39743e+07,2.38982e+07,ns,,,,,
+"bench/quick_parabola/65536",15,4.58374e+07,4.57136e+07,ns,,,,,
+"bench/quick_parabola/131072",7,9.2605e+07,9.22752e+07,ns,,,,,
+"bench/quick_parabola/262144",4,1.694e+08,1.68836e+08,ns,,,,,
+"bench/quick_parabola/524288",2,3.33073e+08,3.31876e+08,ns,,,,,

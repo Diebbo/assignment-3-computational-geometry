@@ -1,21 +1,22 @@
-2025-11-17T13:48:03+01:00
+2025-11-17T17:07:14+01:00
 Running ./build/bench
-Run on (8 X 24 MHz CPU s)
+Run on (8 X 3800.04 MHz CPU s)
 CPU Caches:
-  L1 Data 64 KiB
-  L1 Instruction 128 KiB
-  L2 Unified 4096 KiB (x8)
-Load Average: 1.98, 1.97, 2.47
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 1.86, 1.50, 1.38
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/grahamvec_parabola/256",172383,4082.41,4082.24,ns,,,,,
-"bench/grahamvec_parabola/512",94138,7474,7473.57,ns,,,,,
-"bench/grahamvec_parabola/1024",48306,14793.4,14766.8,ns,,,,,
-"bench/grahamvec_parabola/2048",23447,30571.2,30141.3,ns,,,,,
-"bench/grahamvec_parabola/4096",10142,65847,65721.3,ns,,,,,
-"bench/grahamvec_parabola/8192",4380,158340,158325,ns,,,,,
-"bench/grahamvec_parabola/16384",2067,351190,351154,ns,,,,,
-"bench/grahamvec_parabola/32768",1000,747358,747312,ns,,,,,
-"bench/grahamvec_parabola/65536",478,1.46464e+06,1.46452e+06,ns,,,,,
-"bench/grahamvec_parabola/131072",243,2.87849e+06,2.87845e+06,ns,,,,,
-"bench/grahamvec_parabola/262144",116,6.00577e+06,6.00356e+06,ns,,,,,
-"bench/grahamvec_parabola/524288",52,1.37027e+07,1.36462e+07,ns,,,,,
+"bench/grahamvec_parabola/256",14398,48410.9,48233.5,ns,,,,,
+"bench/grahamvec_parabola/512",6261,106943,106582,ns,,,,,
+"bench/grahamvec_parabola/1024",3013,229431,228666,ns,,,,,
+"bench/grahamvec_parabola/2048",1378,498511,496809,ns,,,,,
+"bench/grahamvec_parabola/4096",642,1.0993e+06,1.09558e+06,ns,,,,,
+"bench/grahamvec_parabola/8192",301,2.25865e+06,2.25048e+06,ns,,,,,
+"bench/grahamvec_parabola/16384",138,5.01814e+06,4.99998e+06,ns,,,,,
+"bench/grahamvec_parabola/32768",70,9.94975e+06,9.91603e+06,ns,,,,,
+"bench/grahamvec_parabola/65536",34,2.06989e+07,2.06268e+07,ns,,,,,
+"bench/grahamvec_parabola/131072",16,4.20302e+07,4.18905e+07,ns,,,,,
+"bench/grahamvec_parabola/262144",8,8.73909e+07,8.71106e+07,ns,,,,,
+"bench/grahamvec_parabola/524288",4,1.80936e+08,1.80324e+08,ns,,,,,

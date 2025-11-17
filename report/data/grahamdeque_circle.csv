@@ -1,21 +1,22 @@
-2025-11-17T13:49:09+01:00
+2025-11-17T17:09:13+01:00
 Running ./build/bench
-Run on (8 X 24 MHz CPU s)
+Run on (8 X 3699.78 MHz CPU s)
 CPU Caches:
-  L1 Data 64 KiB
-  L1 Instruction 128 KiB
-  L2 Unified 4096 KiB (x8)
-Load Average: 2.85, 2.31, 2.57
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 2.16, 1.74, 1.49
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/grahamdeque_circle/256",114060,6210,6199.93,ns,,,,,
-"bench/grahamdeque_circle/512",49505,13924.3,13909.7,ns,,,,,
-"bench/grahamdeque_circle/1024",21173,32826.6,32797.7,ns,,,,,
-"bench/grahamdeque_circle/2048",9566,73169.9,73110.6,ns,,,,,
-"bench/grahamdeque_circle/4096",4409,159666,159553,ns,,,,,
-"bench/grahamdeque_circle/8192",2089,338172,337827,ns,,,,,
-"bench/grahamdeque_circle/16384",1007,692792,692120,ns,,,,,
-"bench/grahamdeque_circle/32768",507,1.3809e+06,1.37952e+06,ns,,,,,
-"bench/grahamdeque_circle/65536",249,2.80956e+06,2.8069e+06,ns,,,,,
-"bench/grahamdeque_circle/131072",121,5.56549e+06,5.5605e+06,ns,,,,,
-"bench/grahamdeque_circle/262144",63,1.12238e+07,1.12134e+07,ns,,,,,
-"bench/grahamdeque_circle/524288",29,2.41477e+07,2.41238e+07,ns,,,,,
+"bench/grahamdeque_circle/256",10999,66949.2,66656.3,ns,,,,,
+"bench/grahamdeque_circle/512",5339,132362,131845,ns,,,,,
+"bench/grahamdeque_circle/1024",2435,287100,286340,ns,,,,,
+"bench/grahamdeque_circle/2048",1148,609922,608321,ns,,,,,
+"bench/grahamdeque_circle/4096",543,1.28687e+06,1.28345e+06,ns,,,,,
+"bench/grahamdeque_circle/8192",264,2.64665e+06,2.63384e+06,ns,,,,,
+"bench/grahamdeque_circle/16384",128,5.50022e+06,5.48357e+06,ns,,,,,
+"bench/grahamdeque_circle/32768",62,1.13357e+07,1.12802e+07,ns,,,,,
+"bench/grahamdeque_circle/65536",30,2.34466e+07,2.33574e+07,ns,,,,,
+"bench/grahamdeque_circle/131072",15,4.8313e+07,4.81564e+07,ns,,,,,
+"bench/grahamdeque_circle/262144",7,9.87956e+07,9.83458e+07,ns,,,,,
+"bench/grahamdeque_circle/524288",3,2.02289e+08,2.01744e+08,ns,,,,,

@@ -1,21 +1,22 @@
-2025-11-17T13:48:17+01:00
+2025-11-17T17:07:38+01:00
 Running ./build/bench
-Run on (8 X 24 MHz CPU s)
+Run on (8 X 2677.8 MHz CPU s)
 CPU Caches:
-  L1 Data 64 KiB
-  L1 Instruction 128 KiB
-  L2 Unified 4096 KiB (x8)
-Load Average: 3.68, 2.32, 2.59
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 1.98, 1.56, 1.40
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/grahamvec_square/256",129290,5136.24,5127.77,ns,,,,,
-"bench/grahamvec_square/512",54352,12422.5,12405.3,ns,,,,,
-"bench/grahamvec_square/1024",23223,30226.6,30164.4,ns,,,,,
-"bench/grahamvec_square/2048",10380,63534,63473,ns,,,,,
-"bench/grahamvec_square/4096",5123,136969,136947,ns,,,,,
-"bench/grahamvec_square/8192",2448,291219,288239,ns,,,,,
-"bench/grahamvec_square/16384",1203,582016,581240,ns,,,,,
-"bench/grahamvec_square/32768",607,1.15929e+06,1.15811e+06,ns,,,,,
-"bench/grahamvec_square/65536",301,2.33948e+06,2.33686e+06,ns,,,,,
-"bench/grahamvec_square/131072",151,4.65278e+06,4.6466e+06,ns,,,,,
-"bench/grahamvec_square/262144",75,1.02126e+07,9.60908e+06,ns,,,,,
-"bench/grahamvec_square/524288",34,2.03863e+07,2.03659e+07,ns,,,,,
+"bench/grahamvec_square/256",11936,63517.3,63327.6,ns,,,,,
+"bench/grahamvec_square/512",5289,137764,137318,ns,,,,,
+"bench/grahamvec_square/1024",2439,282621,281690,ns,,,,,
+"bench/grahamvec_square/2048",1169,613414,610885,ns,,,,,
+"bench/grahamvec_square/4096",557,1.27256e+06,1.26797e+06,ns,,,,,
+"bench/grahamvec_square/8192",258,2.65788e+06,2.64879e+06,ns,,,,,
+"bench/grahamvec_square/16384",123,5.58174e+06,5.56321e+06,ns,,,,,
+"bench/grahamvec_square/32768",61,1.19576e+07,1.18743e+07,ns,,,,,
+"bench/grahamvec_square/65536",30,2.37414e+07,2.36046e+07,ns,,,,,
+"bench/grahamvec_square/131072",14,4.81776e+07,4.7975e+07,ns,,,,,
+"bench/grahamvec_square/262144",7,1.01125e+08,1.00768e+08,ns,,,,,
+"bench/grahamvec_square/524288",3,2.05691e+08,2.04674e+08,ns,,,,,

@@ -1,21 +1,22 @@
-2025-11-17T13:50:51+01:00
+2025-11-17T17:12:01+01:00
 Running ./build/bench
-Run on (8 X 24 MHz CPU s)
+Run on (8 X 959.026 MHz CPU s)
 CPU Caches:
-  L1 Data 64 KiB
-  L1 Instruction 128 KiB
-  L2 Unified 4096 KiB (x8)
-Load Average: 2.21, 2.24, 2.51
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 2.38, 1.97, 1.62
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/marriage_parabola/256",10636,68456.1,67776.3,ns,,,,,
-"bench/marriage_parabola/512",4795,136895,136205,ns,,,,,
-"bench/marriage_parabola/1024",2440,295038,294305,ns,,,,,
-"bench/marriage_parabola/2048",1190,602437,600493,ns,,,,,
-"bench/marriage_parabola/4096",552,1.21557e+06,1.21449e+06,ns,,,,,
-"bench/marriage_parabola/8192",286,2.45936e+06,2.45657e+06,ns,,,,,
-"bench/marriage_parabola/16384",144,4.83723e+06,4.83024e+06,ns,,,,,
-"bench/marriage_parabola/32768",74,9.39408e+06,9.38347e+06,ns,,,,,
-"bench/marriage_parabola/65536",39,1.80116e+07,1.79964e+07,ns,,,,,
-"bench/marriage_parabola/131072",21,3.44061e+07,3.43586e+07,ns,,,,,
-"bench/marriage_parabola/262144",10,6.53067e+07,6.52471e+07,ns,,,,,
-"bench/marriage_parabola/524288",6,1.24526e+08,1.24372e+08,ns,,,,,
+"bench/marriage_parabola/256",3359,208959,208296,ns,,,,,
+"bench/marriage_parabola/512",1587,450828,449155,ns,,,,,
+"bench/marriage_parabola/1024",709,968673,965187,ns,,,,,
+"bench/marriage_parabola/2048",330,2.08822e+06,2.08118e+06,ns,,,,,
+"bench/marriage_parabola/4096",156,4.42945e+06,4.414e+06,ns,,,,,
+"bench/marriage_parabola/8192",76,9.32766e+06,9.29092e+06,ns,,,,,
+"bench/marriage_parabola/16384",38,1.88873e+07,1.88192e+07,ns,,,,,
+"bench/marriage_parabola/32768",19,3.65712e+07,3.64495e+07,ns,,,,,
+"bench/marriage_parabola/65536",10,7.19114e+07,7.16762e+07,ns,,,,,
+"bench/marriage_parabola/131072",5,1.34652e+08,1.34241e+08,ns,,,,,
+"bench/marriage_parabola/262144",3,2.67478e+08,2.66542e+08,ns,,,,,
+"bench/marriage_parabola/524288",1,5.29036e+08,5.27109e+08,ns,,,,,

@@ -57,5 +57,8 @@ BENCHMARK_CAPTURE(bench, quick_parabola, QuickHullNS::QuickHull(), Parabola)->Ra
 BENCHMARK_CAPTURE(bench, marriage_circle, MarriageNS::MarriageBeforeConquest(), Circle)->RangeMultiplier(2)->Range(256, 524288);
 BENCHMARK_CAPTURE(bench, marriage_square, MarriageNS::MarriageBeforeConquest(), Square)->RangeMultiplier(2)->Range(256, 524288);
 BENCHMARK_CAPTURE(bench, marriage_parabola, MarriageNS::MarriageBeforeConquest(), Parabola)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, marriagev2_circle, MarriageNS::MarriageBeforeConquestV2(), Circle)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, marriagev2_square, MarriageNS::MarriageBeforeConquestV2(), Square)->RangeMultiplier(2)->Range(256, 524288);
+BENCHMARK_CAPTURE(bench, marriagev2_parabola, MarriageNS::MarriageBeforeConquestV2(), Parabola)->RangeMultiplier(2)->Range(256, 524288);
 
 BENCHMARK_MAIN();

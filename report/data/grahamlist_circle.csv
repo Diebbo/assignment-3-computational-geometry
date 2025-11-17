@@ -1,21 +1,22 @@
-2025-11-17T13:48:29+01:00
+2025-11-17T17:08:01+01:00
 Running ./build/bench
-Run on (8 X 24 MHz CPU s)
+Run on (8 X 400 MHz CPU s)
 CPU Caches:
-  L1 Data 64 KiB
-  L1 Instruction 128 KiB
-  L2 Unified 4096 KiB (x8)
-Load Average: 3.42, 2.30, 2.58
+  L1 Data 48 KiB (x4)
+  L1 Instruction 32 KiB (x4)
+  L2 Unified 1280 KiB (x4)
+  L3 Unified 8192 KiB (x1)
+Load Average: 2.13, 1.62, 1.43
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/grahamlist_circle/256",31879,22089.7,22067.8,ns,,,,,
-"bench/grahamlist_circle/512",15833,44630,44545.6,ns,,,,,
-"bench/grahamlist_circle/1024",7548,89916.1,89810.9,ns,,,,,
-"bench/grahamlist_circle/2048",3970,176993,176775,ns,,,,,
-"bench/grahamlist_circle/4096",1987,350826,350446,ns,,,,,
-"bench/grahamlist_circle/8192",985,708445,707812,ns,,,,,
-"bench/grahamlist_circle/16384",497,1.4087e+06,1.40735e+06,ns,,,,,
-"bench/grahamlist_circle/32768",250,2.82657e+06,2.82343e+06,ns,,,,,
-"bench/grahamlist_circle/65536",124,5.64572e+06,5.64059e+06,ns,,,,,
-"bench/grahamlist_circle/131072",62,1.13026e+07,1.12936e+07,ns,,,,,
-"bench/grahamlist_circle/262144",31,2.25794e+07,2.2549e+07,ns,,,,,
-"bench/grahamlist_circle/524288",15,4.69687e+07,4.6933e+07,ns,,,,,
+"bench/grahamlist_circle/256",6362,111617,111251,ns,,,,,
+"bench/grahamlist_circle/512",3072,226484,225791,ns,,,,,
+"bench/grahamlist_circle/1024",1481,473449,471995,ns,,,,,
+"bench/grahamlist_circle/2048",710,981801,978957,ns,,,,,
+"bench/grahamlist_circle/4096",345,2.0278e+06,2.02174e+06,ns,,,,,
+"bench/grahamlist_circle/8192",169,4.16743e+06,4.15399e+06,ns,,,,,
+"bench/grahamlist_circle/16384",82,8.49788e+06,8.47102e+06,ns,,,,,
+"bench/grahamlist_circle/32768",41,1.73377e+07,1.72828e+07,ns,,,,,
+"bench/grahamlist_circle/65536",20,3.52519e+07,3.514e+07,ns,,,,,
+"bench/grahamlist_circle/131072",10,7.19397e+07,7.17027e+07,ns,,,,,
+"bench/grahamlist_circle/262144",5,1.46009e+08,1.45518e+08,ns,,,,,
+"bench/grahamlist_circle/524288",2,2.8889e+08,2.87643e+08,ns,,,,,

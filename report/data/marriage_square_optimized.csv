@@ -1,23 +1,22 @@
-2025-11-16T11:52:34+01:00
-Running ./build/bench
-Run on (8 X 4200 MHz CPU s)
+2025-11-17T17:25:17+01:00
+Running ./build/bench_opt
+Run on (8 X 3799.96 MHz CPU s)
 CPU Caches:
   L1 Data 48 KiB (x4)
   L1 Instruction 32 KiB (x4)
   L2 Unified 1280 KiB (x4)
   L3 Unified 8192 KiB (x1)
-Load Average: 2.11, 1.57, 1.21
-***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+Load Average: 2.31, 1.75, 1.60
 name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
-"bench/marriage_square/256",30898,23008.9,22943.9,ns,,,,,
-"bench/marriage_square/512",20666,34023.5,33936.5,ns,,,,,
-"bench/marriage_square/1024",8638,78963.9,78580.4,ns,,,,,
-"bench/marriage_square/2048",5568,126118,125732,ns,,,,,
-"bench/marriage_square/4096",3254,215367,214736,ns,,,,,
-"bench/marriage_square/8192",1385,508130,506523,ns,,,,,
-"bench/marriage_square/16384",828,841144,838203,ns,,,,,
-"bench/marriage_square/32768",381,1.81187e+06,1.80524e+06,ns,,,,,
-"bench/marriage_square/65536",247,2.89296e+06,2.87788e+06,ns,,,,,
-"bench/marriage_square/131072",96,7.27386e+06,7.22689e+06,ns,,,,,
-"bench/marriage_square/262144",34,2.01298e+07,1.99949e+07,ns,,,,,
-"bench/marriage_square/524288",23,3.15782e+07,3.14119e+07,ns,,,,,
+"bench/marriage_square/256",29805,23145.8,23075.3,ns,,,,,
+"bench/marriage_square/512",19947,34213.7,34116.2,ns,,,,,
+"bench/marriage_square/1024",10764,66228.2,66010.4,ns,,,,,
+"bench/marriage_square/2048",6974,99900.9,99606.3,ns,,,,,
+"bench/marriage_square/4096",2279,298151,297277,ns,,,,,
+"bench/marriage_square/8192",1414,485018,482293,ns,,,,,
+"bench/marriage_square/16384",729,937256,933665,ns,,,,,
+"bench/marriage_square/32768",430,1.60269e+06,1.5974e+06,ns,,,,,
+"bench/marriage_square/65536",169,4.06127e+06,4.04693e+06,ns,,,,,
+"bench/marriage_square/131072",86,8.16863e+06,8.13766e+06,ns,,,,,
+"bench/marriage_square/262144",43,1.65234e+07,1.64496e+07,ns,,,,,
+"bench/marriage_square/524288",18,3.58511e+07,3.57139e+07,ns,,,,,
