@@ -46,6 +46,15 @@ void compute_inner(const Points &points, T &half, float side) {
 }
 
 template<typename T>
+void merge(T &lower, T &upper) {
+  lower.pop_back();
+  for (int i = lower.size() - 2; i >= 0; i--) {
+    upper.push_back(lower.back());
+    lower.pop_back();
+  }
+}
+
+template<typename T>
 T GrahamScan<T>::compute(const std::vector<Point> &points) const {
   if (points.size() <= 2)
     return T(points.begin(), points.end());
@@ -58,12 +67,7 @@ T GrahamScan<T>::compute(const std::vector<Point> &points) const {
   T lower;
   compute_inner(pts, lower, -1.0);
 
-  lower.pop_back();
-  for (int i = lower.size() - 2; i >= 0; i--) {
-    upper.push_back(lower.back());
-    lower.pop_back();
-  }
-
+  merge(lower, upper);
   return upper;
 }
 
