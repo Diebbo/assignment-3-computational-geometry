@@ -297,6 +297,16 @@ In order to have a more fair comparison we decided to test the algorithm on also
 
 As we could expect, the optimization provided by the compiler improved the performance by a small constant factor across all the different distributions, so overall the behavior of the algorithm remained the same.
 
+In addition, we've also measured time taken for each function inside the implementation with a flame graph (see @fig:mbc-flame).
+
+#figure(
+  caption: [Flame graph for Marriage Before Conquest algorithm],
+  kind: auto,
+  image("../assets/mbc_flame.png", width: 100%)
+)<fig:mbc-flame>
+
+The results reported show that the `std::shuffle` function consumes a significant portion of the total execution time, indicating that the randomization step is a notable factor in the algorithm's performance.
+
 === Second version
 We also implemented a second version of the Marriage Before Conquest algorithm, add an extra pruning step before solving the LP subproblem: we find the point $p_l$ with the smallest x-coordinate (if there are more than one, take the one with the largest y-coordinate) and the point $p_r$ with the largest x-coordinate (if there are more than one, take the one with the largest y-coordinate), then prune all the points that lie under the line segment $overline(p_l p_r)$
 
