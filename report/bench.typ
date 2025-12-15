@@ -68,20 +68,8 @@
 
 /// Plot points used in the benchmarks.
 #let read_points(shape, size) = {
-  let filepath = "../build/tests/" + shape + "/" + size
-  let data = read(filepath)
-  // remove first line that contains the number of points
-  let lines = data.split("\n").slice(1, none)
-  let points = lines.map(l => {
-    let coords = l.split(" ").map(s => s.trim())
-    (coords.at(0), coords.at(1))
-  })
-  points
-}
-
-/// Plot points used in the benchmarks.
-#let read_points(shape, size) = {
-  let filepath = "../build/tests/" + shape + "/" + size
+  // print path
+  let filepath = "/build/tests/" + shape + "/" + size
   let data = read(filepath)
   // remove first line that contains the number of points
   let lines = data.split("\n").slice(1)
@@ -113,8 +101,8 @@
   legend: (position: top + left),
 )
 
-#let read_hull(shape, algorithm) = {
-  let filepath = "../build/output/" + shape + "/" + algorithm
+#let read_hull(shape, algorithm, size) = {
+  let filepath = "/build/output/" + shape + "/" + str(size) + "/" + algorithm
   let data = read(filepath)
   let lines = data.split("\n")
   let points = lines
@@ -129,7 +117,7 @@
 /// plot the points and connect them printing the convex hull
 #let plot_hull(shape, size, algorithm) = {
   let points = read_points(shape, str(size))
-  let hull = read_hull(shape, algorithm)
+  let hull = read_hull(shape, algorithm, size)
 
   // Close the hull by appending the first point
   let hull_closed = hull + (hull.at(0),)
@@ -187,6 +175,86 @@
     //plot_bench("marriagev2", shape),
     xaxis: (label: "Number of elements", scale: log2),
     yaxis: (label: "Running time (ms)", scale: "log"),
+    legend: (position: top + left),
+    width: 100%,
+    height: 6cm,
+  )
+}
+
+#let point_hull_size(algorithm, shape, size) = {
+  let points = read_points(shape, str(size))
+  let hsize = read_hull(shape, algorithm, size).len()
+  // Y: size of the hull
+  // X: log2 of the number of points
+  (
+    points.len(),
+    hsize,
+  )
+}
+
+#let plot_hull_sizes(algorithm) = {
+  // gather points for values from 2**8 to 2**15
+  let sizes = range(8, 13).map(i => calc.pow(2, i))
+  
+  let circle_data = sizes.map(size => point_hull_size(algorithm, "circle", size))
+  let square_data = sizes.map(size => point_hull_size(algorithm, "square", size))
+  
+  lq.diagram(
+    lq.plot(
+      circle_data.map(d => d.at(0)),
+      circle_data.map(d => d.at(1)),
+      label: "Circle",
+    ),
+    lq.plot(
+      square_data.map(d => d.at(0)),
+      square_data.map(d => d.at(1)),
+      label: "Square",
+    ),
+    xaxis: (label: "log2(Number of points)", scale: log2),
+    yaxis: (label: "Hull Size", scale: log2),
+    legend: (position: top + left),
+    width: 100%,
+    height: 6cm,
+  )
+}
+
+#let plot_hull_size_increasing_factor() = {
+  // plot the ration of hull size to number of points for both circle and square
+  let sizes = range(8, 13).map(i => calc.pow(2, i))
+  
+  // Y: hull size circle / hull size square
+  // X: log2 of the number of points
+  let result_data = sizes.map(size => {
+    let csize = point_hull_size("quick", "circle", size).at(1)
+    let ssize = point_hull_size("quick", "square", size).at(1)
+    (
+      calc.log(size, base: 2),
+      csize / ssize,
+    )
+  })
+
+  //         R = 10.0 * (size / 256)
+  let radius_data = sizes.map(size => {
+    (
+      calc.log(size, base: 2),
+      10.0 * (size / 256),
+    )
+  })
+
+  lq.diagram(
+    lq.plot(
+      result_data.map(d => d.at(0)),
+      result_data.map(d => d.at(1)),
+      label: "increasing factor",
+    ),
+    // plot for reference the radius
+    lq.plot(
+      radius_data.map(d => d.at(0)),
+      radius_data.map(d => d.at(1)),
+      label: "reference radius",
+    ),
+    xaxis: (label: "log2(Number of points)", scale: log2),
+    yaxis: (label: "Hull Size Circle / Hull Size Square", scale: log2),
     legend: (position: top + left),
     width: 100%,
     height: 6cm,

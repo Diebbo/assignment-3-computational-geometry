@@ -296,6 +296,8 @@ void print_results_comparison(const Points &grhamPoints,
   std::string mbc_path = base_path + "mbc";
   std::string mbc_v2_path = base_path + "mbc_v2";
 
+  std::cout << "saving file into " + base_path << std::endl;
+
   // create output directory if it doesn't exist
   std::string command = "mkdir -p " + base_path;
   system(command.c_str());

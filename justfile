@@ -43,13 +43,11 @@ report algorithm=algorithms shape=shapes: build
     #!/bin/sh
 
     # Generate input files if not ./build/tests directory exists
-    if [ ./build/tests -d ]; then
+    if [ -d build/tests ]; then
         echo "Input files already exist, skipping generation."
     else
         uv run --with numpy vis/generate_tests.py
     fi
-
-    just run
 
     xdg-open ./report/main.pdf&
     typst watch ./report/main.typ --root=. 

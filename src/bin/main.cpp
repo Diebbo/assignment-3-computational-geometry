@@ -97,28 +97,32 @@ int main() {
 
   // read 1024 points from file and print the hull points
   Points bigPointContainer;
-  const std::vector<std::string> shape = {"circle", "square", "parabola"};
-  for (const auto &s : shape) {
-    std::string filepath = "build/tests/" + s + "/256";
-    std::string filename = filepath;
-    util::read_points_from_file(filename, bigPointContainer);
-    std::cout << "Read " << bigPointContainer.size()
-              << " points from file: " << filename << std::endl;
-    Points grahamHull =
-        testAlgorithm(new GrahamScan<Points>(), bigPointContainer,
-                      "Graham Scan on " + s + " shape");
-    Points quickHull =
-        testAlgorithm(new QuickHullNS::QuickHull(), bigPointContainer,
-                      "QuickHull on " + s + " shape");
-    Points mbc_hull = testAlgorithm(
-        new MarriageNS::MarriageBeforeConquest(), bigPointContainer,
-        "Marriage Before Conquest on " + s + " shape");
-    Points mbc_hull2 = testAlgorithm(
-        new MarriageNS::MarriageBeforeConquestV2(), bigPointContainer,
-        "Marriage Before Conquest V2 on " + s + " shape");
-    const std::string label = s;
-    util::print_results_comparison(grahamHull, quickHull, mbc_hull, mbc_hull2, label);
-    bigPointContainer.clear();
+  // do it for all the sizes
+  for (int ith = 8; ith <= 13; ith++) {
+    const std::vector<std::string> shape = {"circle", "square", "parabola"};
+    for (const auto &s : shape) {
+      std::string filepath = "build/tests/" + s + "/" + std::to_string(1 << ith);
+      std::string filename = filepath;
+      util::read_points_from_file(filename, bigPointContainer);
+      std::cout << "Read " << bigPointContainer.size()
+                << " points from file: " << filename << std::endl;
+      Points grahamHull =
+          testAlgorithm(new GrahamScan<Points>(), bigPointContainer,
+                        "Graham Scan on " + s + " shape");
+      Points quickHull =
+          testAlgorithm(new QuickHullNS::QuickHull(), bigPointContainer,
+                        "QuickHull on " + s + " shape");
+      Points mbc_hull = testAlgorithm(
+          new MarriageNS::MarriageBeforeConquest(), bigPointContainer,
+          "Marriage Before Conquest on " + s + " shape");
+      Points mbc_hull2 = testAlgorithm(
+          new MarriageNS::MarriageBeforeConquestV2(), bigPointContainer,
+          "Marriage Before Conquest V2 on " + s + " shape");
+      const std::string label = s + "/" + std::to_string(1 << ith);
+
+      util::print_results_comparison(grahamHull, quickHull, mbc_hull, mbc_hull2, label);
+      bigPointContainer.clear();
+    }
   }
 
   //==================
